@@ -15,6 +15,7 @@ import { CategoryComponent } from './public/skill-set/category/category.componen
 import { SkillItemComponent } from './public/skill-set/skill-item/skill-item.component';
 import { ProjectComponent } from './public/project/project.component';
 import { ProjectItemComponent } from './public/project/project-item/project-item.component';
+import { ContactComponent } from './public/contact/contact.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ProjectItemComponent } from './public/project/project-item/project-item
     CategoryComponent,
     SkillItemComponent,
     ProjectComponent,
-    ProjectItemComponent
+    ProjectItemComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule
