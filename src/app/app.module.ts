@@ -13,6 +13,8 @@ import { SkillSetComponent } from './public/skill-set/skill-set.component';
 import { PlatformComponent } from './public/skill-set/platform/platform.component';
 import { CategoryComponent } from './public/skill-set/category/category.component';
 import { SkillItemComponent } from './public/skill-set/skill-item/skill-item.component';
+import { ProjectComponent } from './public/project/project.component';
+import { ProjectItemComponent } from './public/project/project-item/project-item.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { SkillItemComponent } from './public/skill-set/skill-item/skill-item.com
     SkillSetComponent,
     PlatformComponent,
     CategoryComponent,
-    SkillItemComponent
+    SkillItemComponent,
+    ProjectComponent,
+    ProjectItemComponent
   ],
   imports: [
     BrowserModule
