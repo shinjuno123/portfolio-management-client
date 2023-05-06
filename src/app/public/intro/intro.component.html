@@ -1,19 +1,14 @@
 <div class="container">
     <div class="row">
-        <p class="fs-2">Hello, My name is</p>
+        <p class="fs-2">{{intro.sayHi}}</p>
     </div>
     <div class="row text-nowrap">
-        <h1>Junho Shin</h1>
+        <h1>{{intro.name}}</h1>
     </div>
     <hr>
     <div class="row">
-        <p class="fs-6">
-            I'm a passionate developer who is always looking to learn to and grow.
-            I believe that programming is not just a job, but a way of life, and I bring that passion to every project I work on.
-            <br><br>
-            As a developer, I take great pride in writing clean, efficient, and maintainable code. I understand that software development is a team effort, and I value collaboration and communication with my colleagues to deliver high-quality solutions that meet the needs of our clients.
-            <br><br>
-            Overall, I am a dedicated and enthusiastic developer who is always eager to take on new challenges and grow both professionally and personally.
+        <p class="fs-6" [innerHTML]="intro.opening | replace: '\n' : '\<br\>'">
+    
         </p>
     </div>
 </div>

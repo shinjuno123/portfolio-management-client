@@ -16,6 +16,8 @@ import { SkillItemComponent } from './public/skill-set/skill-item/skill-item.com
 import { ProjectComponent } from './public/project/project.component';
 import { ProjectItemComponent } from './public/project/project-item/project-item.component';
 import { ContactComponent } from './public/contact/contact.component';
+import { ReplacePipe } from './public/replace.pipe';
+import { CertificationItemComponent } from './public/about-me/certification-item/certification-item.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { ContactComponent } from './public/contact/contact.component';
     SkillItemComponent,
     ProjectComponent,
     ProjectItemComponent,
-    ContactComponent
+    ContactComponent,
+    ReplacePipe,
+    CertificationItemComponent
   ],
   imports: [
     BrowserModule

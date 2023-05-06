@@ -7,25 +7,8 @@
     <div class="row">
         <div class="col-md-6">
             <div class="row">
-                <p>Allow me to introduce myself.
-                    I am a South Korean native who graduated with a degree in Computer Science and relocated to America
-                    after tying the knot.
-                    I have a deep passion for software development and currently seeking employment in America as a
-                    developer.
-                    My primary area of interest lies in crafting web applications as I find it both challenging and
-                    fulfilling.
-                    <br><br>
-                    I first discovered my love for programming during my sophomore year of college when I created a
-                    desktop application
-                    that provided freshmen with essential information about our institution. During the project, I
-                    encountered an issue with crawling website images but
-                    managed to solve it by importing a form that takes an image source. This experience ignited my
-                    fascination with programming,
-                    leading me down the path to become a passionate developer.
-                    <br><br>
-                    In summary, I am a motivated and determined individual with a background in computer science,
-                    seeking opportunities to contribute my problem-solving
-                    abilities to the world of software development.
+                <p [innerHTML]="about.description | replace: '\n' : '\<br\>'">
+                
                 </p>
             </div>
         </div>
@@ -39,19 +22,23 @@
                     <tbody>
                         <tr scope="row">
                             <th>Name</th>
-                            <td>Junho Shin</td>
+                            <td>{{about.name}}</td>
                         </tr>
                         <tr scope="row">
                             <th>School</th>
-                            <td>Konyang University</td>
+                            <td>{{about.school}}</td>
                         </tr>
                         <tr scope="row">
                             <th>Diploma</th>
-                            <td>B.S in Computer Science</td>
+                            <td>{{about.diploma}}</td>
                         </tr>
                         <tr scope="row">
                             <th>Period</th>
-                            <td>Mar, 2017 ~ Feb, 2023</td>
+                            <td>{{about.period}}</td>
+                        </tr>
+                        <tr scope="row">
+                            <th>Region / Country</th>
+                            <td>{{about.regionCountry}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -59,14 +46,8 @@
             <div class="row">
                 <h3>Cerficiation List</h3>
                 <div class="list-group">
-                    <li class="list-group-item">
-                        <div>
-                            <span>AWS Solutions Architect - associate</span>
-                        </div>
-                        <div>
-                            <a href="#">Download Certification</a>
-                        </div>
-                    </li>
+                    <app-certification-item [certification]="certification" *ngFor="let certification of about.certifications"></app-certification-item>
+                
                 </div>
             </div>
         </div>
