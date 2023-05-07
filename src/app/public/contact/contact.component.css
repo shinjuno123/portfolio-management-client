@@ -1,3 +1,12 @@
 .container{
     padding: 5rem 0;
 }
+
+span{
+    font-size: small;
+}
+
+.cursor-not-allowed {
+    cursor: not-allowed !important; 
+    pointer-events:all !important;
+  }

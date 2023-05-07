@@ -28,9 +28,6 @@ export class SkillSetComponent implements OnInit{
     this.selectedItems = this.skillSetService.getRelavantItems(this.platformName,this.categoryName);
   }
 
-
-
-
   ngOnInit(): void {
     
   }

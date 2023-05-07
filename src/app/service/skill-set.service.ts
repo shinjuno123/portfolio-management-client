@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { SkillSetItem } from "../model/skill-set-item.model";
 import { RelavantProjects } from "../model/skill-set-relavant-projects.model";
-import { Subject } from "rxjs";
 
 @Injectable({
     providedIn: "root"
@@ -49,11 +48,6 @@ export class SkillSetService {
         }
     }
 
-   
-
-
-
-
     getPlamforms(){
         return Object.keys(this.testData);
     }
@@ -68,7 +62,8 @@ export class SkillSetService {
     getRelavantItems(platformName: string, categoryName: string){
         const categories = this.testData[platformName as keyof typeof this.testData];
         let skillSetItems = categories[categoryName as keyof typeof categories];
-        
+        console.log(platformName, categoryName);
+    
         return skillSetItems;
     }
 }

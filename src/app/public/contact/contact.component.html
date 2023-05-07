@@ -1,25 +1,36 @@
 <div class="container">
-    <div class="row mb-4">
-        <h2 class="mb-3">Contact Me!</h2>
-        <div class="col-md-6">
-            <div class="row mb-3">
-                <label class="fw-bold">Your email</label>
-                <input class="form-control" type="text">
+    <form #f="ngForm" (ngSubmit)="onSubmit()">
+        <div class="row mb-4">
+            <h2 class="mb-3">Contact Me!</h2>
+            <p>After I check your message, I'll send you response mail!</p>
+            <div class="col-md-6">
+                <div class="row mb-3">
+                    <label class="fw-bold">Your email</label>
+                    <input name="email" class="form-control" type="email" email required ngModel #email="ngModel">
+                    <span class="text-danger fw-normal" *ngIf="!email.valid && email.touched && email.errors && email.errors['required']">Email is required!</span>
+                    <span class="text-danger fw-normal" *ngIf="!email.valid && email.touched && email.errors && email.errors['email']">Enter a valid email!</span>
+                </div>
+                <div class="row mb-3">
+                    <label class="fw-bold">Subject</label>
+                    <input name="subject" class="form-control" type="text" required ngModel #subject="ngModel">
+                    <span class="text-danger fw-normal" *ngIf="!subject.valid && subject.touched">Subject is required!</span>
+                </div>
+                <div class="row mb-3">
+                    <label class="fw-bold">Content</label>
+                    <textarea name="content" rows="4" class="form-control" type="text" required ngModel #content="ngModel"></textarea>
+                    <span class="text-danger fw-normal" *ngIf="!content.valid && content.touched">Content is required!</span>
+                </div>
             </div>
-            <div class="row mb-3">
-                <label class="fw-bold">Subject</label>
-                <input class="form-control" type="text">
-            </div>
-            <div class="row mb-3">
-                <label class="fw-bold">Content</label>
-                <textarea rows="4" class="form-control" type="text"></textarea>
+            <div class="col-md-6 my-auto">
+                <img class="img-fluid img-thumbnail" src="https://images.unsplash.com/photo-1577563908411-5077b6dc7624?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="">
             </div>
         </div>
-        <div class="col-md-6 my-auto">
-            <img class="img-fluid img-thumbnail" src="https://images.unsplash.com/photo-1577563908411-5077b6dc7624?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="">
+        <div class="row">
+            <button 
+            [ngClass]="{'cursor-not-allowed': !f.valid}" 
+            [disabled]="!f.valid" 
+            type="submit"
+            class="btn btn-primary">Submit</button>
         </div>
-    </div>
-    <div class="row">
-        <button type="button" class="btn btn-primary">Submit</button>
-    </div>
+    </form>
 </div>

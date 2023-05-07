@@ -1,6 +1,4 @@
 <div class="container">
-    <h2 class="mb-4 text-center">Here's my projects</h2>
-    <app-project-item></app-project-item>
-    <app-project-item></app-project-item>
-    <app-project-item></app-project-item>
+    <h2 class="mb-4 text-center">Here's my Noteworthy Projects</h2>
+    <app-project-item [projectItem]="project" *ngFor="let project of projects"></app-project-item>
 </div>
