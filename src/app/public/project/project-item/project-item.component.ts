@@ -7,5 +7,5 @@ import { Project } from 'src/app/model/project.model';
   styleUrls: ['./project-item.component.css']
 })
 export class ProjectItemComponent {
-  @Input() projectItem = new Project("","","");
+  @Input() projectItem = new Project("","","","");
 }
