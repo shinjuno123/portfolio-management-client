@@ -1,13 +1,12 @@
-<div class="row col-8 mb-5">
-    <h3 class="fs-5">Platform</h3>
-    <div class="btn-group" role="group" aria-label="platform">
-        <input type="radio" class="btn-check" name="plaformRadio" id="web" autocomplete="off" checked>
-        <label class="btn btn-outline-primary" for="web">Web</label>
+<div class="row col-5">
+    <h3 class="fs-5">Category</h3>
+    <div class="btn-group" role="group" aria-label="category">
+        <label class="btn btn-outline-primary" [ngClass]="{'active': category === selectedCategory}" [for]="category" *ngFor="let category of categories">
+            {{category}}
+            <input (click)="onSelectCategory(category)" type="radio" class="btn-check" name="categoryRadio" [id]="category" autocomplete="off">
+        </label>
 
-        <input type="radio" class="btn-check" name="plaformRadio" id="android" autocomplete="off">
-        <label class="btn btn-outline-primary" for="android">Android</label>
-
-        <input type="radio" class="btn-check" name="plaformRadio" id="desktop" autocomplete="off">
-        <label class="btn btn-outline-primary" for="desktop">Desktop</label>
+        <!-- <input type="radio" class="btn-check" name="categoryRadio" id="backend" autocomplete="off">
+        <label class="btn btn-outline-primary" for="backend">Backend</label> -->
     </div>
 </div>

@@ -18,6 +18,8 @@ import { ProjectItemComponent } from './public/project/project-item/project-item
 import { ContactComponent } from './public/contact/contact.component';
 import { ReplacePipe } from './public/replace.pipe';
 import { CertificationItemComponent } from './public/about-me/certification-item/certification-item.component';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { CertificationItemComponent } from './public/about-me/certification-item
     CertificationItemComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

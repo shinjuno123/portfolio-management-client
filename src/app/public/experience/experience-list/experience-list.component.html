@@ -1,4 +1,10 @@
 <ul class="list-group mb-4">
-    <li class="list-group-item active">KT Aivle School Tutor</li>
-    <li class="list-group-item">Dummy</li>
+    <li 
+    *ngFor="let title of titles" 
+    (click)="onSelectTitle(title.id)"
+    style="cursor: pointer;"
+    class="list-group-item"
+    [ngClass]="{'active': clickedTitleId === title.id}">
+        {{title.name}}
+    </li>
 </ul>
