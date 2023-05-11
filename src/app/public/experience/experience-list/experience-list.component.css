@@ -1,0 +1,16 @@
+
+.dark-mode-button{
+    border-radius: 3px;
+}
+
+.dark-mode-button > li {
+    background-color: #2F8886;
+    color: white;
+    border: 0;
+}
+
+.dark-mode-button > li.active{
+    margin: 0!important;
+    background-color: #84C69B!important;
+    font-weight:bolder;
+}

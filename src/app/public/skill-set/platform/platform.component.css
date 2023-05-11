@@ -1,0 +1,20 @@
+.custom-dark-mode {
+    background-color: #1A2F4B;
+    padding: 1rem;
+    border-radius: 7px;
+}
+
+
+.custom-dark-mode .btn{
+    color: currentColor;
+    background-color: #2F8886;
+    --bs-btn-border-color: none;
+    --bs-btn-hover-border-color: none;
+}
+
+.custom-dark-mode .active {
+    border: 0;
+    background-color: #84C69B!important;
+    
+}
+

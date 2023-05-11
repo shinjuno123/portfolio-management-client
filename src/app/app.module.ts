@@ -19,7 +19,7 @@ import { ContactComponent } from './public/contact/contact.component';
 import { ReplacePipe } from './public/replace.pipe';
 import { CertificationItemComponent } from './public/about-me/certification-item/certification-item.component';
 import { FormsModule } from '@angular/forms';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -44,6 +44,7 @@ import { FormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     FormsModule,
+    FontAwesomeModule
 
   ],
   providers: [],

@@ -1,24 +1,32 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { AfterViewInit, Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { SkillSetItem } from 'src/app/model/skill-set-item.model';
-import { SkillSetService } from 'src/app/service/skill-set.service';
+import { DarkModeService } from 'src/app/service/dark-mode.service';
+
 
 @Component({
   selector: 'app-skill-item',
   templateUrl: './skill-item.component.html',
   styleUrls: ['./skill-item.component.css'],
 })
-export class SkillItemComponent implements OnInit, OnDestroy {
+export class SkillItemComponent implements OnInit,AfterViewInit {
   @Input() itemInfo!: SkillSetItem;
+  @ViewChild('skillItem') skillItem!: ElementRef;
 
-  constructor() { }
+  constructor(private renderer: Renderer2,
+    private darkModeService: DarkModeService) { }
 
   ngOnInit(): void {
 
   }
 
-  ngOnDestroy(): void {
+  ngAfterViewInit(): void {
+    if(this.darkModeService.getIsDarkMode()){
+      this.activateDarkMode();
+    }
+  }
 
+  private activateDarkMode() {
+    this.renderer.addClass(this.skillItem.nativeElement, "custom-dark-mode");
   }
 
 }

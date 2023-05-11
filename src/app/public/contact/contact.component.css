@@ -9,4 +9,4 @@ span{
 .cursor-not-allowed {
     cursor: not-allowed !important; 
     pointer-events:all !important;
-  }
+}

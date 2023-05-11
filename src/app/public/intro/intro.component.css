@@ -7,12 +7,24 @@ p {
 }
 
 .container {
-    padding-top: 6rem;
-    padding-bottom: 6rem;
+    padding-top: 10rem;
+    padding-bottom: 10rem;
 }
 
 @media screen and (max-width: 530px){
     h1 {
         font-size: 3.5rem;
     }
+}
+
+hr{
+    color: #FFF7D4;
+    border-width: 3px;
+    opacity: 1;
+    border-radius: 3px;
+}
+
+
+.my-name{
+    color: #FFD95A;
 }

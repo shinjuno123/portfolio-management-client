@@ -1,3 +1,76 @@
 a{
     cursor: pointer;
 }
+
+
+
+
+/* Toggle Night Mode */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+
+* {box-sizing: border-box;}
+
+
+.checkbox {
+  opacity: 0;
+  position: absolute;
+}
+
+.checkbox-label {
+  background-color: #111;
+  width: 50px;
+  height: 26px;
+  border-radius: 50px;
+  position: relative;
+  padding: 5px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.checkbox-label .ball {
+  background-color: #fff;
+  width: 42.5%;
+  height: 84.6%;
+  position: absolute;
+  left: 4%;
+  top: 7.6%;
+  border-radius: 50%;
+  transition: transform 0.2s linear;
+}
+
+.checkbox:checked + .checkbox-label .ball {
+  transform: translateX(114%);
+}
+
+/* Navigation bar Bootstrap intialization */
+.navbar-nav{
+  --bs-nav-link-color: currentColor!important;
+  --bs-nav-link-hover-color: currentColor!important;
+}
+
+.navbar-brand{
+  color: currentColor;
+}
+
+nav {
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+
+
+/* Navigation bar classes */
+.nav-background-dark{
+  background-color: #171717!important;
+}
+
+
+.dark-active {
+  color: #FFFFFF;
+}
+
+.dark-disabled{
+  color: #888888;
+}

@@ -2,3 +2,31 @@
     padding-top: 5rem;
     padding-bottom: 5rem;
 }
+
+.custom-dark-mode > div > .col-md-4{
+    background-color: #28475C;
+    padding: .3rem;
+    border-start-start-radius: 7px;
+    border-bottom-left-radius: 7px;
+}
+
+.custom-dark-mode > div > .col-md-8{
+    background-color: #1A2F4B;
+    padding: 2rem;
+    border-start-end-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
+
+@media screen and  (max-width: 768px){
+    .custom-dark-mode > div > .col-md-4{
+        border-start-end-radius: 7px;
+        border-start-start-radius: 7px;
+        border-bottom-left-radius: 0;
+    }
+    
+    .custom-dark-mode > div > .col-md-8{
+        border-end-start-radius: 7px;
+        border-start-end-radius: 0;
+
+    }
+}

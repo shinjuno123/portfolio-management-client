@@ -1,4 +1,4 @@
-<div class="row col-5">
+<div class="row col-md-5" #categoryContainer>
     <h3 class="fs-5">Category</h3>
     <div class="btn-group" role="group" aria-label="category">
         <label class="btn btn-outline-primary" [ngClass]="{'active': category === selectedCategory}" [for]="category" *ngFor="let category of categories">

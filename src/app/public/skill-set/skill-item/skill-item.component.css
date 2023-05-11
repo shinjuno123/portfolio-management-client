@@ -1,0 +1,64 @@
+.custom-dark-mode{
+    --bs-card-border-width: none;
+    --bs-border-radius: 5px;
+    --bs-card-inner-border-radius: 6px!important;
+    --bs-card-bg:none;
+    box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.3);
+    --bs-body-color: currentColor;
+}
+
+.custom-dark-mode .accordion-body{
+    padding: 1rem 0 0 0;
+}
+
+.custom-dark-mode .card-body {
+    background-color:#191A19;
+    border: 0;
+    border-end-start-radius: 7px;
+    border-end-end-radius: 7px;
+    color: currentColor;
+}
+
+.custom-dark-mode .accordion{
+    --bs-border-color: none;
+    --bs-accordion-bg: none;
+    --bs-accordion-btn-icon-transform: none;
+    --bs-accordion-btn-active-icon: none;
+}
+
+.custom-dark-mode .accordion-button.open{
+    background-color: #1A2F4B;
+    color: currentColor;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.custom-dark-mode .accordion-button::after{
+    --bs-accordion-btn-icon: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAfklEQVR4nO3VsQkDQQwF0cW5+29HClyICznGOF1bXCot8zKFA4K/liRJUl9A8CvXJMCD/641NOQq7ifwpp88JSSqkNmv9QW8boslzYfL3ghzBzFPCYkqZOeyS2oKl70R5g5inhISVcjOZZfUFC57I8wdxDwlJKqQncsurTN8AJzJEvZbOhKBAAAAAElFTkSuQmCC'); 
+    --bs-accordion-btn-active-icon : url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAfklEQVR4nO3VsQkDQQwF0cW5+29HClyICznGOF1bXCot8zKFA4K/liRJUl9A8CvXJMCD/641NOQq7ifwpp88JSSqkNmv9QW8boslzYfL3ghzBzFPCYkqZOeyS2oKl70R5g5inhISVcjOZZfUFC57I8wdxDwlJKqQncsurTN8AJzJEvZbOhKBAAAAAElFTkSuQmCC'); 
+}
+
+.custom-dark-mode .accordion-button.open.collapsed{
+    background-color: #1A2F4B;
+    color: currentColor;
+
+}
+
+.custom-dark-mode .list-group {
+    border-radius: 7px;
+}
+
+
+.custom-dark-mode .list-group .list-group-item{
+    padding: .5rem;
+    border-radius: 7px;
+    background-color: #1A2F4B;
+    margin-bottom: .4rem;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+
+.custom-dark-mode .list-group .list-group-item > a{
+    text-decoration:none;
+    color: #C07F00;
+}
+

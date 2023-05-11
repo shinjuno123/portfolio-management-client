@@ -1,7 +1,7 @@
-<div class="row col-8 mb-5">
+<div class="row col-md-8 mb-3" #platformContainer>
     <h3 class="fs-5">Platform</h3>
-    <div  class="btn-group" role="group" aria-label="platform">
-        <label *ngFor="let platform of platforms" class="btn btn-outline-primary" [ngClass]="{'active': selectedPlatform === platform}"  [for]="platform">
+    <div  class="btn-group" role="group" aria-label="platform" #btnGroup>
+        <label *ngFor="let platform of platforms" class="btn" [ngClass]="{'active': selectedPlatform === platform}"  [for]="platform">
             {{platform}}
             <input (click)="onSelectPlatform(platform)" [value]="platform" type="radio" class="btn-check" [name]="platform" [id]="platform" autocomplete="off" [(ngModel)]="selectedPlatform">
         </label>
