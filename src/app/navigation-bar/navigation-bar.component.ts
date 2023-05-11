@@ -17,7 +17,6 @@ export class NavigationBarComponent implements OnInit, AfterViewInit{
   @ViewChild('navigationBar') navigationBar!: ElementRef;
 
   onChangeView(selectedView: string){
-    this.currentView = selectedView;
     this.scrollService.buttonEvent.next(selectedView);
   }
 
@@ -47,6 +46,13 @@ export class NavigationBarComponent implements OnInit, AfterViewInit{
   ngOnInit(): void {
     this.views = this.scrollService.views;
     this.currentView = this.views[0];
+
+    this.scrollService.scrollEvent.subscribe(
+      viewName => {
+        this.currentView = viewName;
+        console.log(this.currentView);
+      }
+    )
   }
 
 

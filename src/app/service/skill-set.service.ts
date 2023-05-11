@@ -62,7 +62,6 @@ export class SkillSetService {
     getRelavantItems(platformName: string, categoryName: string){
         const categories = this.testData[platformName as keyof typeof this.testData];
         let skillSetItems = categories[categoryName as keyof typeof categories];
-        console.log(platformName, categoryName);
     
         return skillSetItems;
     }

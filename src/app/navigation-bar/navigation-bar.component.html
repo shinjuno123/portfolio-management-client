@@ -11,7 +11,11 @@
     <div class="collapse d-xxl-flex navbar-collapse justify-content-between" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item" *ngFor="let view of views">
-          <a class="nav-link" [ngClass]="{'custom-active': view === currentView, 'custom-disabled': view !== currentView}" (click)="onChangeView(view)">{{view}}</a>
+          <a class="nav-link" [ngClass]="{'custom-active': view === currentView, 'custom-disabled': view !== currentView}" (click)="onChangeView(view)">
+            <!-- {{view.toUpperCase()}}
+            {{currentView}} -->
+            {{view}}
+          </a>
         </li>
       </ul>
       

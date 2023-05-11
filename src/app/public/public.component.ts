@@ -30,42 +30,34 @@ export class PublicComponent implements AfterViewInit{
 
   constructor(private scrollService: ScrollService){}
 
-
-  private scrollToTheView(){
-    switch(this.selectedView) {
-      case this.views[0]:
-        this.introView.nativeElement.scrollIntoView();
-        break;
-      case this.views[1]:
-        this.aboutView.nativeElement.scrollIntoView();
-        break;
-      case this.views[2]:
-        this.experienceView.nativeElement.scrollIntoView();
-        break;
-      case this.views[3]:
-        this.skillSetView.nativeElement.scrollIntoView();
-        break;
-      case this.views[4]:
-        this.projectView.nativeElement.scrollIntoView();
-        break;
-      case this.views[5]:
-        this.contactView.nativeElement.scrollIntoView();
-        break;
-    }
-  }
-
   ngAfterViewInit(): void {
     this.views = this.scrollService.views;
     this.selectedView = this.scrollService.views[0];
 
+    this.scrollService.setObserver(          
+      this.introView,
+      this.aboutView,
+      this.experienceView,
+      this.skillSetView,
+      this.projectView,
+      this.contactView);
+
     this.scrollService.buttonEvent
     .subscribe(
       viewName => {
-      
         this.selectedView = viewName;
-        this.scrollToTheView();
+        this.scrollService.scrollToTheView(
+          this.selectedView,
+          this.introView,
+          this.aboutView,
+          this.experienceView,
+          this.skillSetView,
+          this.projectView,
+          this.contactView
+        )
       }
-    ) 
+    )
   }
+
 
 }
