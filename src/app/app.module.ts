@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppComponent } from './app.component';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 import { PublicComponent } from './public/public.component';
@@ -16,7 +15,7 @@ import { SkillItemComponent } from './public/skill-set/skill-item/skill-item.com
 import { ProjectComponent } from './public/project/project.component';
 import { ProjectItemComponent } from './public/project/project-item/project-item.component';
 import { ContactComponent } from './public/contact/contact.component';
-import { ReplacePipe } from './public/replace.pipe';
+import { ReplacePipe } from './pipe/replace.pipe';
 import { CertificationItemComponent } from './public/about-me/certification-item/certification-item.component';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';

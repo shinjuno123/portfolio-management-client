@@ -1,7 +1,5 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { ScrollService } from '../service/scroll.service';
-import { ContactComponent } from './contact/contact.component';
 
 @Component({
   selector: 'app-public',

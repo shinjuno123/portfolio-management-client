@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { DarkModeService } from 'src/app/service/dark-mode.service';
 import { SkillSetService } from 'src/app/service/skill-set.service';
 
