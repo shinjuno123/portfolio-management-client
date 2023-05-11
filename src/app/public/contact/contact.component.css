@@ -6,6 +6,11 @@ span{
     font-size: small;
 }
 
+.row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
 .cursor-not-allowed {
     cursor: not-allowed !important; 
     pointer-events:all !important;
