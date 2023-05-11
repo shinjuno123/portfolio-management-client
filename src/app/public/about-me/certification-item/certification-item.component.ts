@@ -18,10 +18,26 @@ export class CertificationItemComponent implements AfterViewInit{
     if(this.darkModeService.getIsDarkMode()){
       this.activateNightMode();
     }
+
+    this.darkModeService.modeChange.subscribe(
+      isDarkMode => {
+        if(isDarkMode){
+          this.activateNightMode();
+        } else {
+          this.deactivateNightMode();
+        }
+      }
+    )
   }
 
   private activateNightMode(){
+    this.renderer.removeClass(this.certificationItem.nativeElement, "bright-mode-list");
     this.renderer.addClass(this.certificationItem.nativeElement, "dark-mode-list");
+  }
+
+  private deactivateNightMode() {
+    this.renderer.removeClass(this.certificationItem.nativeElement, "dark-mode-list");
+    this.renderer.addClass(this.certificationItem.nativeElement, "bright-mode-list");
   }
 
 }

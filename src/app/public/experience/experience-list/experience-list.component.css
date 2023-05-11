@@ -14,3 +14,19 @@
     background-color: #84C69B!important;
     font-weight:bolder;
 }
+
+.bright-mode-button{
+    box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.3);
+}
+
+.bright-mode-button > li {
+    background-color: #BBBFCA;
+    color: currentColor;
+    border: 0;
+}
+
+.bright-mode-button > li.active{
+    margin: 0!important;
+    background-color: #E8E8E8!important;
+    font-weight:bolder;
+}

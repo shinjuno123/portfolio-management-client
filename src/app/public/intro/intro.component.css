@@ -1,5 +1,7 @@
 h1 {
     font-size: 5rem;
+    display: inline-block;
+    width: fit-content;
 }
 
 p {
@@ -17,7 +19,7 @@ p {
     }
 }
 
-hr{
+.custom-dark-mode hr{
     color: #FFF7D4;
     border-width: 3px;
     opacity: 1;
@@ -26,6 +28,25 @@ hr{
 }
 
 
-.my-name{
+.custom-dark-mode .my-name{
     color: #FFD95A;
 }
+
+.custom-bright-mode hr {
+    color: #05BFDB;
+    border-width: 3px;
+    opacity: 1;
+    border-radius: 3px;
+    box-shadow:2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.custom-bright-mode .my-name{
+    color: #F0F0F0;
+}
+.custom-bright-mode .my-name>h1{
+    padding: 0 2rem;
+    background-color: #00FFCA;
+    box-shadow:2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+

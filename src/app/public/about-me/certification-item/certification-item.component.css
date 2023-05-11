@@ -12,3 +12,16 @@
     text-decoration: none;
     color: #C07F00;
 }
+
+
+.bright-mode-list {
+    background-color: white;
+    border-radius: 5px;
+    border: 0;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.bright-mode-list a{
+    text-decoration: none;
+    color: #05BFDB;
+}

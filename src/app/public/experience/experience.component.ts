@@ -42,6 +42,16 @@ export class ExperienceComponent implements OnInit, OnDestroy, AfterViewInit{
     if(this.darkModeService.getIsDarkMode()){
       this.activateDarkMode();
     }
+
+    this.darkModeService.modeChange.subscribe(
+      isDarkMode => {
+        if(isDarkMode){
+          this.activateDarkMode();
+        } else {
+          this.deactivateDarMode();
+        }
+      }
+    )
   }
 
   private getTitles(): {id:string, name:string}[] {
@@ -61,7 +71,13 @@ export class ExperienceComponent implements OnInit, OnDestroy, AfterViewInit{
   }
 
   private activateDarkMode() {
+    this.renderer.removeClass(this.experienceContainer.nativeElement, "custom-bright-mode");
     this.renderer.addClass(this.experienceContainer.nativeElement, "custom-dark-mode");
+  }
+
+  private deactivateDarMode(){
+    this.renderer.removeClass(this.experienceContainer.nativeElement, "custom-dark-mode");
+    this.renderer.addClass(this.experienceContainer.nativeElement, "custom-bright-mode");
   }
 
 }

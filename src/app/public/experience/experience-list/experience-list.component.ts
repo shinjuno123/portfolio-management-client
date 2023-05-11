@@ -29,9 +29,25 @@ export class ExperienceListComponent implements OnInit, AfterViewInit{
     if(this.darkModeService.getIsDarkMode()){
       this.activateDarkMode();
     }
+
+    this.darkModeService.modeChange.subscribe(
+      isDarkMode => {
+        if(isDarkMode) {
+          this.activateDarkMode();
+        } else {
+          this.deactivateDarkMode();
+        }
+      }
+    )
+  }
+  
+  private deactivateDarkMode() {
+    this.renderer.removeClass(this.experienceListButton.nativeElement,"dark-mode-button");
+    this.renderer.addClass(this.experienceListButton.nativeElement,"bright-mode-button");
   }
 
   private activateDarkMode(){
+    this.renderer.removeClass(this.experienceListButton.nativeElement,"bright-mode-button");
     this.renderer.addClass(this.experienceListButton.nativeElement,"dark-mode-button");
   }
 

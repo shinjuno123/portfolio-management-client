@@ -1,10 +1,12 @@
-import { ElementRef, Injectable, Renderer2, RendererFactory2 } from "@angular/core";
+import { Injectable } from "@angular/core";
+import { Subject } from "rxjs";
 
 @Injectable({
     providedIn: "root"
 })
 export class DarkModeService {
     private isDarkMode: boolean = true;
+    modeChange = new Subject<boolean>();
 
     setIsDarkMode(isDarkMode: boolean){
         this.isDarkMode = isDarkMode;

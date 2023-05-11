@@ -62,15 +62,31 @@ nav {
 
 
 /* Navigation bar classes */
+.navbar-brand{
+  color: white;
+}
+
 .nav-background-dark{
   background-color: #171717!important;
 }
 
-
-.dark-active {
+.nav-background-dark li .custom-active{
   color: #FFFFFF;
 }
 
-.dark-disabled{
+.nav-background-dark li .custom-disabled{
+  color: #888888;
+}
+
+
+.nav-background-bright {
+  background-color: #0A4D68!important;
+}
+
+.nav-background-bright li .custom-active{
+  color: #FFFFFF;
+}
+
+.nav-background-bright li .custom-disabled{
   color: #888888;
 }
