@@ -10,3 +10,17 @@ span{
     cursor: not-allowed !important; 
     pointer-events:all !important;
 }
+
+.custom-dark-mode button{
+    border-radius: 7px;
+    background-color: #2F8886;
+    border: none;
+}
+
+.custom-dark-mode button:hover{
+    background-color: #84C69B;
+}
+
+img {
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.3);
+}

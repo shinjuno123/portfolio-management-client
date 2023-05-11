@@ -1,4 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Georama&display=swap');
+body{
+    font-family: 'Georama', sans-serif;
+}
+
 .background-dark {
     background-color: #222831;
 

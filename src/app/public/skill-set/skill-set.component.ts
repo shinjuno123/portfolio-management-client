@@ -1,4 +1,5 @@
-import {Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { DarkModeService } from 'src/app/service/dark-mode.service';
 import { SkillSetService } from 'src/app/service/skill-set.service';
 
 @Component({
@@ -6,13 +7,16 @@ import { SkillSetService } from 'src/app/service/skill-set.service';
   templateUrl: './skill-set.component.html',
   styleUrls: ['./skill-set.component.css']
 })
-export class SkillSetComponent implements OnInit{
+export class SkillSetComponent implements AfterViewInit{
   platformName : string = '';
   categoryName : string = '';
   selectedCategories: string[] = [];
   selectedItems : any;
+  @ViewChild('hLine') hLine!: ElementRef;
 
-  constructor(private skillSetService: SkillSetService){}
+  constructor(private skillSetService: SkillSetService,
+    private darkModeService: DarkModeService,
+    private renderer: Renderer2){}
 
   onPlatformChange(platformName: string){
     this.platformName = platformName;
@@ -28,7 +32,13 @@ export class SkillSetComponent implements OnInit{
     this.selectedItems = this.skillSetService.getRelavantItems(this.platformName,this.categoryName);
   }
 
-  ngOnInit(): void {
-    
+  ngAfterViewInit(): void {
+    if(this.darkModeService.getIsDarkMode()){
+      this.activateDarkMode();
+    }
+  }
+
+  private activateDarkMode(){
+    this.renderer.addClass(this.hLine.nativeElement, "custom-dark-mode");
   }
 }

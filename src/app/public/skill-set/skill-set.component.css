@@ -5,3 +5,12 @@
 .container:last-child{
     padding-bottom: 5rem;
 }
+
+
+.custom-dark-mode {
+    color: #FFF7D4;
+    opacity: 1;
+    border-width: 3px;
+    border-radius: 3px;
+    box-shadow:2px 2px 4px rgba(0, 0, 0, 0.3);
+}

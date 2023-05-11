@@ -14,7 +14,7 @@
                 <div [id]="itemInfo.title | replace : ' ': ''" class="accordion-collapse collapse">
                   <div class="accordion-body">
                     <ul class="list-group">
-                        <li *ngFor="let project of itemInfo.relavantProjects; let idx=index" class="list-group-item"><a [href]="project.url">{{idx + 1}}. {{project.name}}</a></li>
+                        <li *ngFor="let project of itemInfo.relavantProjects; let idx=index" class="list-group-item"><a [href]="project.url">{{idx + 1}}. {{project.name}}(Click)</a></li>
                       </ul>
                   </div>
                 </div>

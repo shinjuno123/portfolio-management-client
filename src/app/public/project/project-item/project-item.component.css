@@ -1,0 +1,34 @@
+.card {
+    border: none;
+
+}
+
+
+.card>.position-absolute {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.card:hover>.position-absolute {
+    background-color: rgba(0, 0, 0, 0);
+    animation-name: fade-out;
+    animation-duration: 2s;
+}
+
+.card a{
+    --bs-btn-bg: #2F8886;
+    --bs-btn-border-color: none;
+    --bs-btn-hover-bg: #84C69B;
+}
+
+
+
+
+@keyframes fade-out {
+    0% {
+        background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    100% {
+        background-color: rgba(0, 0, 0, 0);
+    }
+}
