@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { ScrollService } from '../service/scroll.service';
-import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
+import { faSun, faMoon, faBars} from '@fortawesome/free-solid-svg-icons';
 import { DarkModeService } from '../service/dark-mode.service';
 
 @Component({
@@ -13,6 +13,7 @@ export class NavigationBarComponent implements OnInit, AfterViewInit{
   views!: string[];
   moonIcon = faMoon;
   sunIcon = faSun
+  barIcon = faBars;
   isDarkMode: boolean = true;
   @ViewChild('navigationBar') navigationBar!: ElementRef;
 
