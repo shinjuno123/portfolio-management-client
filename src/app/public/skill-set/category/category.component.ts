@@ -26,10 +26,26 @@ export class CategoryComponent implements OnInit, OnDestroy, AfterViewInit{
     if(this.darkModeService.getIsDarkMode()){
       this.activateDarkMode();
     }
+
+    this.darkModeService.modeChange.subscribe(
+      isDarkMode => {
+        if(isDarkMode){
+          this.activateDarkMode();
+        } else {
+          this.deactivateDarkMode()
+        }
+      }
+    )
   }
 
   private activateDarkMode(){
+    this.renderer.removeClass(this.categoryContainer.nativeElement,"custom-bright-mode");
     this.renderer.addClass(this.categoryContainer.nativeElement,"custom-dark-mode");
+  }
+
+  private deactivateDarkMode() {
+    this.renderer.removeClass(this.categoryContainer.nativeElement,"custom-dark-mode");
+    this.renderer.addClass(this.categoryContainer.nativeElement,"custom-bright-mode");
   }
 
   onSelectCategory(categoryName: string){

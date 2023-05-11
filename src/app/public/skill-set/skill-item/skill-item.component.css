@@ -62,3 +62,70 @@
     color: #C07F00;
 }
 
+
+
+
+
+.custom-bright-mode{
+    --bs-card-border-width: none;
+    --bs-border-radius: 5px;
+    --bs-card-inner-border-radius: 6px!important;
+    --bs-card-bg:none;
+    box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.3);
+    --bs-body-color: currentColor;
+}
+
+.custom-bright-mode .accordion-body{
+    padding: 1rem 0 0 0;
+}
+
+.custom-bright-mode .card-body {
+    background-color:#BBBFCA;
+    border: 0;
+    border-end-start-radius: 7px;
+    border-end-end-radius: 7px;
+    color: currentColor;
+}
+
+.custom-bright-mode .accordion{
+    --bs-border-color: none;
+    --bs-accordion-bg: none;
+    --bs-accordion-btn-icon-transform: none;
+    --bs-accordion-btn-active-icon: none;
+}
+
+.custom-bright-mode .accordion-button.open{
+    background-color: #E8E8E8;
+    color: currentColor;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.custom-bright-mode .accordion-button::after{
+    --bs-accordion-btn-icon: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAeklEQVR4nO3VwQmAQAxE0SnA/svJIWnETuJVFgze3MT/IAdv+0EYCQDwMZOUy4UayodrJ5eH378PSWcR+9XFlBAf/WvF22IAvRnLvplsOIgxJcSrEJYdQA/Gsm8mGw5iTAnxKoRlB9CDseybyYaDGFNCvAph2QEAv3MBD9CoDPxj23UAAAAASUVORK5CYII='); 
+    --bs-accordion-btn-active-icon : url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAeklEQVR4nO3VwQmAQAxE0SnA/svJIWnETuJVFgze3MT/IAdv+0EYCQDwMZOUy4UayodrJ5eH378PSWcR+9XFlBAf/WvF22IAvRnLvplsOIgxJcSrEJYdQA/Gsm8mGw5iTAnxKoRlB9CDseybyYaDGFNCvAph2QEAv3MBD9CoDPxj23UAAAAASUVORK5CYII='); 
+}
+
+.custom-bright-mode .accordion-button.open.collapsed{
+    background-color: #E8E8E8;
+    color: currentColor;
+
+}
+
+.custom-bright-mode .list-group {
+    border-radius: 7px;
+}
+
+
+.custom-bright-mode .list-group .list-group-item{
+    padding: .5rem;
+    border-radius: 7px;
+    background-color: #E8E8E8;
+    margin-bottom: .4rem;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+
+.custom-bright-mode .list-group .list-group-item > a{
+    text-decoration:none;
+    color: #05BFDB;
+}

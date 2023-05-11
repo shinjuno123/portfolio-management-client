@@ -26,6 +26,21 @@ span{
     background-color: #84C69B;
 }
 
+
+
+
+.custom-bright-mode button{
+    border-radius: 7px;
+    background-color: #BBBFCA;
+    border: none;
+    box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.3);
+    color: currentColor;
+}
+
+.custom-bright-mode button:hover{
+    background-color: #E8E8E8;
+}
+
 img {
     box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.3);
 }

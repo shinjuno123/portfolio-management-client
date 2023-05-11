@@ -18,3 +18,24 @@
     
 }
 
+.custom-bright-mode {
+    background-color: #BBBFCA;
+    padding: 1rem;
+    border-radius: 7px;
+    box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.4);
+}
+
+
+.custom-bright-mode .btn{
+    color: currentColor;
+    background-color: #BBBFCA;
+    --bs-btn-border-color: none;
+    --bs-btn-hover-border-color: none;
+    box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.4);
+}
+
+.custom-bright-mode .active {
+    border: 0;
+    background-color: #E8E8E8!important;
+    
+}

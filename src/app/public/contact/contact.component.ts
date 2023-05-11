@@ -23,10 +23,28 @@ export class ContactComponent implements AfterViewInit{
   ngAfterViewInit(): void {
     if(this.darkModeService.getIsDarkMode()){
       this.activateDarkMode();
+    } else {
+      this.deactivateDarkMode();
     }
+
+    this.darkModeService.modeChange.subscribe(
+      isDarkMode => {
+        if(isDarkMode){
+          this.activateDarkMode();
+        } else {
+          this.deactivateDarkMode();
+        }
+      }
+    )
   }
 
   private activateDarkMode(){
+    this.renderer.removeClass(this.contactContainer.nativeElement, 'custom-dark-mode');
     this.renderer.addClass(this.contactContainer.nativeElement, 'custom-dark-mode');
+  }
+
+  private deactivateDarkMode() {
+    this.renderer.removeClass(this.contactContainer.nativeElement, 'custom-dark-mode');
+    this.renderer.addClass(this.contactContainer.nativeElement, 'custom-bright-mode');
   }
 }

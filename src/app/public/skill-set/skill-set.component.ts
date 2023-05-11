@@ -36,9 +36,25 @@ export class SkillSetComponent implements AfterViewInit{
     if(this.darkModeService.getIsDarkMode()){
       this.activateDarkMode();
     }
+
+    this.darkModeService.modeChange.subscribe(
+      isDarMode => {
+        if(isDarMode){
+          this.activateDarkMode();
+        } else {
+          this.deactivateDarkMode();
+        }
+      }
+    )
   }
 
   private activateDarkMode(){
+    this.renderer.removeClass(this.hLine.nativeElement, "custom-bright-mode");
     this.renderer.addClass(this.hLine.nativeElement, "custom-dark-mode");
+  }
+
+  private deactivateDarkMode() {
+    this.renderer.removeClass(this.hLine.nativeElement, "custom-dark-mode");
+    this.renderer.addClass(this.hLine.nativeElement, "custom-bright-mode");
   }
 }

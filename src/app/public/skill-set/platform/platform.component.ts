@@ -30,6 +30,16 @@ export class PlatformComponent implements OnInit, OnDestroy, AfterViewInit{
     if(this.darkModeService.getIsDarkMode()){
       this.activateDarkMode();
     }
+
+    this.darkModeService.modeChange.subscribe(
+      isDarMode => {
+        if(isDarMode) {
+          this.activateDarkMode();
+        } else {
+          this.deactivateDarkMode();
+        }
+      }
+    )
   }
 
   onSelectPlatform(platformName: string){
@@ -38,8 +48,14 @@ export class PlatformComponent implements OnInit, OnDestroy, AfterViewInit{
   }
 
   private activateDarkMode(){
+    this.renderer.removeClass(this.platformContainer.nativeElement, "custom-bright-mode");
     this.renderer.addClass(this.platformContainer.nativeElement, "custom-dark-mode");
 
+  }
+
+  private deactivateDarkMode() {
+    this.renderer.removeClass(this.platformContainer.nativeElement, "custom-dark-mode");
+    this.renderer.addClass(this.platformContainer.nativeElement, "custom-bright-mode");
   }
 
   ngOnDestroy(): void {

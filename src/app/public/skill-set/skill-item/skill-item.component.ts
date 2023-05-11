@@ -22,11 +22,30 @@ export class SkillItemComponent implements OnInit,AfterViewInit {
   ngAfterViewInit(): void {
     if(this.darkModeService.getIsDarkMode()){
       this.activateDarkMode();
+    } else {
+      this.deactivateDarkMode();
     }
+
+    this.darkModeService.modeChange.subscribe(
+      isDarkMode => {
+        if(isDarkMode){
+          this.activateDarkMode();
+        } else {
+          this.deactivateDarkMode();
+        }
+      }
+    )
   }
 
   private activateDarkMode() {
+    this.renderer.removeClass(this.skillItem.nativeElement, "custom-bright-mode");
     this.renderer.addClass(this.skillItem.nativeElement, "custom-dark-mode");
   }
+
+  private deactivateDarkMode() {
+    this.renderer.removeClass(this.skillItem.nativeElement, "custom-dark-mode");
+    this.renderer.addClass(this.skillItem.nativeElement, "custom-bright-mode");
+  }
+
 
 }
