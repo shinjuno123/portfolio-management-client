@@ -14,7 +14,7 @@
         </div>
         <div class="col-md-6">
             <img class="rounded mx-auto img-fluid"
-                src="https://media.istockphoto.com/id/1090878494/photo/close-up-portrait-of-young-smiling-handsome-man-in-blue-polo-shirt-isolated-on-gray-background.jpg?s=612x612&w=0&k=20&c=AycQ2obu8sgJxWAJgYBbYR6jeRB9Bhs1JZBXzSgL6LE="
+                [src]= "environment.rootUrl + about.faceImagePath"
                 alt="face-image">
 
             <div class="row mb-3">
@@ -46,7 +46,7 @@
             <div class="row">
                 <h3>Cerficiation List</h3>
                 <div class="list-group">
-                    <app-certification-item [certification]="certification" *ngFor="let certification of about.certifications"></app-certification-item>
+                    <app-certification-item [certification]="certification" *ngFor="let certification of certifications"></app-certification-item>
                 
                 </div>
             </div>

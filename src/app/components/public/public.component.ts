@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
-import { ScrollService } from '../service/scroll.service';
+import { ScrollService } from 'src/app/service/scroll.service';
 
 @Component({
   selector: 'app-public',
