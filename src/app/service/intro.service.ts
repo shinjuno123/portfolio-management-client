@@ -3,6 +3,7 @@ import { Intro } from "../model/intro.model";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { AppConstants } from "../constants/app.constants";
+import { map } from "rxjs/operators";
 
 @Injectable({providedIn:"root"})
 export class IntroService {
@@ -16,6 +17,7 @@ export class IntroService {
     constructor(private http:HttpClient){}
 
     fetchIntro() {
-        return this.http.get<Intro>(environment.rootUrl + AppConstants.INTRO_API_URL,{observe:"response"});
+        return this.http.get<Intro>(environment.rootUrl + AppConstants.INTRO_API_URL,{observe:"response"})
+        .pipe(map(response=> response.body));
     }
 }

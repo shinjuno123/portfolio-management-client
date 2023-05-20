@@ -1,5 +1,4 @@
-import { HttpResponse } from '@angular/common/http';
-import { AfterViewChecked, AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Intro } from 'src/app/model/intro.model';
 import { DarkModeService } from 'src/app/service/dark-mode.service';
@@ -11,7 +10,7 @@ import { IntroService } from 'src/app/service/intro.service';
   styleUrls: ['./intro.component.css']
 })
 export class IntroComponent implements OnInit, AfterViewChecked, OnDestroy{
-  intro : Intro = new Intro('','','','');
+  intro! : Intro;
   formattedOpening : any;
   introEvent!: Subscription;
   @ViewChild('introContainer',{static:true}) introContainer!: ElementRef;
@@ -22,10 +21,6 @@ export class IntroComponent implements OnInit, AfterViewChecked, OnDestroy{
   }
 
   ngAfterViewChecked(): void {
-    if(this.darkModeService.getIsDarkMode()){
-      this.activateDarkMode();
-    }
-
     this.darkModeService.modeChange.subscribe(
       isDarkMode => {
         if(isDarkMode) {
@@ -39,13 +34,10 @@ export class IntroComponent implements OnInit, AfterViewChecked, OnDestroy{
 
   ngOnInit(): void {
     this.introEvent = this.introService.fetchIntro().subscribe(
-      (response: HttpResponse<Intro>) => {
-        if(response.body){
-          this.intro = response.body;
+      (intro) => {
+        if(intro){
+          this.intro = intro;
         } 
-      },
-      (error: Error) => {
-
       }
     );
   }

@@ -1,14 +1,22 @@
 <div class="container" #introContainer>
-    <div class="row">
-        <p class="fs-2">{{intro.sayHi}}</p>
+    <div class="text-success d-flex justify-content-center" role="status" *ngIf="!intro" style="padding-top: 200px; padding-bottom: 200px;">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
     </div>
-    <div class="row text-nowrap my-name">
-        <h1>{{intro.name}}</h1>
+    <div *ngIf="intro">
+        <div class="row">
+            <p class="fs-2">{{intro.sayHi}}</p>
+        </div>
+        <div class="row text-nowrap my-name">
+            <h1>{{intro.name}}</h1>
+        </div>
+        <hr>
+        <div class="row">
+            <p class="fs-6" [innerHTML]="intro.opening | replace: '\n' : '\<br\>'">
+
+            </p>
+        </div>
     </div>
-    <hr>
-    <div class="row">
-        <p class="fs-6" [innerHTML]="intro.opening | replace: '\n' : '\<br\>'">
-    
-        </p>
-    </div>
+
 </div>

@@ -10,12 +10,9 @@ import { SkillSetService } from 'src/app/service/skill-set.service';
   styleUrls: ['./skill-set.component.css']
 })
 export class SkillSetComponent implements OnInit, OnDestroy, AfterViewInit {
-  platformName: string = '';
-  categoryName: string = '';
-  selectedCategories: string[] = [];
-  selectedItems: any;
   fetchDataEvent!: Subscription;
   @ViewChild('hLine') hLine!: ElementRef;
+  data!: FirstCategory[];
 
   constructor(private skillSetService: SkillSetService,
     private darkModeService: DarkModeService,
@@ -25,6 +22,7 @@ export class SkillSetComponent implements OnInit, OnDestroy, AfterViewInit {
     this.fetchDataEvent = this.skillSetService.fetchData().subscribe((firstCategories) => {
       if (firstCategories) {
         this.skillSetService.data = firstCategories;
+        this.data= firstCategories;
         this.skillSetService.dataChange.next(this.skillSetService.data.slice());
       }
     });

@@ -28,6 +28,12 @@ export class ExperienceListComponent implements AfterViewInit, OnChanges, OnDest
 
 
   ngAfterViewInit(): void {
+    if (this.darkModeService.getIsDarkMode()) {
+      this.activateDarkMode();
+    } else {
+      this.deactivateDarkMode();
+    }
+
     this.modeChangeEvent = this.darkModeService.modeChange.subscribe(
       isDarkMode => {
         if (isDarkMode) {

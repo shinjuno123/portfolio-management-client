@@ -40,7 +40,9 @@ export class PlatformComponent implements OnInit, OnDestroy, AfterViewInit{
   ngAfterViewInit(): void {
     if(this.darkModeService.getIsDarkMode()){
       this.activateDarkMode();
-    }
+    } else {
+      this.deactivateDarkMode();
+    } 
 
     this.darkModeService.modeChange.subscribe(
       isDarMode => {

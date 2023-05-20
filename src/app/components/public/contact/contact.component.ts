@@ -38,6 +38,12 @@ export class ContactComponent implements AfterViewInit{
   }
 
   ngAfterViewInit(): void {
+    if(this.darkModeService.getIsDarkMode()){
+      this.activateDarkMode();
+    } else {
+      this.deactivateDarkMode();
+    }
+
     this.darkModeService.modeChange.subscribe(
       isDarkMode => {
         if(isDarkMode){

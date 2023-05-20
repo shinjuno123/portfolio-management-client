@@ -1,59 +1,67 @@
-<div class="container" #aboutContainer *ngIf="about">
-    <div class="row">
-        <div class="col">
-            <h2>About me</h2>
-        </div>
+<div class="container" #aboutContainer>
+    <div class="text-success d-flex justify-content-center" role="status" *ngIf="!about" style="padding-top: 200px; padding-bottom: 200px;">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
     </div>
-    <div class="row">
-        <div class="col-md-6">
-            <div class="row">
-                <p  [innerHTML]="about.description | replace: '\n' : '\<br\>'">
-                
-                </p>
+    <div *ngIf="about">
+        <div class="row">
+            <div class="col">
+                <h2>About me</h2>
             </div>
         </div>
-        <div class="col-md-6">
-            <img class="rounded mx-auto img-fluid"
-                [src]= "environment.rootUrl + about.faceImagePath"
-                alt="face-image">
-
-            <div class="row mb-3">
-                <table class="table">
-                    <tbody>
-                        <tr scope="row">
-                            <th>Name</th>
-                            <td>{{about.name}}</td>
-                        </tr>
-                        <tr scope="row">
-                            <th>School</th>
-                            <td>{{about.school}}</td>
-                        </tr>
-                        <tr scope="row">
-                            <th>Diploma</th>
-                            <td><a [href]="environment.rootUrl + about.diplomaUrl">{{about.diploma}} (Download Diploma)</a></td>
-                        </tr>
-                        <tr scope="row">
-                            <th>Transcript</th>
-                            <td><a [href]="environment.rootUrl + about.diplomaUrl">(Download Transcript)</a></td>
-                        </tr>
-                        <tr scope="row">
-                            <th>Period</th>
-                            <td>{{about.period}}</td>
-                        </tr>
-                        <tr scope="row">
-                            <th>Region / Country</th>
-                            <td>{{about.regionCountry}}</td>
-                        </tr>
-                    </tbody>
-                </table>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <p  [innerHTML]="about.description | replace: '\n' : '\<br\>'">
+                    
+                    </p>
+                </div>
             </div>
-            <div class="row">
-                <h3>Cerficiation List</h3>
-                <div class="list-group">
-                    <app-certification-item [certification]="certification" *ngFor="let certification of certifications"></app-certification-item>
-                
+            <div class="col-md-6">
+                <img class="rounded mx-auto img-fluid"
+                    [src]= "environment.rootUrl + about.faceImagePath"
+                    alt="face-image">
+    
+                <div class="row mb-3">
+                    <table class="table">
+                        <tbody>
+                            <tr scope="row">
+                                <th>Name</th>
+                                <td>{{about.name}}</td>
+                            </tr>
+                            <tr scope="row">
+                                <th>School</th>
+                                <td>{{about.school}}</td>
+                            </tr>
+                            <tr scope="row">
+                                <th>Diploma</th>
+                                <td><a [href]="environment.rootUrl + about.diplomaUrl">{{about.diploma}} (Download Diploma)</a></td>
+                            </tr>
+                            <tr scope="row">
+                                <th>Transcript</th>
+                                <td><a [href]="environment.rootUrl + about.diplomaUrl">(Download Transcript)</a></td>
+                            </tr>
+                            <tr scope="row">
+                                <th>Period</th>
+                                <td>{{about.period}}</td>
+                            </tr>
+                            <tr scope="row">
+                                <th>Region / Country</th>
+                                <td>{{about.regionCountry}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
+                    <h3>Cerficiation List</h3>
+                    <div class="list-group">
+                        <app-certification-item [certification]="certification" *ngFor="let certification of certifications"></app-certification-item>
+                    
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    
 </div>

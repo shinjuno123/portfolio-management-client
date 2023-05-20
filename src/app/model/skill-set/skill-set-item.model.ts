@@ -7,5 +7,5 @@ export interface SkillSetItem {
     description: string,
     updated: string,
     uploaded: string,
-    relevantProjects: RelevantProjects[]
+    relevantProjectSet: RelevantProjects[]
 }

@@ -1,4 +1,5 @@
 <div class="row gx-2 gy-3 mb-3" #skillItem>
+  <span *ngIf="!selectedSkillSetItems.length">No Data Found!</span>
   <div class="col-md-4" *ngFor="let skillSetItem of selectedSkillSetItems">
     <div class="card" >
       <img [src]="environment.rootUrl + skillSetItem.imagePath" class="card-img-top" [alt]="skillSetItem.title">
@@ -17,7 +18,7 @@
             <div [id]="skillSetItem.title | replace : ' ': ''" class="accordion-collapse collapse">
               <div class="accordion-body">
                 <ul class="list-group">
-                  <li *ngFor="let project of skillSetItem.relevantProjects; let idx=index" class="list-group-item"><a
+                  <li *ngFor="let project of skillSetItem.relevantProjectSet; let idx=index" class="list-group-item"><a
                       [href]="project.url">{{idx + 1}}. {{project.name}}(Click)</a></li>
                 </ul>
               </div>
