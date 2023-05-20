@@ -7,12 +7,12 @@ import { SkillSetService } from 'src/app/service/skill-set.service';
 
 @Component({
   selector: 'app-category',
-  templateUrl: './category.component.html',
-  styleUrls: ['./category.component.css']
+  templateUrl: './second-category.component.html',
+  styleUrls: ['./second-category.component.css']
 })
 export class CategoryComponent implements OnInit, OnDestroy, AfterViewInit{
   @Output() categoryChangeEvent = new EventEmitter<string>();
-  @ViewChild('categoryContainer') categoryContainer!: ElementRef;
+  @ViewChild('secondCategoryContainer') categoryContainer!: ElementRef;
   datachange!:Subscription;
   secondCategories: SecondCategory[] = [];
 

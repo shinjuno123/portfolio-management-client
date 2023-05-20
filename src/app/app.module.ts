@@ -13,8 +13,8 @@ import { ExperienceComponent } from './components/public/experience/experience.c
 import { ExperienceListComponent } from './components/public/experience/experience-list/experience-list.component';
 import { ExperienceDetailComponent } from './components/public/experience/experience-detail/experience-detail.component';
 import { SkillSetComponent } from './components/public/skill-set/skill-set.component';
-import { PlatformComponent } from './components/public/skill-set/platform/platform.component';
-import { CategoryComponent } from './components/public/skill-set/category/category.component';
+import { PlatformComponent } from './components/public/skill-set/first-category/first-category.component';
+import { CategoryComponent } from './components/public/skill-set/second-category/second-category.component';
 import { SkillItemComponent } from './components/public/skill-set/skill-item/skill-item.component';
 import { ProjectComponent } from './components/public/project/project.component';
 import { ProjectItemComponent } from './components/public/project/project-item/project-item.component';

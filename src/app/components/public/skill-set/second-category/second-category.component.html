@@ -1,5 +1,5 @@
-<div class="row col-md-5" #categoryContainer>
-    <h3 class="fs-5">Category</h3>
+<div class="row col-md-5" #secondCategoryContainer>
+    <h3 class="fs-5">Category 2</h3>
     <div class="btn-group" role="group" aria-label="category">
         <label class="btn btn-outline-primary" [ngClass]="{'active': idx === selectedSecondCategoryIndex}" [for]="secondCategory.name" *ngFor="let secondCategory of secondCategories ; let idx= index">
             {{secondCategory.name}}

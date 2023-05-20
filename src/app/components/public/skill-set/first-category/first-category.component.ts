@@ -6,8 +6,8 @@ import { SkillSetService } from 'src/app/service/skill-set.service';
 
 @Component({
   selector: 'app-platform',
-  templateUrl: './platform.component.html',
-  styleUrls: ['./platform.component.css']
+  templateUrl: './first-category.component.html',
+  styleUrls: ['./first-category.component.css']
 })
 export class PlatformComponent implements OnInit, OnDestroy, AfterViewInit{
   firstCategories: FirstCategory[] = [];
@@ -15,7 +15,7 @@ export class PlatformComponent implements OnInit, OnDestroy, AfterViewInit{
   dataChange!: Subscription;
   
   @ViewChild('btnGroup') btnGroup!: ElementRef;
-  @ViewChild('platformContainer') platformContainer!: ElementRef;
+  @ViewChild('firstCategoryContainer') platformContainer!: ElementRef;
 
   constructor(private skillSetService: SkillSetService,
     private darkModeService: DarkModeService,

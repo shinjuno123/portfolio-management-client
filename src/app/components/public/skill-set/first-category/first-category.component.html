@@ -1,5 +1,5 @@
-<div class="row col-md-8 mb-3" #platformContainer>
-    <h3 class="fs-5">Platform</h3>
+<div class="row col-md-8 mb-3" #firstCategoryContainer>
+    <h3 class="fs-5">Category 1</h3>
     <div  class="btn-group" role="group" aria-label="platform" #btnGroup>
         <label *ngFor="let firstCategory of firstCategories; let idx = index" class="btn" [ngClass]="{'active': selectedFirstCategoryIndex === idx}"  [for]="firstCategory.name">
             {{firstCategory.name}}
