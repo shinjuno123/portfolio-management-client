@@ -55,3 +55,7 @@ img {
 button[data-bs-toggle= 'modal'] {
     display: none;
 }
+
+#failedResult button {
+    background-color: #F55050;
+}
