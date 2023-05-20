@@ -13,7 +13,13 @@ export class ProjectComponent implements OnInit{
   constructor(private projectService: ProjectService){}
 
   ngOnInit(): void {
-    this.projects = this.projectService.getProjects();
+    this.projectService.fetchProjects().subscribe({
+      next:(projects)=>{
+        if(projects){
+          this.projects = projects;
+        }
+      }
+    })
   }
 
 

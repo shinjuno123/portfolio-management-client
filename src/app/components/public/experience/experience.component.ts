@@ -10,19 +10,19 @@ import { ExperienceService } from 'src/app/service/experience.service';
   templateUrl: './experience.component.html',
   styleUrls: ['./experience.component.css']
 })
-export class ExperienceComponent implements OnDestroy, AfterViewInit{
+export class ExperienceComponent implements OnDestroy, AfterViewInit {
   experiences: Experience[] = [];
-  titles!: {id:string, name:string}[];
+  titles!: { id: string, name: string }[];
   selectTitleEvent!: Subscription;
-  experienceEvent!:Subscription
-  selectedExperience : Experience | any;
+  experienceEvent!: Subscription
+  selectedExperience: Experience | any;
   @ViewChild('exContainer') experienceContainer!: ElementRef;
 
   constructor(
-    private experienceService :ExperienceService,
+    private experienceService: ExperienceService,
     private renderer: Renderer2,
     private darkModeService: DarkModeService
-  ){}
+  ) { }
 
 
 
@@ -32,33 +32,32 @@ export class ExperienceComponent implements OnDestroy, AfterViewInit{
   }
 
   ngAfterViewInit(): void {
-    this.experienceEvent = this.experienceService.fetchExperiences().subscribe(
-      (response: HttpResponse<Experience[]>)=>{
-        if(response.body){
+    this.experienceEvent = this.experienceService.fetchExperiences().subscribe({
+      next: (response: HttpResponse<Experience[]>) => {
+        if (response.body) {
           this.experiences = response.body;
           this.titles = this.getTitles();
 
-          this.selectedExperience = this.experiences.length > 0? this.experiences.at(0): null;
+          this.selectedExperience = this.experiences.length > 0 ? this.experiences.at(0) : null;
           this.darkModeService.modeChange.next(true);
         }
-      },
-      (error:Error)=>{
-        
-      } 
+      }
+    }
+
     );
 
-    
+
     this.selectTitleEvent = this.experienceService.selectTitleEvent.subscribe(
       (id) => this.onItemSelected(id)
     );
 
-    if(this.darkModeService.getIsDarkMode()){
+    if (this.darkModeService.getIsDarkMode()) {
       this.activateDarkMode();
     }
 
     this.darkModeService.modeChange.subscribe(
       isDarkMode => {
-        if(isDarkMode){
+        if (isDarkMode) {
           this.activateDarkMode();
         } else {
           this.deactivateDarMode();
@@ -67,16 +66,16 @@ export class ExperienceComponent implements OnDestroy, AfterViewInit{
     )
   }
 
-  private getTitles(): {id:string, name:string}[] {
-    return this.experiences.map(experience=>{
-      return {id:experience.id, name:experience.title};
+  private getTitles(): { id: string, name: string }[] {
+    return this.experiences.map(experience => {
+      return { id: experience.id, name: experience.title };
     })
   }
 
-  private onItemSelected(id: string){
+  private onItemSelected(id: string) {
     this.experiences.forEach(
       (experience) => {
-        if(experience.id === id){
+        if (experience.id === id) {
           this.selectedExperience = experience;
         }
       }
@@ -88,7 +87,7 @@ export class ExperienceComponent implements OnDestroy, AfterViewInit{
     this.renderer.addClass(this.experienceContainer.nativeElement, "custom-dark-mode");
   }
 
-  private deactivateDarMode(){
+  private deactivateDarMode() {
     this.renderer.removeClass(this.experienceContainer.nativeElement, "custom-dark-mode");
     this.renderer.addClass(this.experienceContainer.nativeElement, "custom-bright-mode");
   }

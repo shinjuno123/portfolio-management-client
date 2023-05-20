@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Project } from 'src/app/model/project.model';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-project-item',
@@ -7,5 +8,6 @@ import { Project } from 'src/app/model/project.model';
   styleUrls: ['./project-item.component.css']
 })
 export class ProjectItemComponent {
-  @Input() projectItem = new Project("","","","");
+  @Input() projectItem!:Project;
+  environment = environment;
 }

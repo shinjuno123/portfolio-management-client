@@ -7,30 +7,92 @@
                 <div class="row mb-3">
                     <label class="fw-bold">Your email</label>
                     <input name="email" class="form-control" type="email" email required ngModel #email="ngModel">
-                    <span class="text-danger fw-normal" *ngIf="!email.valid && email.touched && email.errors && email.errors['required']">Email is required!</span>
-                    <span class="text-danger fw-normal" *ngIf="!email.valid && email.touched && email.errors && email.errors['email']">Enter a valid email!</span>
+                    <span class="text-danger fw-normal"
+                        *ngIf="!email.valid && email.touched && email.errors && email.errors['required']">Email is
+                        required!</span>
+                    <span class="text-danger fw-normal"
+                        *ngIf="!email.valid && email.touched && email.errors && email.errors['email']">Enter a valid
+                        email!</span>
                 </div>
                 <div class="row mb-3">
                     <label class="fw-bold">Subject</label>
                     <input name="subject" class="form-control" type="text" required ngModel #subject="ngModel">
-                    <span class="text-danger fw-normal" *ngIf="!subject.valid && subject.touched">Subject is required!</span>
+                    <span class="text-danger fw-normal" *ngIf="!subject.valid && subject.touched">Subject is
+                        required!</span>
                 </div>
                 <div class="row mb-3">
                     <label class="fw-bold">Content</label>
-                    <textarea name="content" rows="4" class="form-control" type="text" required ngModel #content="ngModel"></textarea>
-                    <span class="text-danger fw-normal" *ngIf="!content.valid && content.touched">Content is required!</span>
+                    <textarea name="content" rows="4" class="form-control" type="text" required ngModel
+                        #content="ngModel"></textarea>
+                    <span class="text-danger fw-normal" *ngIf="!content.valid && content.touched">Content is
+                        required!</span>
                 </div>
             </div>
             <div class="col-md-6 my-auto">
-                <img class="img-fluid rounded" src="https://images.unsplash.com/photo-1577563908411-5077b6dc7624?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="">
+                <img class="img-fluid rounded"
+                    src="https://images.unsplash.com/photo-1577563908411-5077b6dc7624?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+                    alt="">
             </div>
         </div>
+
         <div class="row">
-            <button 
-            [ngClass]="{'cursor-not-allowed': !f.valid}" 
-            [disabled]="!f.valid" 
-            type="submit"
-            class="btn btn-primary">Submit</button>
+            <button [ngClass]="{'cursor-not-allowed': !f.valid}" [disabled]="!f.valid" type="submit"
+                class="btn btn-primary">Submit</button>
         </div>
     </form>
+
+
+
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#successResult" #successModalButton>
+        Launch static backdrop modal
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="successResult" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Successfully Submitted!</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    You successfully submitted your message. I'll check your message as fast as I can. and I'll reply to your mail.
+                    Thank you very much!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#failedResult" #failedModalButton>
+            Launch static backdrop modal
+        </button>
+    
+        <!-- Modal -->
+        <div class="modal fade" id="failedResult" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Successfully Submitted!</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        You successfully submitted your message. I'll check your message as fast as I can. and I'll reply to your mail.
+                        Thank you very much!
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 </div>

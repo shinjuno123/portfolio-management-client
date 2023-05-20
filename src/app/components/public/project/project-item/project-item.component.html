@@ -1,12 +1,12 @@
 <div class="card p-5 mb-4" style="
-background-image: url('{{projectItem.imgPath}}');
+background-image: url('{{ environment.rootUrl + projectItem.imagePath}}');
 background-position: center center; 
 background-size: cover;">
     <div class="z-0 position-absolute w-100 h-100 top-0 start-0 card"></div>
     <div class="z-1 p-2">
         <div class="m-auto text-center">
-            <h4 class="card-title text-white mb-3">{{projectItem.name}}</h4>
-            <a class="btn btn-sm btn-dark" href="{{projectItem.projectPath}}">View Detail</a>
+            <h4 class="card-title text-white mb-3">{{projectItem.projectName}}</h4>
+            <a class="btn btn-sm btn-dark" [href]="environment.rootUrl + projectItem.url">View Detail</a>
         </div>
     </div>
 </div>
