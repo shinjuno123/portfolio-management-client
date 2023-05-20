@@ -1,6 +1,6 @@
 export class Certification {
     constructor(
         public name: string,
-        public downloadSrc: string
+        public downloadUrl: string
     ){}
 }

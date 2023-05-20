@@ -1,4 +1,4 @@
-<div class="container" *ngIf="about">
+<div class="container" #aboutContainer *ngIf="about">
     <div class="row">
         <div class="col">
             <h2>About me</h2>
@@ -30,7 +30,11 @@
                         </tr>
                         <tr scope="row">
                             <th>Diploma</th>
-                            <td>{{about.diploma}}</td>
+                            <td><a [href]="environment.rootUrl + about.diplomaUrl">{{about.diploma}} (Download Diploma)</a></td>
+                        </tr>
+                        <tr scope="row">
+                            <th>Transcript</th>
+                            <td><a [href]="environment.rootUrl + about.diplomaUrl">(Download Transcript)</a></td>
                         </tr>
                         <tr scope="row">
                             <th>Period</th>

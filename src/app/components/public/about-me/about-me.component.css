@@ -9,3 +9,13 @@
 img {
     box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.3);
 }
+
+.dark-mode-list a {
+    text-decoration: none;
+    color: #C07F00;
+}
+
+.bright-mode-list a {
+    text-decoration: none;
+    color: #05BFDB;
+}

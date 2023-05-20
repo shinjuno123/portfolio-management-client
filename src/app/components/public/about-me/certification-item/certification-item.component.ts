@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Certification } from 'src/app/model/certification.model';
 import { DarkModeService } from 'src/app/service/dark-mode.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-certification-item',
@@ -10,6 +11,7 @@ import { DarkModeService } from 'src/app/service/dark-mode.service';
 export class CertificationItemComponent implements AfterViewInit{
   @Input() certification!: Certification;
   @ViewChild("certificationItem") certificationItem!: ElementRef;
+  enviornment = environment;
 
 
   constructor(private renderer :Renderer2,private darkModeService: DarkModeService){}

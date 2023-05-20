@@ -1,9 +1,10 @@
 import { HttpResponse } from '@angular/common/http';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { About } from 'src/app/model/about.model';
 import { Certification } from 'src/app/model/certification.model';
 import { AboutService } from 'src/app/service/about.service';
+import { DarkModeService } from 'src/app/service/dark-mode.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -17,8 +18,9 @@ export class AboutMeComponent implements OnInit, OnDestroy{
   environment: {production: boolean, rootUrl:string};
   aboutEvent!: Subscription;
   certificationEvent!: Subscription;
+  @ViewChild("aboutContainer") aboutContainer!: ElementRef;
 
-  constructor(private aboutService: AboutService){
+  constructor(private aboutService: AboutService, private darkModeService: DarkModeService, private renderer: Renderer2){
     this.environment = environment;
   }
 
@@ -37,11 +39,32 @@ export class AboutMeComponent implements OnInit, OnDestroy{
         }
       }
     )
+
+    this.darkModeService.modeChange.subscribe(
+      isDarkMode => {
+        if(isDarkMode){
+          this.activateNightMode();
+        } else {
+          this.deactivateNightMode();
+        }
+      }
+    )
   }
 
   ngOnDestroy(): void {
     this.aboutEvent.unsubscribe();
     this.certificationEvent.unsubscribe();
+  }
+
+  
+  private activateNightMode(){
+    this.renderer.removeClass(this.aboutContainer.nativeElement, "bright-mode-list");
+    this.renderer.addClass(this.aboutContainer.nativeElement, "dark-mode-list");
+  }
+
+  private deactivateNightMode() {
+    this.renderer.removeClass(this.aboutContainer.nativeElement, "dark-mode-list");
+    this.renderer.addClass(this.aboutContainer.nativeElement, "bright-mode-list");
   }
 
 }
