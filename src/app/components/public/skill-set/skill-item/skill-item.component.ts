@@ -1,6 +1,10 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { SkillSetItem } from 'src/app/model/skill-set-item.model';
+import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { SkillSetItem } from 'src/app/model/skill-set/skill-set-item.model';
+
 import { DarkModeService } from 'src/app/service/dark-mode.service';
+import { SkillSetService } from 'src/app/service/skill-set.service';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -8,24 +12,29 @@ import { DarkModeService } from 'src/app/service/dark-mode.service';
   templateUrl: './skill-item.component.html',
   styleUrls: ['./skill-item.component.css'],
 })
-export class SkillItemComponent implements OnInit,AfterViewInit {
-  @Input() itemInfo!: SkillSetItem;
+export class SkillItemComponent implements OnInit, OnDestroy,AfterViewInit {
   @ViewChild('skillItem') skillItem!: ElementRef;
+  secondCategoryChange!: Subscription;
+  selectedSkillSetItems: SkillSetItem[] = [];
+  environment = environment;
 
   constructor(private renderer: Renderer2,
-    private darkModeService: DarkModeService) { }
+    private darkModeService: DarkModeService,
+    private skillSetService:SkillSetService) { }
 
   ngOnInit(): void {
+    this.secondCategoryChange = this.skillSetService.selectedSecondCategoryNameChange.subscribe(
+      selectedSecondCategory => {
+        this.selectedSkillSetItems = selectedSecondCategory.skillSetItemSet;
+      }
+    )
+  }
 
+  ngOnDestroy(): void {
+    this.secondCategoryChange.unsubscribe();
   }
 
   ngAfterViewInit(): void {
-    if(this.darkModeService.getIsDarkMode()){
-      this.activateDarkMode();
-    } else {
-      this.deactivateDarkMode();
-    }
-
     this.darkModeService.modeChange.subscribe(
       isDarkMode => {
         if(isDarkMode){

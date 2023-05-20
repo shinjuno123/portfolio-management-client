@@ -1,20 +1,12 @@
-
-
 <div class="container">
     <h2 class="mb-4">Skill Set & Relavant Projects</h2>
-    <app-platform (platformChangeEvent)="onPlatformChange($event)"></app-platform>
-    <app-category (categoryChangeEvent)="onCategoryChange($event)" [categories]="selectedCategories" [selectedCategory]="categoryName"></app-category>
+    <app-platform></app-platform>
+    <app-category></app-category>
 
 </div>
 
 <hr #hLine>
 
 <div class="container">
-    <div class="row gx-2 gy-3 mb-3">
-        <div class="col-md-4" *ngFor="let item of selectedItems">
-            <app-skill-item [itemInfo]="item"></app-skill-item>
-        </div>
-       
-    </div>
-
+    <app-skill-item></app-skill-item>
 </div>

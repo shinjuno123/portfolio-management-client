@@ -1,9 +1,9 @@
 <div class="row col-md-5" #categoryContainer>
     <h3 class="fs-5">Category</h3>
     <div class="btn-group" role="group" aria-label="category">
-        <label class="btn btn-outline-primary" [ngClass]="{'active': category === selectedCategory}" [for]="category" *ngFor="let category of categories">
-            {{category}}
-            <input (click)="onSelectCategory(category)" type="radio" class="btn-check" name="categoryRadio" [id]="category" autocomplete="off">
+        <label class="btn btn-outline-primary" [ngClass]="{'active': idx === selectedSecondCategoryIndex}" [for]="secondCategory.name" *ngFor="let secondCategory of secondCategories ; let idx= index">
+            {{secondCategory.name}}
+            <input (click)="onSelectSecondCategory(idx)" type="radio" class="btn-check" name="categoryRadio" [id]="secondCategory.name" autocomplete="off">
         </label>
 
         <!-- <input type="radio" class="btn-check" name="categoryRadio" id="backend" autocomplete="off">

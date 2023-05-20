@@ -1,4 +1,5 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, ElementRef, Input, OnChanges, OnDestroy, OnInit, Renderer2, SimpleChanges, ViewChild } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { DarkModeService } from 'src/app/service/dark-mode.service';
 import { ExperienceService } from 'src/app/service/experience.service';
 
@@ -7,49 +8,59 @@ import { ExperienceService } from 'src/app/service/experience.service';
   templateUrl: './experience-list.component.html',
   styleUrls: ['./experience-list.component.css']
 })
-export class ExperienceListComponent implements OnInit, AfterViewInit{
-  @Input() titles!: {id:string, name:string}[];
-  clickedTitleId : string = '';
+export class ExperienceListComponent implements AfterViewInit, OnChanges, OnDestroy{
+  @Input() titles!: { id: string, name: string }[];
+  clickedTitleId: string = '';
+  modeChangeEvent!: Subscription;
   @ViewChild('exList') experienceListButton!: ElementRef;
 
   constructor(private experienceService: ExperienceService,
     private darkModeService: DarkModeService,
-    private renderer: Renderer2){}
+    private renderer: Renderer2) { }
 
-  ngOnInit(): void {
-    this.clickedTitleId = this.titles.length > 0? this.titles[0].id : '';
-  }
 
-  onSelectTitle(id: string){
+
+  onSelectTitle(id: string) {
     this.clickedTitleId = id;
     this.experienceService.selectTitleEvent.next(id);
   }
 
-  ngAfterViewInit(): void {
-    if(this.darkModeService.getIsDarkMode()){
-      this.activateDarkMode();
-    }
 
-    this.darkModeService.modeChange.subscribe(
+
+  ngAfterViewInit(): void {
+    this.modeChangeEvent = this.darkModeService.modeChange.subscribe(
       isDarkMode => {
-        if(isDarkMode) {
+        if (isDarkMode) {
           this.activateDarkMode();
         } else {
           this.deactivateDarkMode();
         }
       }
-    )
+    );
+
   }
-  
+
+  ngOnDestroy(): void {
+    this.modeChangeEvent.unsubscribe();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['titles'].currentValue) {
+      this.clickedTitleId = this.titles.length > 0 ? this.titles[0].id : '';
+    }
+
+  }
+
+
   private deactivateDarkMode() {
-    this.renderer.removeClass(this.experienceListButton.nativeElement,"dark-mode-button");
-    this.renderer.addClass(this.experienceListButton.nativeElement,"bright-mode-button");
+    this.renderer.removeClass(this.experienceListButton.nativeElement, "dark-mode-button");
+    this.renderer.addClass(this.experienceListButton.nativeElement, "bright-mode-button");
   }
 
-  private activateDarkMode(){
-    this.renderer.removeClass(this.experienceListButton.nativeElement,"bright-mode-button");
-    this.renderer.addClass(this.experienceListButton.nativeElement,"dark-mode-button");
+  private activateDarkMode() {
+    this.renderer.removeClass(this.experienceListButton.nativeElement, "bright-mode-button");
+    this.renderer.addClass(this.experienceListButton.nativeElement, "dark-mode-button");
   }
 
-  
+
 }

@@ -1,4 +1,6 @@
-import {AfterViewInit, Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { FirstCategory } from 'src/app/model/skill-set/first-category.model';
 import { DarkModeService } from 'src/app/service/dark-mode.service';
 import { SkillSetService } from 'src/app/service/skill-set.service';
 
@@ -7,48 +9,50 @@ import { SkillSetService } from 'src/app/service/skill-set.service';
   templateUrl: './skill-set.component.html',
   styleUrls: ['./skill-set.component.css']
 })
-export class SkillSetComponent implements AfterViewInit{
-  platformName : string = '';
-  categoryName : string = '';
+export class SkillSetComponent implements OnInit, OnDestroy, AfterViewInit {
+  platformName: string = '';
+  categoryName: string = '';
   selectedCategories: string[] = [];
-  selectedItems : any;
+  selectedItems: any;
+  fetchDataEvent!: Subscription;
   @ViewChild('hLine') hLine!: ElementRef;
 
   constructor(private skillSetService: SkillSetService,
     private darkModeService: DarkModeService,
-    private renderer: Renderer2){}
+    private renderer: Renderer2) { }
 
-  onPlatformChange(platformName: string){
-    this.platformName = platformName;
-    this.selectedCategories = this.skillSetService.getCategories(platformName);
-    this.categoryName = this.selectedCategories[0];
-
-    this.selectedItems = this.skillSetService.getRelavantItems(this.platformName,this.categoryName);
+  ngOnInit(): void {
+    this.fetchDataEvent = this.skillSetService.fetchData().subscribe((firstCategories) => {
+      if (firstCategories) {
+        this.skillSetService.data = firstCategories;
+        this.skillSetService.dataChange.next(this.skillSetService.data.slice());
+      }
+    });
   }
 
-  onCategoryChange(categoryName:string){
-    this.categoryName = categoryName;
-
-    this.selectedItems = this.skillSetService.getRelavantItems(this.platformName,this.categoryName);
+  ngOnDestroy(): void {
+    this.fetchDataEvent.unsubscribe();
   }
+
 
   ngAfterViewInit(): void {
-    if(this.darkModeService.getIsDarkMode()){
+    if (this.darkModeService.getIsDarkMode()) {
       this.activateDarkMode();
     }
 
     this.darkModeService.modeChange.subscribe(
       isDarMode => {
-        if(isDarMode){
+        if (isDarMode) {
           this.activateDarkMode();
         } else {
           this.deactivateDarkMode();
         }
       }
     )
+
   }
 
-  private activateDarkMode(){
+  private activateDarkMode() {
     this.renderer.removeClass(this.hLine.nativeElement, "custom-bright-mode");
     this.renderer.addClass(this.hLine.nativeElement, "custom-dark-mode");
   }

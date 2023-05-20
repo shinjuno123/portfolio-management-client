@@ -1,6 +1,8 @@
-<img 
+
+<div *ngIf="experience">
+    <img 
     class="d-block mx-auto mb-4 rounded img-fluid img-thumbnail" 
-    [src]="experience.imgPath" [alt]="experience.company">
+    [src]="environment.rootUrl + experience.imgPath" [alt]="experience.company">
 <div class="row">
     <h4>Company</h4>
     <p>{{experience.company}}</p>
@@ -15,4 +17,6 @@
 </div>
 <div class="row">
     <p [innerHTML]="experience.description | replace: '\n': '\<br\>'"></p>
+</div>
+
 </div>

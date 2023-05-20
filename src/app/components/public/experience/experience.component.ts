@@ -1,3 +1,4 @@
+import { HttpResponse } from '@angular/common/http';
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Experience } from 'src/app/model/experience.model';
@@ -9,10 +10,11 @@ import { ExperienceService } from 'src/app/service/experience.service';
   templateUrl: './experience.component.html',
   styleUrls: ['./experience.component.css']
 })
-export class ExperienceComponent implements OnInit, OnDestroy, AfterViewInit{
+export class ExperienceComponent implements OnDestroy, AfterViewInit{
   experiences: Experience[] = [];
-  titles : {id:string, name:string}[] = [];
-  selectTitleEvent: Subscription | any;
+  titles!: {id:string, name:string}[];
+  selectTitleEvent!: Subscription;
+  experienceEvent!:Subscription
   selectedExperience : Experience | any;
   @ViewChild('exContainer') experienceContainer!: ElementRef;
 
@@ -23,22 +25,33 @@ export class ExperienceComponent implements OnInit, OnDestroy, AfterViewInit{
   ){}
 
 
-  ngOnInit(): void {
-    this.experiences = this.experienceService.getExperiences();
-    this.titles = this.getTitles();
-
-    this.selectedExperience = this.experiences.length > 0? this.experiences.at(0): null;
-    this.selectTitleEvent = this.experienceService.selectTitleEvent.subscribe(
-      (id) => this.onItemSelected(id)
-    )
-
-  }
 
   ngOnDestroy(): void {
     this.selectTitleEvent.unsubscribe();
+    this.experienceEvent.unsubscribe();
   }
 
   ngAfterViewInit(): void {
+    this.experienceEvent = this.experienceService.fetchExperiences().subscribe(
+      (response: HttpResponse<Experience[]>)=>{
+        if(response.body){
+          this.experiences = response.body;
+          this.titles = this.getTitles();
+
+          this.selectedExperience = this.experiences.length > 0? this.experiences.at(0): null;
+          this.darkModeService.modeChange.next(true);
+        }
+      },
+      (error:Error)=>{
+        
+      } 
+    );
+
+    
+    this.selectTitleEvent = this.experienceService.selectTitleEvent.subscribe(
+      (id) => this.onItemSelected(id)
+    );
+
     if(this.darkModeService.getIsDarkMode()){
       this.activateDarkMode();
     }

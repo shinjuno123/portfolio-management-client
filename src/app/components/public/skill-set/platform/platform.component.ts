@@ -1,4 +1,6 @@
 import { Component, OnInit, EventEmitter, Output, OnDestroy, ElementRef, ViewChild, AfterViewInit, Renderer2 } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { FirstCategory } from 'src/app/model/skill-set/first-category.model';
 import { DarkModeService } from 'src/app/service/dark-mode.service';
 import { SkillSetService } from 'src/app/service/skill-set.service';
 
@@ -8,9 +10,10 @@ import { SkillSetService } from 'src/app/service/skill-set.service';
   styleUrls: ['./platform.component.css']
 })
 export class PlatformComponent implements OnInit, OnDestroy, AfterViewInit{
-  platforms: string[] = [];
-  selectedPlatform: string = '';
-  @Output() platformChangeEvent = new EventEmitter<string>();
+  firstCategories: FirstCategory[] = [];
+  selectedFirstCategoryIndex!: number;
+  dataChange!: Subscription;
+  
   @ViewChild('btnGroup') btnGroup!: ElementRef;
   @ViewChild('platformContainer') platformContainer!: ElementRef;
 
@@ -20,10 +23,18 @@ export class PlatformComponent implements OnInit, OnDestroy, AfterViewInit{
 
 
   ngOnInit(): void {
-    this.platforms = this.skillSetService.getPlamforms();
-    this.selectedPlatform = this.platforms.length > 0? this.platforms[0]: '';
+    this.dataChange = this.skillSetService.dataChange.subscribe(
+      () => {
+        this.firstCategories = this.skillSetService.getFirstCategories();
 
-    this.platformChangeEvent.emit(this.selectedPlatform);
+        if(this.firstCategories.length === 0){
+          this.selectedFirstCategoryIndex = -1;
+        }
+
+        this.selectedFirstCategoryIndex = 0;
+        this.skillSetService.selectedFirstCategoryNameChange.next(this.firstCategories[this.selectedFirstCategoryIndex]);
+      }
+    );
   }
 
   ngAfterViewInit(): void {
@@ -42,9 +53,9 @@ export class PlatformComponent implements OnInit, OnDestroy, AfterViewInit{
     )
   }
 
-  onSelectPlatform(platformName: string){
-    this.selectedPlatform = platformName;
-    this.platformChangeEvent.emit(this.selectedPlatform);
+  onSelectFirstCategory(firstCategoryIndex: number){
+    this.selectedFirstCategoryIndex = firstCategoryIndex;
+    this.skillSetService.selectedFirstCategoryNameChange.next(this.firstCategories[this.selectedFirstCategoryIndex]);
   }
 
   private activateDarkMode(){
@@ -59,7 +70,7 @@ export class PlatformComponent implements OnInit, OnDestroy, AfterViewInit{
   }
 
   ngOnDestroy(): void {
-    this.platformChangeEvent.unsubscribe();
+    this.dataChange.unsubscribe();
   }
 
 
