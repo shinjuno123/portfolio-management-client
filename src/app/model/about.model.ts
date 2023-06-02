@@ -9,6 +9,7 @@ export class About {
         public school: string,
         public diploma: string,
         public diplomaUrl: string,
+        public transcriptUrl: string,
         public regionCountry: string,
         public faceImagePath : string,
         public uploaded : Date

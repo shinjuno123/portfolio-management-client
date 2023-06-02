@@ -40,7 +40,7 @@
                             </tr>
                             <tr scope="row">
                                 <th>Transcript</th>
-                                <td><a [href]="environment.rootUrl + about.diplomaUrl">(Download Transcript)</a></td>
+                                <td><a [href]="environment.rootUrl + about.transcriptUrl">(Download Transcript)</a></td>
                             </tr>
                             <tr scope="row">
                                 <th>Period</th>
@@ -54,7 +54,7 @@
                     </table>
                 </div>
                 <div class="row">
-                    <h3>Cerficiation List</h3>
+                    <h3>Certification List</h3>
                     <div class="list-group">
                         <app-certification-item [certification]="certification" *ngFor="let certification of certifications"></app-certification-item>
                     

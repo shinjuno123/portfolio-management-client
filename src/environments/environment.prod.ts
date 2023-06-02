@@ -1,5 +1,5 @@
 export const environment = {
     production: true,
-    rootUrl: "http://localhost:8080"
+    rootUrl: "https://junho-developer.net/pms-api"
   };
   

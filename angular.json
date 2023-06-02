@@ -70,10 +70,12 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "pms-app:build:production"
+              "browserTarget": "pms-app:build:production",
+              "port": 4200
             },
             "development": {
-              "browserTarget": "pms-app:build:development"
+              "browserTarget": "pms-app:build:development",
+              "port": 4200
             }
           },
           "defaultConfiguration": "development"
