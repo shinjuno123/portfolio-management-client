@@ -1,8 +1,6 @@
 <div class="container" #exContainer>
-
     <div>
         <h2 class="mb-4">This is my Experience</h2>
-        <span>No Data Found!</span>
         <div class="row" *ngIf="experiences.length">
             <div class="col-md-4">
                 <app-experience-list [titles]="titles"></app-experience-list>

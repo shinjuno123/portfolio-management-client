@@ -20,11 +20,12 @@ export class ScrollService {
             entries.forEach(
                 (entry) => {
                     if(entry.isIntersecting){
-                        this.scrollEvent.next(entry.target.id);
+                      this.scrollEvent.next(entry.target.id);
                     }
                 }
             )
-        }, {threshold:0.4})
+        }, {threshold:0.1})
+
 
         this.observer.observe(introView.nativeElement);
         this.observer.observe(aboutView.nativeElement);

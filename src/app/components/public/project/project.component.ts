@@ -17,6 +17,7 @@ export class ProjectComponent implements OnInit{
       next:(projects)=>{
         if(projects){
           this.projects = projects;
+          console.log(this.projects);
         }
       }
     })
