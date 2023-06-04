@@ -28,7 +28,6 @@ export class ProjectComponent implements OnInit, AfterViewChecked{
   ngAfterViewChecked(): void {
     this.darkModeService.modeChange.subscribe(
       isDarkMode => {
-        console.log(this.projectContainer);
         if(isDarkMode) {
           this.activateDarkMode();
         } else {

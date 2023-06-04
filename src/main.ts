@@ -4,7 +4,6 @@ import { environment } from './environments/environment';
 import { enableProdMode } from '@angular/core';
 
 if (environment.production) {
-  console.log(environment);
   enableProdMode();
 }
 

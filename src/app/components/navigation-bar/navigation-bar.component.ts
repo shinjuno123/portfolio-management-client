@@ -51,7 +51,6 @@ export class NavigationBarComponent implements OnInit, AfterViewInit{
     this.scrollService.scrollEvent.subscribe(
       viewName => {
         this.currentView = viewName;
-        console.log(this.currentView);
       }
     )
   }
