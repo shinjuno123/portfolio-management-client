@@ -73,7 +73,7 @@ export class ProjectComponent implements OnInit, AfterViewChecked{
           this.isLast = projectsPage['last'];
           this.totalPages = Array(projectsPage['totalPages']).fill(0).map((_,idx)=>idx + 1);
           this.currentPageNumber = projectsPage['number'] + 1;
-          this.currentPageSize = projectsPage['numberOfElements'];
+          this.currentPageSize = projectsPage['size'];
         }
       }
     });
