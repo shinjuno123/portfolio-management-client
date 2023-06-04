@@ -1,3 +1,8 @@
+.btn-group{
+    display: inline-block;
+}
+
+
 .custom-dark-mode {
     background-color: #1A2F4B;
     padding: 1rem;
