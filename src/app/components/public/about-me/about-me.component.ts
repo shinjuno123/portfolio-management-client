@@ -18,6 +18,7 @@ export class AboutMeComponent implements OnInit, OnDestroy{
   environment: {production: boolean, rootUrl:string};
   aboutEvent!: Subscription;
   certificationEvent!: Subscription;
+  modeChangeEvent!: Subscription;
   @ViewChild("aboutContainer") aboutContainer!: ElementRef;
 
   constructor(private aboutService: AboutService, private darkModeService: DarkModeService, private renderer: Renderer2){
@@ -40,7 +41,7 @@ export class AboutMeComponent implements OnInit, OnDestroy{
       }
     )
 
-    this.darkModeService.modeChange.subscribe(
+    this.modeChangeEvent = this.darkModeService.modeChange.subscribe(
       isDarkMode => {
         if(isDarkMode){
           this.activateNightMode();
@@ -54,6 +55,7 @@ export class AboutMeComponent implements OnInit, OnDestroy{
   ngOnDestroy(): void {
     this.aboutEvent.unsubscribe();
     this.certificationEvent.unsubscribe();
+    this.modeChangeEvent.unsubscribe();
   }
 
   

@@ -14,7 +14,8 @@ export class ExperienceComponent implements OnDestroy, AfterViewInit {
   experiences: Experience[] = [];
   titles!: { id: string, name: string }[];
   selectTitleEvent!: Subscription;
-  experienceEvent!: Subscription
+  experienceEvent!: Subscription;
+  modeChangeEvent!: Subscription;
   selectedExperience: Experience | any;
   @ViewChild('exContainer') experienceContainer!: ElementRef;
 
@@ -24,11 +25,10 @@ export class ExperienceComponent implements OnDestroy, AfterViewInit {
     private darkModeService: DarkModeService
   ) { }
 
-
-
   ngOnDestroy(): void {
     this.selectTitleEvent.unsubscribe();
     this.experienceEvent.unsubscribe();
+    this.modeChangeEvent.unsubscribe();
   }
 
   ngAfterViewInit(): void {
@@ -55,7 +55,7 @@ export class ExperienceComponent implements OnDestroy, AfterViewInit {
       this.activateDarkMode();
     }
 
-    this.darkModeService.modeChange.subscribe(
+   this.modeChangeEvent = this.darkModeService.modeChange.subscribe(
       isDarkMode => {
         if (isDarkMode) {
           this.activateDarkMode();

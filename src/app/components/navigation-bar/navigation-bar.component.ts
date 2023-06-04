@@ -1,14 +1,15 @@
-import {AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { ScrollService } from '../../service/scroll.service';
 import { faSun, faMoon, faBars} from '@fortawesome/free-solid-svg-icons';
 import { DarkModeService } from '../../service/dark-mode.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-navigation-bar',
   templateUrl: './navigation-bar.component.html',
   styleUrls: ['./navigation-bar.component.css']
 })
-export class NavigationBarComponent implements OnInit, AfterViewInit{
+export class NavigationBarComponent implements OnInit, AfterViewInit, OnDestroy{
   currentView : string = '';
   views!: string[];
   moonIcon = faMoon;
@@ -16,6 +17,7 @@ export class NavigationBarComponent implements OnInit, AfterViewInit{
   barIcon = faBars;
   isDarkMode: boolean = true;
   @ViewChild('navigationBar') navigationBar!: ElementRef;
+  modechangeEvent!: Subscription;
 
   onChangeView(selectedView: string){
     this.scrollService.buttonEvent.next(selectedView);
@@ -35,7 +37,7 @@ export class NavigationBarComponent implements OnInit, AfterViewInit{
       this.activateNightMode();
     }
 
-    this.darkModeService.modeChange.subscribe(isDarkMode => {
+    this.modechangeEvent = this.darkModeService.modeChange.subscribe(isDarkMode => {
       if(isDarkMode){
         this.activateNightMode();
       } else {
@@ -53,6 +55,10 @@ export class NavigationBarComponent implements OnInit, AfterViewInit{
         this.currentView = viewName;
       }
     )
+  }
+
+  ngOnDestroy(): void {
+    this.modechangeEvent.unsubscribe();
   }
 
 

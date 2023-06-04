@@ -11,6 +11,7 @@ import { SkillSetService } from 'src/app/service/skill-set.service';
 })
 export class SkillSetComponent implements OnInit, OnDestroy, AfterViewInit {
   fetchDataEvent!: Subscription;
+  modeChangeEvent!: Subscription;
   @ViewChild('hLine') hLine!: ElementRef;
   data!: FirstCategory[];
 
@@ -30,6 +31,7 @@ export class SkillSetComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnDestroy(): void {
     this.fetchDataEvent.unsubscribe();
+    this.modeChangeEvent.unsubscribe();
   }
 
 
@@ -38,7 +40,7 @@ export class SkillSetComponent implements OnInit, OnDestroy, AfterViewInit {
       this.activateDarkMode();
     }
 
-    this.darkModeService.modeChange.subscribe(
+    this.modeChangeEvent = this.darkModeService.modeChange.subscribe(
       isDarMode => {
         if (isDarMode) {
           this.activateDarkMode();

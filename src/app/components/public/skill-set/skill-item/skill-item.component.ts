@@ -16,6 +16,7 @@ export class SkillItemComponent implements OnInit, OnDestroy,AfterViewInit {
   @ViewChild('skillItem') skillItem!: ElementRef;
   secondCategoryChange!: Subscription;
   selectedSkillSetItems: SkillSetItem[] = [];
+  modeChangeEvent!: Subscription;
   environment = environment;
 
   constructor(private renderer: Renderer2,
@@ -32,10 +33,11 @@ export class SkillItemComponent implements OnInit, OnDestroy,AfterViewInit {
 
   ngOnDestroy(): void {
     this.secondCategoryChange.unsubscribe();
+    this.modeChangeEvent.unsubscribe();
   }
 
   ngAfterViewInit(): void {
-    this.darkModeService.modeChange.subscribe(
+    this.modeChangeEvent = this.darkModeService.modeChange.subscribe(
       isDarkMode => {
         if(isDarkMode){
           this.activateDarkMode();

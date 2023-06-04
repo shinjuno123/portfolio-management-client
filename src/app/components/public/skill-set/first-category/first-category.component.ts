@@ -12,7 +12,8 @@ import { SkillSetService } from 'src/app/service/skill-set.service';
 export class PlatformComponent implements OnInit, OnDestroy, AfterViewInit{
   firstCategories: FirstCategory[] = [];
   selectedFirstCategoryIndex!: number;
-  dataChange!: Subscription;
+  selectFirstCategoryEvent!: Subscription;
+  modeChangeEvent!: Subscription;
   
   @ViewChild('btnGroup') btnGroup!: ElementRef;
   @ViewChild('firstCategoryContainer') platformContainer!: ElementRef;
@@ -23,7 +24,7 @@ export class PlatformComponent implements OnInit, OnDestroy, AfterViewInit{
 
 
   ngOnInit(): void {
-    this.dataChange = this.skillSetService.dataChange.subscribe(
+    this.selectFirstCategoryEvent = this.skillSetService.dataChange.subscribe(
       () => {
         this.firstCategories = this.skillSetService.getFirstCategories();
 
@@ -44,7 +45,7 @@ export class PlatformComponent implements OnInit, OnDestroy, AfterViewInit{
       this.deactivateDarkMode();
     } 
 
-    this.darkModeService.modeChange.subscribe(
+    this.modeChangeEvent = this.darkModeService.modeChange.subscribe(
       isDarMode => {
         if(isDarMode) {
           this.activateDarkMode();
@@ -72,7 +73,8 @@ export class PlatformComponent implements OnInit, OnDestroy, AfterViewInit{
   }
 
   ngOnDestroy(): void {
-    this.dataChange.unsubscribe();
+    this.selectFirstCategoryEvent.unsubscribe();
+    this.modeChangeEvent.unsubscribe();
   }
 
 

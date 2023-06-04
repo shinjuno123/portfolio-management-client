@@ -13,6 +13,7 @@ export class IntroComponent implements OnInit, AfterViewChecked, OnDestroy{
   intro! : Intro;
   formattedOpening : any;
   introEvent!: Subscription;
+  modeChangeEvent!: Subscription;
   @ViewChild('introContainer',{static:true}) introContainer!: ElementRef;
 
   constructor(private introService: IntroService,
@@ -21,7 +22,7 @@ export class IntroComponent implements OnInit, AfterViewChecked, OnDestroy{
   }
 
   ngAfterViewChecked(): void {
-    this.darkModeService.modeChange.subscribe(
+    this.modeChangeEvent = this.darkModeService.modeChange.subscribe(
       isDarkMode => {
         if(isDarkMode) {
           this.activateDarkMode();
@@ -44,6 +45,7 @@ export class IntroComponent implements OnInit, AfterViewChecked, OnDestroy{
 
   ngOnDestroy(): void {
     this.introEvent.unsubscribe();
+    this.modeChangeEvent.unsubscribe();
   }
 
   private activateDarkMode(){

@@ -11,12 +11,10 @@ import { SkillSetService } from 'src/app/service/skill-set.service';
   styleUrls: ['./second-category.component.css']
 })
 export class CategoryComponent implements OnInit, OnDestroy, AfterViewInit{
-  @Output() categoryChangeEvent = new EventEmitter<string>();
   @ViewChild('secondCategoryContainer') categoryContainer!: ElementRef;
-  datachange!:Subscription;
   secondCategories: SecondCategory[] = [];
-
-
+  firstCategoryNameChangeEvent!: Subscription;
+  modeChangeEvent!: Subscription;
   selectedSecondCategoryIndex! : number;
 
 
@@ -24,7 +22,7 @@ export class CategoryComponent implements OnInit, OnDestroy, AfterViewInit{
     private darkModeService: DarkModeService,private skillSetService: SkillSetService){}
 
   ngOnInit(): void {
-    this.skillSetService.selectedFirstCategoryNameChange.subscribe(
+    this.firstCategoryNameChangeEvent = this.skillSetService.selectedFirstCategoryNameChange.subscribe(
       selectedFirstCategory => {
         this.secondCategories = selectedFirstCategory.secondCategorySet;
 
@@ -46,7 +44,7 @@ export class CategoryComponent implements OnInit, OnDestroy, AfterViewInit{
     }
 
 
-    this.darkModeService.modeChange.subscribe(
+    this.modeChangeEvent = this.darkModeService.modeChange.subscribe(
       isDarkMode => {
         if(isDarkMode){
           this.activateDarkMode();
@@ -73,7 +71,8 @@ export class CategoryComponent implements OnInit, OnDestroy, AfterViewInit{
   }
 
   ngOnDestroy(): void {
-    this.categoryChangeEvent.unsubscribe();
+    this.modeChangeEvent.unsubscribe();
+    this.firstCategoryNameChangeEvent.unsubscribe();
   }
 
 

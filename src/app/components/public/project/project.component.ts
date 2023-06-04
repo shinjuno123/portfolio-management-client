@@ -1,4 +1,5 @@
-import { AfterViewChecked, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Project } from 'src/app/model/project.model';
 import { DarkModeService } from 'src/app/service/dark-mode.service';
 import { ProjectService } from 'src/app/service/project.service';
@@ -8,7 +9,7 @@ import { ProjectService } from 'src/app/service/project.service';
   templateUrl: './project.component.html',
   styleUrls: ['./project.component.css']
 })
-export class ProjectComponent implements OnInit, AfterViewChecked{
+export class ProjectComponent implements OnInit, AfterViewChecked, OnDestroy{
   projects: Project[] = [];
   currentPageSize: number = 3;
   currentPageNumber: number = 1;
@@ -16,6 +17,8 @@ export class ProjectComponent implements OnInit, AfterViewChecked{
   isFirst: boolean = true;
   isLast: boolean = false;
   @ViewChild('projectContainer',{static:true}) projectContainer!: ElementRef;
+  modeChangeEvent!: Subscription;
+  fetchProjectEvent!: Subscription;
 
   constructor(private projectService: ProjectService,
     private renderer: Renderer2,
@@ -26,7 +29,7 @@ export class ProjectComponent implements OnInit, AfterViewChecked{
   }
 
   ngAfterViewChecked(): void {
-    this.darkModeService.modeChange.subscribe(
+    this.modeChangeEvent = this.darkModeService.modeChange.subscribe(
       isDarkMode => {
         if(isDarkMode) {
           this.activateDarkMode();
@@ -65,7 +68,7 @@ export class ProjectComponent implements OnInit, AfterViewChecked{
   }
 
   fetchProjects(){
-    this.projectService.fetchProjects(this.currentPageSize, this.currentPageNumber).subscribe({
+    this.fetchProjectEvent = this.projectService.fetchProjects(this.currentPageSize, this.currentPageNumber).subscribe({
       next:(projectsPage)=>{
         if(projectsPage){
           this.projects = projectsPage['content'];
@@ -79,5 +82,9 @@ export class ProjectComponent implements OnInit, AfterViewChecked{
     });
   }
 
+  ngOnDestroy(): void {
+    this.modeChangeEvent.unsubscribe();
+    this.fetchProjectEvent.unsubscribe();
+  }
 
 }

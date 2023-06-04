@@ -1,4 +1,5 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ScrollService } from 'src/app/service/scroll.service';
 
 @Component({
@@ -6,9 +7,10 @@ import { ScrollService } from 'src/app/service/scroll.service';
   templateUrl: './public.component.html',
   styleUrls: ['./public.component.css']
 })
-export class PublicComponent implements AfterViewInit{
+export class PublicComponent implements AfterViewInit, OnDestroy{
   selectedView!: string;
   views!: string[];
+  buttonEvent!: Subscription;
 
   @ViewChild('appIntro', {read: ElementRef ,static: false })
   introView!: ElementRef;
@@ -42,7 +44,7 @@ export class PublicComponent implements AfterViewInit{
       this.projectView,
       this.contactView);
 
-    this.scrollService.buttonEvent
+    this.buttonEvent = this.scrollService.buttonEvent
     .subscribe(
       viewName => {
         this.selectedView = viewName;
@@ -57,6 +59,11 @@ export class PublicComponent implements AfterViewInit{
         )
       }
     )
+  }
+
+  
+  ngOnDestroy(): void {
+    this.buttonEvent.unsubscribe();
   }
 
 

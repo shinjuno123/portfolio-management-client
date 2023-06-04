@@ -1,6 +1,7 @@
-import { AfterViewInit, Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, Renderer2, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { faL } from '@fortawesome/free-solid-svg-icons';
+import { Subscription } from 'rxjs';
 import { ContactService } from 'src/app/service/contact.service';
 import { DarkModeService } from 'src/app/service/dark-mode.service';
 
@@ -9,12 +10,13 @@ import { DarkModeService } from 'src/app/service/dark-mode.service';
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.css']
 })
-export class ContactComponent implements AfterViewInit{
+export class ContactComponent implements AfterViewInit, OnDestroy{
   @ViewChild('f') contactForm!: NgForm;
   @ViewChild('email') mail!: NgForm;
   @ViewChild('contactContainer') contactContainer!: ElementRef;
   @ViewChild('successModalButton') successModalButton!: ElementRef;
   @ViewChild('failedModalButton') failedModalButton!: ElementRef;
+  modechangeEvent!: Subscription;
 
 
 
@@ -44,7 +46,7 @@ export class ContactComponent implements AfterViewInit{
       this.deactivateDarkMode();
     }
 
-    this.darkModeService.modeChange.subscribe(
+    this.modechangeEvent = this.darkModeService.modeChange.subscribe(
       isDarkMode => {
         if(isDarkMode){
           this.activateDarkMode();
@@ -53,7 +55,10 @@ export class ContactComponent implements AfterViewInit{
         }
       }
     )
+  }
 
+  ngOnDestroy(): void {
+    this.modechangeEvent.unsubscribe();
   }
 
   private activateDarkMode(){
