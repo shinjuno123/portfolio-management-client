@@ -20,6 +20,7 @@ import { ProjectComponent } from './components/public/project/project.component'
 import { ProjectItemComponent } from './components/public/project/project-item/project-item.component';
 import { ContactComponent } from './components/public/contact/contact.component';
 import { CertificationItemComponent } from './components/public/about-me/certification-item/certification-item.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { CertificationItemComponent } from './components/public/about-me/certifi
     ProjectComponent,
     ProjectItemComponent,
     ContactComponent,
+    FooterComponent,
     ReplacePipe,
     CertificationItemComponent
   ],

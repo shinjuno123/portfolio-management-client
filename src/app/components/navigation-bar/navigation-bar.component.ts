@@ -18,6 +18,7 @@ export class NavigationBarComponent implements OnInit, AfterViewInit, OnDestroy{
   isDarkMode: boolean = true;
   @ViewChild('navigationBar') navigationBar!: ElementRef;
   modechangeEvent!: Subscription;
+  scrollEvent!: Subscription;
 
   onChangeView(selectedView: string){
     this.scrollService.buttonEvent.next(selectedView);
@@ -50,7 +51,7 @@ export class NavigationBarComponent implements OnInit, AfterViewInit, OnDestroy{
     this.views = this.scrollService.views;
     this.currentView = this.views[0];
 
-    this.scrollService.scrollEvent.subscribe(
+    this.scrollEvent = this.scrollService.scrollEvent.subscribe(
       viewName => {
         this.currentView = viewName;
       }
@@ -59,6 +60,7 @@ export class NavigationBarComponent implements OnInit, AfterViewInit, OnDestroy{
 
   ngOnDestroy(): void {
     this.modechangeEvent.unsubscribe();
+    this.scrollEvent.unsubscribe();
   }
 
 

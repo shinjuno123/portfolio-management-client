@@ -2,6 +2,10 @@
     flex-wrap: wrap;
 }
 
+.btn-group > .btn {
+    margin-bottom: 10px;
+}
+
 
 .custom-dark-mode {
     background-color: #1A2F4B;
