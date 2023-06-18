@@ -1,0 +1,15 @@
+.container .d-flex {
+    flex-wrap: wrap;
+    gap: .7rem;
+}
+
+.container {
+    padding: 6.5rem 0;
+}
+
+.btn {
+    --bs-btn-border-color:#2F8886;
+    --bs-btn-bg:#2F8886;
+    --bs-btn-hover-bg:#84C69B;
+    --bs-btn-hover-border-color: #84C69B;
+}

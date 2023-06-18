@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
-import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 import { ReplacePipe } from './pipe/replace.pipe';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -19,14 +18,32 @@ import { SkillItemComponent } from './components/public/skill-set/skill-item/ski
 import { ProjectComponent } from './components/public/project/project.component';
 import { ProjectItemComponent } from './components/public/project/project-item/project-item.component';
 import { ContactComponent } from './components/public/contact/contact.component';
+import { NavigationBarComponent } from './components/public/navigation-bar/navigation-bar.component';
 import { CertificationItemComponent } from './components/public/about-me/certification-item/certification-item.component';
-import { FooterComponent } from './components/footer/footer.component';
+import { FooterComponent } from './components/public/footer/footer.component';
+import { AppRoutingModule } from './app-routing.module';
+import { AdminComponent } from './components/admin/admin.component';
+import { AdminIntroComponent } from './components/admin/intro/intro.component';
+import { AdminHomeComponent } from './components/admin/home/home.component';
+import { AdminAboutComponent } from './components/admin/about/about.component';
+import { AdminExperienceComponent } from './components/admin/experience/experience.component';
+import { AdminSkillSetComponent } from './components/admin/skillset/skillset.component';
+import { AdminProjectComponent } from './components/admin/project/project.component';
+import { AdminContactComponent } from './components/admin/contact/contact.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationBarComponent,
+    AdminComponent,
+    AdminHomeComponent,
+    AdminAboutComponent,
+    AdminExperienceComponent,
+    AdminSkillSetComponent,
+    AdminProjectComponent,
+    AdminContactComponent,
     PublicComponent,
+    AdminIntroComponent,
     IntroComponent,
     AboutMeComponent,
     ExperienceComponent,
@@ -47,8 +64,8 @@ import { FooterComponent } from './components/footer/footer.component';
     BrowserModule,
     FormsModule,
     FontAwesomeModule,
-    HttpClientModule
-
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,8 +1,8 @@
 import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { ScrollService } from '../../service/scroll.service';
 import { faSun, faMoon, faBars} from '@fortawesome/free-solid-svg-icons';
-import { DarkModeService } from '../../service/dark-mode.service';
 import { Subscription } from 'rxjs';
+import { DarkModeService } from 'src/app/service/dark-mode.service';
+import { ScrollService } from 'src/app/service/scroll.service';
 
 @Component({
   selector: 'app-navigation-bar',
