@@ -30,6 +30,9 @@ import { AdminExperienceComponent } from './components/admin/experience/experien
 import { AdminSkillSetComponent } from './components/admin/skillset/skillset.component';
 import { AdminProjectComponent } from './components/admin/project/project.component';
 import { AdminContactComponent } from './components/admin/contact/contact.component';
+import { AdminIntroEditComponent } from './components/admin/intro/intro-edit/intro-edit.compoent';
+import { AdminIntroListItemComponent } from './components/admin/intro/intro-list/intro-list-item/intro-list-item.component';
+import { AdminIntroListComponent } from './components/admin/intro/intro-list/intro-list.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +45,9 @@ import { AdminContactComponent } from './components/admin/contact/contact.compon
     AdminSkillSetComponent,
     AdminProjectComponent,
     AdminContactComponent,
+    AdminIntroListComponent,
+    AdminIntroListItemComponent,
+    AdminIntroEditComponent,
     PublicComponent,
     AdminIntroComponent,
     IntroComponent,

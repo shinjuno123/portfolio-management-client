@@ -1,0 +1,44 @@
+h2 {
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, .7);
+    padding: 1rem;
+    border-radius: .375rem;
+
+}
+
+a.btn {
+    display: block;
+    width: fit-content;
+    margin-right: auto;
+    --bs-btn-border-color:#27374D;
+    --bs-btn-bg:#27374D;
+    --bs-btn-hover-bg:#9DB2BF;
+    --bs-btn-hover-border-color: #9DB2BF;
+    padding: .5rem 4rem;
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, .7);
+}
+
+.row {
+    font-size: small;
+}
+
+.row > div > div {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.row > div:nth-child(1) > div {
+    background-color: rgba(127, 233, 162,.5);
+}
+
+.row > div:nth-child(2) > div {
+    background-color: rgba(73, 167, 159, .5);
+}
+
+.row > div:nth-child(3) > div {
+    background-color: rgba(36, 157, 212,.5);
+}
+
+.row >  div:nth-child(4) > div {
+    background-color: rgb(47, 100, 168,.5);
+}
+
