@@ -84,3 +84,25 @@ a.btn {
 .date-form p:first-child{
     background-color: #1F6E8C;
 }
+
+.modal-header h1 {
+    color: black;
+}
+
+.modal-header button {
+    display: none;
+}
+
+.modal-button{
+    display: none;
+}
+
+
+.modal-body p {
+    width: auto;
+    margin: 0;
+    padding: 0;
+    color: black;
+    background-color: white;
+    border-radius: 0;
+}

@@ -18,7 +18,7 @@
                 <label for="floatingTextarea">Comments</label>
             </div>
             <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                <input #activated class="form-check-input" name="actviated" [(ngModel)]="isActivated" (change)="activateIntroduction()" value="true" type="checkbox" role="switch" id="flexSwitchCheckDefault">
                 <label class="form-check-label" for="flexSwitchCheckDefault">Activate this introduction</label>
               </div>
             <div class="date-form mb-3">
@@ -33,3 +33,24 @@
         </form>
     </div>
 </div>
+
+<button #modalButton type="button" class="modal-button" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
+
+<div (click)="closeModal()" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Warning</h1>
+          <button #closeModalButton type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p class="text-start">Do you really want to activate this introduction?</p>
+          <p class="text-start">Warning, Other introductions will be deactivated!</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="cancelActivation()" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" (click)="confirmActivation()">Confirm activating this introduction</button>
+        </div>
+      </div>
+    </div>
+  </div>
