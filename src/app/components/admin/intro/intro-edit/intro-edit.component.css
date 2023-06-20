@@ -59,16 +59,16 @@ input:focus {
     margin-bottom: 0.3rem;
 }
 
-button.btn {
+.btn.btn-primary {
     width: 100%;
-    --bs-btn-border-color:#27374D;
-    --bs-btn-bg:#27374D;
-    --bs-btn-hover-bg:#9DB2BF;
-    --bs-btn-hover-border-color: #9DB2BF;
+    --bs-btn-border-color:#38E54D;
+    --bs-btn-bg:#38E54D;
+    --bs-btn-hover-bg:#9CFF2E;
+    --bs-btn-hover-border-color: #9CFF2E;
     box-shadow: 3px 3px 8px rgba(0, 0, 0, .7);
 }
 
-a.btn {
+a.btn.btn-primary {
     display: block;
     width: fit-content;
     margin-right: auto;
@@ -76,6 +76,17 @@ a.btn {
     --bs-btn-bg:#27374D;
     --bs-btn-hover-bg:#9DB2BF;
     --bs-btn-hover-border-color: #9DB2BF;
+    padding: .5rem 4rem;
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, .7);
+}
+
+.btn.btn-danger {
+    display: block;
+    width: 100%;
+    --bs-btn-border-color:#ED2B2A;
+    --bs-btn-bg:#ED2B2A;
+    --bs-btn-hover-bg:#F15A59;
+    --bs-btn-hover-border-color: #F15A59;
     padding: .5rem 4rem;
     box-shadow: 3px 3px 8px rgba(0, 0, 0, .7);
 }
