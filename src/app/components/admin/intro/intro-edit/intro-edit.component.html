@@ -30,7 +30,7 @@
                 <p>Fri Jul 02 2021 12:44:45 GMT+0100</p>
             </div>
             <button class="btn btn-primary mb-4">Update</button>
-            <button class="btn btn-danger">Delete</button>
+            <button class="btn btn-danger" (click)="deleteIntroduction()">Delete</button>
         </form>
     </div>
 </div>
@@ -51,6 +51,28 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" (click)="cancelActivation()" data-bs-dismiss="modal">Cancel</button>
           <button type="button" class="btn btn-primary" (click)="confirmActivation()">Confirm activating this introduction</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <button #deleteModalButton type="button" class="modal-button" data-bs-toggle="modal" data-bs-target="#exampleModal2"></button>
+
+  <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel2">Warning</h1>
+          <button #closeModalButton type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p class="text-start">Your data will be removed permanently.</p>
+          <p class="text-start">Do you agree with permanent removal of your data?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No</button>
+          <button type="button" class="btn btn-primary" (click)="submitDelete()">Yes</button>
         </div>
       </div>
     </div>

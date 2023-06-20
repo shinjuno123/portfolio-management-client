@@ -11,6 +11,7 @@ export class AdminIntroEditComponent {
     isConfirmed: boolean = false;
     @ViewChild('modalButton') modalButton!:ElementRef;
     @ViewChild('closeModalButton') closeModelButton!: ElementRef;
+    @ViewChild('deleteModalButton') deleteModalButton!: ElementRef;
 
     constructor(private renderer: Renderer2){}
 
@@ -21,7 +22,6 @@ export class AdminIntroEditComponent {
     }
 
     confirmActivation() {
-        // this.isActivated = true;
         this.renderer.selectRootElement(this.closeModelButton.nativeElement).dispatchEvent(new Event('click'));
         this.isConfirmed = true;
     }
@@ -32,15 +32,21 @@ export class AdminIntroEditComponent {
 
     closeModal() {
         if(this.isConfirmed) {
-            console.log(this.isConfirmed)
             this.isActivated = true;
             this.isConfirmed = false;
             return;
         }
 
-        this.isConfirmed = false;
         this.isActivated = false;
         this.renderer.selectRootElement(this.closeModelButton.nativeElement).dispatchEvent(new Event('click'));
+    }
+
+    deleteIntroduction() {
+        this.renderer.selectRootElement(this.deleteModalButton.nativeElement).dispatchEvent(new Event('click'));
+    }
+
+    submitDelete(){
+        console.log("Your data is removed!");
     }
     
 }
