@@ -42,11 +42,24 @@ export class AdminAboutEditComponent {
         this.renderer.selectRootElement(this.closeModelButton.nativeElement).dispatchEvent(new Event('click'));
     }
 
-    deleteIntroduction() {
+    deleteAboutMe() {
         this.renderer.selectRootElement(this.deleteModalButton.nativeElement).dispatchEvent(new Event('click'));
     }
 
     submitDelete(){
         console.log("Your data is removed!");
+    }
+
+    setAttachment(event: Event) {
+        const target = event.target as HTMLInputElement;
+        const files = target.files;
+
+        if(files !== undefined && files !== null && files.length > 0){
+            const attachment: File = files[0];
+            const pTag: ChildNode | null = target.nextSibling;
+            if(pTag) {
+                pTag.textContent = attachment.name;
+            }
+        }
     }
 }

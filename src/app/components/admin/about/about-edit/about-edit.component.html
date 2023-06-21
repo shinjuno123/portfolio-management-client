@@ -34,30 +34,30 @@
                 <input type="text" class="form-control" placeholder="Region/Country" aria-label="Username" aria-describedby="basic-addon2">
             </div>
 
-            <div class="form-check form-switch mb-4">
+            <div class="form-check form-switch mb-5">
                 <input #activated class="form-check-input" name="actviated" [(ngModel)]="isActivated" (change)="activateAboutMe()" value="true" type="checkbox" role="switch" id="flexSwitchCheckDefault">
                 <label class="form-check-label" for="flexSwitchCheckDefault">Activate this "About Me"</label>
             </div>
 
-            <div class="text-end">
-                <div class="attachment-form mb-4">
-                    <input type="file" name="" id="" hidden>
-                    <p class="icon-description">Click to upload your face image</p>
+            <div class="d-flex mb-5 attachment-box">
+                <div class="attachment-form" (click)="faceImageUpload.click()" #faceImage>
+                    <input type="file" name="faceImage" id="faceImage"  (change)="setAttachment($event)" #faceImageUpload hidden>
+                    <p class="icon-description">Click to upload your face Image </p>
                     <div class="icon-wrapper">
                         <fa-icon class="fa-icon" [icon]="faPaperclip"></fa-icon>
                     </div>
                 </div>
     
-                <div class="attachment-form mb-4">
-                    <input type="file" name="" id="" hidden>
+                <div class="attachment-form" (click)="diplomaUpload.click()" #diploma>
+                    <input type="file" name="diploma" id="diploma" (change)="setAttachment($event)" #diplomaUpload hidden>
                     <p class="icon-description">Click to upload your diploma</p>
                     <div class="icon-wrapper">
                         <fa-icon class="fa-icon" [icon]="faPaperclip"></fa-icon>
                     </div>
                 </div>
     
-                <div class="attachment-form mb-4">
-                    <input type="file" name="" id="" hidden>
+                <div class="attachment-form" (click)="transcriptUpload.click()" #transcript>
+                    <input type="file" name="transcrip" id="transcript" (change)="setAttachment($event)" #transcriptUpload hidden>
                     <p class="icon-description">Click to upload your transcription</p>
                     <div class="icon-wrapper">
                         <fa-icon class="fa-icon" [icon]="faPaperclip"></fa-icon>
@@ -77,7 +77,7 @@
             </div>
             <div></div>
             <button class="btn btn-primary mb-4">Update</button>
-            <button class="btn btn-danger" (click)="activateAboutMe()">Delete</button>
+            <button class="btn btn-danger" (click)="deleteAboutMe()">Delete</button>
         </form>
     </div>
 </div>
