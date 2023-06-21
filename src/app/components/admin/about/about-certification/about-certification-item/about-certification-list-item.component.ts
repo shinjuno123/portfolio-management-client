@@ -1,13 +1,13 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Route, Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 
 
 @Component({
-    selector: 'admin-about-certification-item',
-    templateUrl: './about-certification-item.component.html',
-    styleUrls:['./about-certification-item.component.css']
+    selector: 'admin-about-certification-list-item',
+    templateUrl: './about-certification-list-item.component.html',
+    styleUrls:['./about-certification-list-item.component.css']
 })
-export class AdminAboutCertificationItemComponent implements OnInit{
+export class AdminAboutCertificationListItemComponent implements OnInit{
     dummyDate!: Date;
 
 

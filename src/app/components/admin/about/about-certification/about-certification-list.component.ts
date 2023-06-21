@@ -3,11 +3,11 @@ import { Certification } from "src/app/model/certification.model";
 
 
 @Component({
-    selector: 'admin-about-certification',
-    templateUrl: './about-certification.component.html',
-    styleUrls:['./about-certification.component.css']
+    selector: 'admin-about-certification-list',
+    templateUrl: './about-certification-list.component.html',
+    styleUrls:['./about-certification-list.component.css']
 })
-export class AdminAboutCertificationComponent implements OnInit{
+export class AdminAboutCertificationListComponent implements OnInit{
     propertyNames!: string[];
     @ViewChild("sortByList") sortByList!:ElementRef;
     selectedPropertyName: string = "";
