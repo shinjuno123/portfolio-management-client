@@ -1,13 +1,13 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from "@angular/core";
-import { Intro } from "src/app/model/intro.model";
+import { Component, ElementRef, Renderer2, ViewChild } from "@angular/core";
+import { About } from "src/app/model/about.model";
 
 
 @Component({
-    selector: 'admin-intro-list',
-    templateUrl: './intro-list.component.html',
-    styleUrls:['./intro-list.component.css']
+    selector: 'admin-about-list',
+    templateUrl: './about-list.component.html',
+    styleUrls:['./about-list.component.css']
 })
-export class AdminIntroListComponent implements OnInit{
+export class AdminAboutListComponent {
     propertyNames!: string[];
     @ViewChild("sortByList") sortByList!:ElementRef;
     selectedPropertyName: string = "";
@@ -15,8 +15,8 @@ export class AdminIntroListComponent implements OnInit{
     constructor(private renderer:Renderer2){}
 
     ngOnInit(): void {
-       const dummyIntro = new Intro("","","","");
-       this.propertyNames = Object.getOwnPropertyNames(dummyIntro);
+       const dummyAbout = new About("","","","","","","","","","",new Date());
+       this.propertyNames = Object.getOwnPropertyNames(dummyAbout);
     }
 
     selectSortBy(selectedIndex: number ,propertyName: string) {
@@ -37,6 +37,5 @@ export class AdminIntroListComponent implements OnInit{
 
         this.selectedPropertyName = propertyName;
     }
-    
     
 }

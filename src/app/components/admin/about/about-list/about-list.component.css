@@ -42,9 +42,6 @@ a.btn {
     background-color: rgb(47, 100, 168,.5);
 }
 
-.row >  div:nth-child(5) > div {
-    background-color: rgba(55, 47, 168, 0.5);
-}
 
 
 ul.dropdown-menu li.selected {

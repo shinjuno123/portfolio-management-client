@@ -11,6 +11,8 @@ import { AdminProjectComponent } from "./components/admin/project/project.compon
 import { AdminContactComponent } from "./components/admin/contact/contact.component";
 import { AdminIntroListComponent } from "./components/admin/intro/intro-list/intro-list.component";
 import { AdminIntroEditComponent } from "./components/admin/intro/intro-edit/intro-edit.compoent";
+import { AdminAboutListComponent } from "./components/admin/about/about-list/about-list.component";
+import { AdminAboutEditComponent } from "./components/admin/about/about-edit/about-edit.component";
 
 
 
@@ -23,7 +25,10 @@ const appRoutes: Routes = [
             {path: "", component: AdminIntroListComponent},
             {path: "edit", component: AdminIntroEditComponent}
         ]},
-        {path:"about", component: AdminAboutComponent},
+        {path:"about", component: AdminAboutComponent, children:[
+            {path: "", component: AdminAboutListComponent},
+            {path: "edit", component: AdminAboutEditComponent}
+        ]},
         {path:"experience", component: AdminExperienceComponent},
         {path:"skill-set", component: AdminSkillSetComponent},
         {path:"project", component: AdminProjectComponent},

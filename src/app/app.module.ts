@@ -33,6 +33,9 @@ import { AdminContactComponent } from './components/admin/contact/contact.compon
 import { AdminIntroEditComponent } from './components/admin/intro/intro-edit/intro-edit.compoent';
 import { AdminIntroListItemComponent } from './components/admin/intro/intro-list/intro-list-item/intro-list-item.component';
 import { AdminIntroListComponent } from './components/admin/intro/intro-list/intro-list.component';
+import { AdminAboutListComponent } from './components/admin/about/about-list/about-list.component';
+import { AdminAboutEditComponent } from './components/admin/about/about-edit/about-edit.component';
+import { AdminAboutListItemComponent } from './components/admin/about/about-list/about-list-item/about-list-item.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +51,9 @@ import { AdminIntroListComponent } from './components/admin/intro/intro-list/int
     AdminIntroListComponent,
     AdminIntroListItemComponent,
     AdminIntroEditComponent,
+    AdminAboutListComponent,
+    AdminAboutEditComponent,
+    AdminAboutListItemComponent,
     PublicComponent,
     AdminIntroComponent,
     IntroComponent,
