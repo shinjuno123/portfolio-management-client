@@ -1,0 +1,42 @@
+<div class="section-division-padding">
+    <div class="container">
+        <h3 class="text-start">Certifications</h3>
+        <div class="row text-end text-start mb-3">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    Sort by {{selectedPropertyName !== ""? '(' + selectedPropertyName + ')': ''}}
+                </button>
+                <ul class="dropdown-menu" #sortByList>
+                    <li *ngFor="let propertyName of propertyNames let idx=index"
+                        (click)="selectSortBy(idx, propertyName)">
+                        <a class="dropdown-item">
+                            {{propertyName}}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row mb-4 g-1">
+            <div class="col-3">
+                <div>Name</div>
+            </div>
+            <div class="col-5">
+                <div>File Name</div>
+            </div>
+            <div class="col-2">
+                <div>Updated</div>
+            </div>
+            <div class="col-2">
+                <div>Uploaded</div>
+            </div>
+        </div>
+        <div class="row">
+            <hr>
+        </div>
+        <admin-about-certification-item></admin-about-certification-item>
+        <div class="row">
+            <hr>
+        </div>
+    </div>
+</div>

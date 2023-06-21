@@ -1,3 +1,14 @@
+h3 {
+    font-family: 'Raleway', sans-serif;
+    font-size: 2rem;
+    color: rgb(18, 214, 221);
+}
+
+
+.section-division-padding {
+    padding: 3rem 0 5rem 0;
+}
+
 h2 {
     box-shadow: 3px 3px 8px rgba(0, 0, 0, .7);
     padding: 1rem;

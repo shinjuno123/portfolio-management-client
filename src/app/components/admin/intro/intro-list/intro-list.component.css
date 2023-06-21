@@ -24,6 +24,7 @@ a.btn {
 .row > div > div {
     padding-top: 1rem;
     padding-bottom: 1rem;
+    
 }
 
 .row > div:nth-child(1) > div {

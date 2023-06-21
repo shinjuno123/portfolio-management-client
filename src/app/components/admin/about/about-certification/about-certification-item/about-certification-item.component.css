@@ -15,9 +15,6 @@
     background-color: rgb(47, 100, 168,.5);
 }
 
-.row >  div:nth-child(5) > div {
-    background-color: rgba(55, 47, 168, 0.5);
-}
 
 p {
     margin: 0;
@@ -27,7 +24,6 @@ p {
 .row > div > div {
     position: relative;
     height: 100%;
-    padding: 1rem 0;
     vertical-align: middle;
 }
 
@@ -44,59 +40,16 @@ p {
     width: 0.9rem;
 }
 
-.row > div > div input[type='checkbox'] {
-    visibility: hidden;
-}
-
-.row > div > div label:hover input ~ .greenmark {
-    background-color: yellow;
-}
-
-.row > div > div label > input:checked ~ .greenmark {
-    background-color: rgba(127, 233, 162,.7);
-}
-
-.row > div > div label > input:checked ~ .greenmark:after {
-    display: block;
-}
-
-.greenmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    border-radius: 5px;
-    background-color: black;
-}
-
-.greenmark:after {
-    content: "";
-    position: absolute;
-    display: none;
-}
-
-.greenmark::after {
-    left: 5px;
-    bottom: 4px;
-    width: 6px;
-    height: 10px;
-    border: solid white;
-    border-width: 0 3px 3px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-}
-
 
 
 .row:hover::after{
     position: absolute;
     top:2px;
     width: 100%;
-    height: calc(100% - 8px);
+    height: 100%;
     border:2px dashed rgba(127, 233, 162,.5);
     content: "";
+    height: calc(100% - 8px);
     opacity: 100%;
 }
 

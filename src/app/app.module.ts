@@ -36,6 +36,9 @@ import { AdminIntroListComponent } from './components/admin/intro/intro-list/int
 import { AdminAboutListComponent } from './components/admin/about/about-list/about-list.component';
 import { AdminAboutEditComponent } from './components/admin/about/about-edit/about-edit.component';
 import { AdminAboutListItemComponent } from './components/admin/about/about-list/about-list-item/about-list-item.component';
+import { AdminAboutCertificationComponent } from './components/admin/about/about-certification/about-certification.component';
+import { AdminAboutCertificationItemComponent } from './components/admin/about/about-certification/about-certification-item/about-certification-item.component';
+import { AdminAboutCertificationEditComponent } from './components/admin/about/about-certification-edit/about-certification-edit.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +57,9 @@ import { AdminAboutListItemComponent } from './components/admin/about/about-list
     AdminAboutListComponent,
     AdminAboutEditComponent,
     AdminAboutListItemComponent,
+    AdminAboutCertificationComponent,
+    AdminAboutCertificationItemComponent,
+    AdminAboutCertificationEditComponent,
     PublicComponent,
     AdminIntroComponent,
     IntroComponent,

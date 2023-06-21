@@ -23,7 +23,7 @@ p {
 
 .row > div > div {
     position: relative;
-    height: 3rem;
+    height: 100%;
     vertical-align: middle;
 }
 
@@ -90,10 +90,10 @@ p {
     position: absolute;
     top:2px;
     width: 100%;
-    height: 87%;
     border:2px dashed rgba(127, 233, 162,.5);
     content: "";
     opacity: 100%;
+    height: calc(100% - 8px);
 }
 
 .row::after {
@@ -102,7 +102,7 @@ p {
     top:2px;
     opacity: 0;
     width: 100%;
-    height: 87%;
+    height: calc(100% - 8px);
     border:2px dashed rgba(127, 233, 162,.5);
     transition: .5s all; 
 }

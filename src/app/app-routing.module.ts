@@ -13,6 +13,7 @@ import { AdminIntroListComponent } from "./components/admin/intro/intro-list/int
 import { AdminIntroEditComponent } from "./components/admin/intro/intro-edit/intro-edit.compoent";
 import { AdminAboutListComponent } from "./components/admin/about/about-list/about-list.component";
 import { AdminAboutEditComponent } from "./components/admin/about/about-edit/about-edit.component";
+import { AdminAboutCertificationEditComponent } from "./components/admin/about/about-certification-edit/about-certification-edit.component";
 
 
 
@@ -23,11 +24,12 @@ const appRoutes: Routes = [
         {path:"",component:AdminHomeComponent},
         {path:"intro", component: AdminIntroComponent, children:[
             {path: "", component: AdminIntroListComponent},
-            {path: "edit", component: AdminIntroEditComponent}
+            {path: "edit", component: AdminIntroEditComponent},
         ]},
         {path:"about", component: AdminAboutComponent, children:[
             {path: "", component: AdminAboutListComponent},
-            {path: "edit", component: AdminAboutEditComponent}
+            {path: "edit", component: AdminAboutEditComponent},
+            {path: "certification/edit", component: AdminAboutCertificationEditComponent}
         ]},
         {path:"experience", component: AdminExperienceComponent},
         {path:"skill-set", component: AdminSkillSetComponent},
