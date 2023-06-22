@@ -14,6 +14,8 @@ import { AdminIntroEditComponent } from "./components/admin/intro/intro-edit/int
 import { AdminAboutListComponent } from "./components/admin/about/about-list/about-list.component";
 import { AdminAboutEditComponent } from "./components/admin/about/about-edit/about-edit.component";
 import { AdminAboutCertificationEditComponent } from "./components/admin/about/about-certification-edit/about-certification-edit.component";
+import { AdminExperienceListComponent } from "./components/admin/experience/experience-list/experience-list.component";
+import { AdminExperienceEditComponent } from "./components/admin/experience/experience-edit/experience-edit.component";
 
 
 
@@ -31,7 +33,10 @@ const appRoutes: Routes = [
             {path: "edit", component: AdminAboutEditComponent},
             {path: "certification/edit", component: AdminAboutCertificationEditComponent}
         ]},
-        {path:"experience", component: AdminExperienceComponent},
+        {path:"experience", component: AdminExperienceComponent, children:[
+            {path:"", component:AdminExperienceListComponent},
+            {path:"edit", component: AdminExperienceEditComponent}
+        ]},
         {path:"skill-set", component: AdminSkillSetComponent},
         {path:"project", component: AdminProjectComponent},
         {path:"contact", component: AdminContactComponent}
