@@ -42,6 +42,9 @@ import { AdminExperienceEditComponent } from './components/admin/experience/expe
 import { AdminExperienceListComponent } from './components/admin/experience/experience-list/experience-list.component';
 import { AdminAboutCertificationListItemComponent } from './components/admin/about/about-certification-list/about-certification-list-item/about-certification-list-item.component';
 import { AdminExperienceListItemComponent } from './components/admin/experience/experience-list/experience-list-item/experience-list-item.component';
+import { AdminProjectListComponent } from './components/admin/project/project-list/project-list.component';
+import { AdminProjectListItemComponent } from './components/admin/project/project-list/project-list-item/project-list-item.component';
+import { AdminProjectEditComponent } from './components/admin/project/project-edit/project-edit.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +69,9 @@ import { AdminExperienceListItemComponent } from './components/admin/experience/
     AdminExperienceEditComponent,
     AdminExperienceListComponent,
     AdminExperienceListItemComponent,
+    AdminProjectListComponent,
+    AdminProjectListItemComponent,
+    AdminProjectEditComponent,
     PublicComponent,
     AdminIntroComponent,
     IntroComponent,
