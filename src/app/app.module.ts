@@ -45,6 +45,13 @@ import { AdminExperienceListItemComponent } from './components/admin/experience/
 import { AdminProjectListComponent } from './components/admin/project/project-list/project-list.component';
 import { AdminProjectListItemComponent } from './components/admin/project/project-list/project-list-item/project-list-item.component';
 import { AdminProjectEditComponent } from './components/admin/project/project-edit/project-edit.component';
+import { AdminContactViewComponent } from './components/admin/contact/contact-view/contact-view.component';
+import { AdminContactListComponent } from './components/admin/contact/contact-list/contact-list.component';
+import { AdminContactListItemComponent } from './components/admin/contact/contact-list/contact-list-item/contact-list-item.component';
+import { AdminNotificationComponent } from './components/admin/notification/notification.component';
+import { AdminNotificationListComponent } from './components/admin/notification/notification-list/notification-list.component';
+import { AdminNotificationEditComponent } from './components/admin/notification/notification-edit/notification-edit.component';
+import { AdminNotificationListItemComponent } from './components/admin/notification/notification-list/notification-list-item/notification-list-item.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +79,13 @@ import { AdminProjectEditComponent } from './components/admin/project/project-ed
     AdminProjectListComponent,
     AdminProjectListItemComponent,
     AdminProjectEditComponent,
+    AdminContactViewComponent,
+    AdminContactListComponent,
+    AdminContactListItemComponent,
+    AdminNotificationComponent,
+    AdminNotificationListComponent,
+    AdminNotificationEditComponent,
+    AdminNotificationListItemComponent,
     PublicComponent,
     AdminIntroComponent,
     IntroComponent,

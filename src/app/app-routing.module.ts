@@ -18,6 +18,11 @@ import { AdminExperienceListComponent } from "./components/admin/experience/expe
 import { AdminExperienceEditComponent } from "./components/admin/experience/experience-edit/experience-edit.component";
 import { AdminProjectListComponent } from "./components/admin/project/project-list/project-list.component";
 import { AdminProjectEditComponent } from "./components/admin/project/project-edit/project-edit.component";
+import { AdminContactListComponent } from "./components/admin/contact/contact-list/contact-list.component";
+import { AdminContactViewComponent } from "./components/admin/contact/contact-view/contact-view.component";
+import { AdminNotificationComponent } from "./components/admin/notification/notification.component";
+import { AdminNotificationListComponent } from "./components/admin/notification/notification-list/notification-list.component";
+import { AdminNotificationEditComponent } from "./components/admin/notification/notification-edit/notification-edit.component";
 
 
 
@@ -44,7 +49,14 @@ const appRoutes: Routes = [
             {path:"", component:AdminProjectListComponent},
             {path:"edit", component:AdminProjectEditComponent}
         ]},
-        {path:"contact", component: AdminContactComponent}
+        {path:"contact", component: AdminContactComponent, children: [
+            {path:"", component:AdminContactListComponent},
+            {path:"view", component:AdminContactViewComponent}
+        ]},
+        {path:"notification", component: AdminNotificationComponent, children: [
+            {path:"", component:AdminNotificationListComponent},
+            {path:"edit", component:AdminNotificationEditComponent}
+        ]}
     ]}
 ]
 

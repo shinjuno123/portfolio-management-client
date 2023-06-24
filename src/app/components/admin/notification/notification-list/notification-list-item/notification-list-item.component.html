@@ -1,0 +1,20 @@
+<div class="row g-1 pb-2 text-start" *ngFor="let i of [false,false,true,false,false,false]" (click)="routeToEditPage()">
+    <div class="col-6"><div><p>Fish game</p></div></div>
+    <div class="col-2">
+        <div>
+            <label>
+                <input type="checkbox" [checked]="i">
+                <span class="greenmark"></span>
+            </label>
+        </div>
+    </div>
+    <div class="col-2">
+        <div>
+            <label>
+                <input type="checkbox" [checked]="i">
+                <span class="greenmark"></span>
+            </label>
+        </div>
+    </div>
+    <div class="col-2"><div><p>{{dummyDate}}</p></div></div>
+</div>

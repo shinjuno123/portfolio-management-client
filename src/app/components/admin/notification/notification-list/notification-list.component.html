@@ -1,0 +1,40 @@
+<div class="container">
+    <a class="btn btn-primary mb-5" routerLink="../">Back</a>
+    <h3 class="text-start mb-4" >Notifications</h3>
+    <div class="row text-end text-start mb-4">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Sort by {{selectedPropertyName !== ""? '(' + selectedPropertyName + ')': ''}}
+            </button>
+            <ul class="dropdown-menu" #sortByList>
+                <li *ngFor="let propertyName of propertyNames let idx=index" (click)="selectSortBy(idx, propertyName)">
+                    <a class="dropdown-item">
+                        {{propertyName}}
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row mb-4 g-1">
+        <div class="col-6">
+            <div>Subject</div>
+        </div>
+        <div class="col-2">
+            <div>active</div>
+        </div>
+        <div class="col-2">
+            <div>displayed</div>
+        </div>
+        <div class="col-2">
+            <div>uploaded</div>
+        </div>
+    </div>
+    <div class="row">
+        <hr>
+    </div>
+    <admin-notification-list-item></admin-notification-list-item>
+    <div class="row">
+        <hr>
+    </div>
+</div>

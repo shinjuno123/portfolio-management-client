@@ -1,0 +1,54 @@
+<div class="container">
+    <a class="btn btn-primary mb-4" routerLink="../">Back</a>
+    <h2 class="text-start mb-4">View message</h2>
+    <div class="board-wrapper">
+        <form>
+            <p class="text-start block-highlight">id: 5258b3c4-0e3e-11ee-be56-0242ac120002</p>
+
+            <p class="text-start font-highlight">Subject</p>
+            <p class="text-start d">
+                About work with you
+            </p>
+
+            <p class="text-start font-highlight">Content Body</p>
+            <p class="text-start">
+                I want to have a interview with you. Can I get your phone number?
+            </p>
+   
+
+
+            <div class="date-form mb-5">
+                <p class="block-highlight">Uploaded</p>
+                <p class="block-highlight">Fri Jul 02 2021 12:44:45 GMT+0100</p>
+            </div>
+            <div></div>
+            <button class="btn btn-danger" (click)="deleteAboutMe()">Delete</button>
+        </form>
+    </div>
+</div>
+
+<button #modalButton type="button" class="modal-button" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
+
+
+
+
+  <button #deleteModalButton type="button" class="modal-button" data-bs-toggle="modal" data-bs-target="#exampleModal2"></button>
+
+  <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel2">Warning</h1>
+          <button #closeModalButton type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p class="text-start">Your data will be removed permanently.</p>
+          <p class="text-start">Do you agree with the permanent removal of your data?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No</button>
+          <button type="button" class="btn btn-primary" (click)="submitDelete()">Yes</button>
+        </div>
+      </div>
+    </div>
+  </div>

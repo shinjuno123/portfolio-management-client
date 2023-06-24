@@ -1,3 +1,4 @@
+
 h3 {
     box-shadow: 3px 3px 8px rgba(0, 0, 0, .7);
     padding: 1rem;
@@ -19,6 +20,18 @@ a.btn {
     box-shadow: 3px 3px 8px rgba(0, 0, 0, .7);
 }
 
+
+h2 {
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, .7);
+    padding: 1rem;
+    border-radius: .375rem;
+    font-size: 2rem;
+    font-family: 'Raleway', sans-serif;
+    color: rgb(18, 214, 221);
+}
+
+
+
 .row {
     font-size: small;
 }
@@ -26,7 +39,6 @@ a.btn {
 .row > div > div {
     padding-top: 1rem;
     padding-bottom: 1rem;
-    
 }
 
 .row > div:nth-child(1) > div {
@@ -45,9 +57,6 @@ a.btn {
     background-color: rgb(47, 100, 168,.5);
 }
 
-.row >  div:nth-child(5) > div {
-    background-color: rgba(55, 47, 168, 0.5);
-}
 
 
 ul.dropdown-menu li.selected {
