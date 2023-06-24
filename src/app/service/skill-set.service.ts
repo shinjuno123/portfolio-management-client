@@ -3,8 +3,8 @@ import { FirstCategory } from "../model/skill-set/first-category.model";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { AppConstants } from "../constants/app.constants";
-import { first, map } from "rxjs/operators";
-import { Subject, Subscription } from "rxjs";
+import { map } from "rxjs/operators";
+import { Subject } from "rxjs";
 import { SecondCategory } from "../model/skill-set/second-category.model";
 
 @Injectable({

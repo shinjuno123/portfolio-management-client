@@ -56,6 +56,11 @@ import { AdminRelevantSitesComponent } from './components/admin/relevant-sites/r
 import { AdminRelevantSitesListComponent } from './components/admin/relevant-sites/relevant-sites-list/relevant-sites-list.component';
 import { AdminRelevantSitesEditComponent } from './components/admin/relevant-sites/relevant-sites-edit/relevant-sites-edit.component';
 import { AdminAboutRelevantSitesListItemComponent } from './components/admin/relevant-sites/relevant-sites-list/relevant-sites-list-item/relevant-sites-list-item.component';
+import { AdminSkillSetEditComponent } from './components/admin/skillset/skillset-edit/skillset-edit.component';
+import { AdminSkillSetHomeComponent } from './components/admin/skillset/skillset-home/skillset-home.component';
+import { AdminSkillSetHomeFirstCategoryComponent } from './components/admin/skillset/skillset-home/skillset-home-first-category/skillset-home-first-category.component';
+import { AdminSkillSetHomeSecondCategoryComponent } from './components/admin/skillset/skillset-home/skillset-home-second-category/skillset-home-second-category.component';
+import { AdminSkillSetHomeSkillItemComponent } from './components/admin/skillset/skillset-home/skillset-home-skill-item/skillset-home-skill-item.component';
 
 @NgModule({
   declarations: [
@@ -93,7 +98,12 @@ import { AdminAboutRelevantSitesListItemComponent } from './components/admin/rel
     AdminRelevantSitesComponent,
     AdminRelevantSitesListComponent,
     AdminRelevantSitesEditComponent,
+    AdminSkillSetEditComponent,
+    AdminSkillSetHomeComponent,
     AdminAboutRelevantSitesListItemComponent,
+    AdminSkillSetHomeFirstCategoryComponent,
+    AdminSkillSetHomeSecondCategoryComponent,
+    AdminSkillSetHomeSkillItemComponent,
     PublicComponent,
     AdminIntroComponent,
     IntroComponent,

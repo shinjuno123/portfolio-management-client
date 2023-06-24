@@ -26,6 +26,8 @@ import { AdminNotificationEditComponent } from "./components/admin/notification/
 import { AdminRelevantSitesComponent } from "./components/admin/relevant-sites/relevant-sites.component";
 import { AdminRelevantSitesListComponent } from "./components/admin/relevant-sites/relevant-sites-list/relevant-sites-list.component";
 import { AdminRelevantSitesEditComponent } from "./components/admin/relevant-sites/relevant-sites-edit/relevant-sites-edit.component";
+import { AdminSkillSetHomeComponent } from "./components/admin/skillset/skillset-home/skillset-home.component";
+import { AdminSkillSetEditComponent } from "./components/admin/skillset/skillset-edit/skillset-edit.component";
 
 
 
@@ -47,7 +49,6 @@ const appRoutes: Routes = [
             {path:"", component:AdminExperienceListComponent},
             {path:"edit", component: AdminExperienceEditComponent}
         ]},
-        {path:"skill-set", component: AdminSkillSetComponent},
         {path:"project", component: AdminProjectComponent, children: [
             {path:"", component:AdminProjectListComponent},
             {path:"edit", component:AdminProjectEditComponent}
@@ -63,6 +64,10 @@ const appRoutes: Routes = [
         {path:"relevant-sites", component: AdminRelevantSitesComponent, children: [
             {path:"", component:AdminRelevantSitesListComponent},
             {path:"edit", component:AdminRelevantSitesEditComponent}
+        ]},
+        {path:"skill-set", component: AdminSkillSetComponent, children: [
+            {path:"", component:AdminSkillSetHomeComponent},
+            {path:"edit", component:AdminSkillSetEditComponent}
         ]}
     ]}
 ]

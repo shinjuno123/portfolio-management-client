@@ -1,31 +1,29 @@
 <div class="container">
     <a class="btn btn-primary mb-4" routerLink="../">Back</a>
-    <h2 class="text-start mb-4">Edit Project</h2>
+    <h2 class="text-start mb-4">Edit Skill-Set</h2>
     <div class="board-wrapper">
       <form>
         <p class="text-start">id: 5258b3c4-0e3e-11ee-be56-0242ac120002</p>
   
         <div class="input-group mb-3">
-          <span class="input-group-text" id="basic-addon2">Project Name</span>
-          <input type="text" class="form-control" placeholder="Project Name" aria-describedby="basic-addon2">
+          <span class="input-group-text" id="basic-addon2">Title</span>
+          <input type="text" class="form-control" placeholder="Title" aria-describedby="basic-addon2">
         </div>
-        <div class="input-group mb-3">
-          <span class="input-group-text" id="basic-addon2">Url</span>
-          <input type="text" class="form-control" placeholder="Url"
-            aria-describedby="basic-addon2">
+
+        <div class="form-floating text-black mb-3">
+            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+            <label for="floatingTextarea">Description</label>
         </div>
   
-        <div class="d-flex mb-5 attachment-box">
-          <div class="attachment-form" (click)="faceImageUpload.click()" #faceImage>
-            <input type="file" name="faceImage" id="faceImage" (change)="setAttachment($event)" #faceImageUpload hidden>
-            <p class="icon-description">Click to upload your Project Image</p>
+        <div class="d-flex mb-5 attachment-box text-center">
+          <div class="attachment-form" (click)="skillSetImageUpload.click()" #faceImage>
+            <input type="file" name="faceImage" id="skillsetimage" (change)="setAttachment($event)" #skillSetImageUpload hidden>
+            <p class="icon-description">Click to upload your skill-set image</p>
             <div class="icon-wrapper">
               <fa-icon class="fa-icon" [icon]="faPaperclip"></fa-icon>
             </div>
           </div>
-  
-        </div>
-  
+        </div>  
   
         <div class="date-form mb-3">
           <p>Updated</p>
