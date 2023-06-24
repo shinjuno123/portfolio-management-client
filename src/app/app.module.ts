@@ -52,6 +52,10 @@ import { AdminNotificationComponent } from './components/admin/notification/noti
 import { AdminNotificationListComponent } from './components/admin/notification/notification-list/notification-list.component';
 import { AdminNotificationEditComponent } from './components/admin/notification/notification-edit/notification-edit.component';
 import { AdminNotificationListItemComponent } from './components/admin/notification/notification-list/notification-list-item/notification-list-item.component';
+import { AdminRelevantSitesComponent } from './components/admin/relevant-sites/relevant-sites.component';
+import { AdminRelevantSitesListComponent } from './components/admin/relevant-sites/relevant-sites-list/relevant-sites-list.component';
+import { AdminRelevantSitesEditComponent } from './components/admin/relevant-sites/relevant-sites-edit/relevant-sites-edit.component';
+import { AdminAboutRelevantSitesListItemComponent } from './components/admin/relevant-sites/relevant-sites-list/relevant-sites-list-item/relevant-sites-list-item.component';
 
 @NgModule({
   declarations: [
@@ -86,6 +90,10 @@ import { AdminNotificationListItemComponent } from './components/admin/notificat
     AdminNotificationListComponent,
     AdminNotificationEditComponent,
     AdminNotificationListItemComponent,
+    AdminRelevantSitesComponent,
+    AdminRelevantSitesListComponent,
+    AdminRelevantSitesEditComponent,
+    AdminAboutRelevantSitesListItemComponent,
     PublicComponent,
     AdminIntroComponent,
     IntroComponent,

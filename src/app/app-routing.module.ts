@@ -23,6 +23,9 @@ import { AdminContactViewComponent } from "./components/admin/contact/contact-vi
 import { AdminNotificationComponent } from "./components/admin/notification/notification.component";
 import { AdminNotificationListComponent } from "./components/admin/notification/notification-list/notification-list.component";
 import { AdminNotificationEditComponent } from "./components/admin/notification/notification-edit/notification-edit.component";
+import { AdminRelevantSitesComponent } from "./components/admin/relevant-sites/relevant-sites.component";
+import { AdminRelevantSitesListComponent } from "./components/admin/relevant-sites/relevant-sites-list/relevant-sites-list.component";
+import { AdminRelevantSitesEditComponent } from "./components/admin/relevant-sites/relevant-sites-edit/relevant-sites-edit.component";
 
 
 
@@ -56,6 +59,10 @@ const appRoutes: Routes = [
         {path:"notification", component: AdminNotificationComponent, children: [
             {path:"", component:AdminNotificationListComponent},
             {path:"edit", component:AdminNotificationEditComponent}
+        ]},
+        {path:"relevant-sites", component: AdminRelevantSitesComponent, children: [
+            {path:"", component:AdminRelevantSitesListComponent},
+            {path:"edit", component:AdminRelevantSitesEditComponent}
         ]}
     ]}
 ]
