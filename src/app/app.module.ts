@@ -61,6 +61,7 @@ import { AdminSkillSetHomeComponent } from './components/admin/skillset/skillset
 import { AdminSkillSetHomeFirstCategoryComponent } from './components/admin/skillset/skillset-home/skillset-home-first-category/skillset-home-first-category.component';
 import { AdminSkillSetHomeSecondCategoryComponent } from './components/admin/skillset/skillset-home/skillset-home-second-category/skillset-home-second-category.component';
 import { AdminSkillSetHomeSkillItemComponent } from './components/admin/skillset/skillset-home/skillset-home-skill-item/skillset-home-skill-item.component';
+import { AdminLoginComponent } from './components/admin/login/login.component';
 
 @NgModule({
   declarations: [
@@ -104,6 +105,7 @@ import { AdminSkillSetHomeSkillItemComponent } from './components/admin/skillset
     AdminSkillSetHomeFirstCategoryComponent,
     AdminSkillSetHomeSecondCategoryComponent,
     AdminSkillSetHomeSkillItemComponent,
+    AdminLoginComponent,
     PublicComponent,
     AdminIntroComponent,
     IntroComponent,

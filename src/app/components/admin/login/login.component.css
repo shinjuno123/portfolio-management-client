@@ -1,0 +1,102 @@
+.container {
+    margin: 5rem auto 10rem auto;
+    background-color: rgb(255, 252, 252);
+    color: black;
+    border-radius: .7rem;
+    position: relative;
+}
+
+.mb-max {
+    margin-bottom: 5rem;
+}
+
+.home-button {
+    display: block;
+    width: fit-content;
+    color: white;
+    padding: .5rem 1.5rem .5rem 1.5rem;
+    background-color: #222831;
+    border-radius: .4rem;
+    margin-bottom: 2rem;
+    -webkit-transition: background-color .2s ease-in; /* Safari */
+    transition: background-color .2s ease-in;
+}
+
+.home-button:link {
+    text-decoration: none;
+}
+
+.home-button:hover {
+    text-decoration: none;
+    background-color: #383a3f;
+    -webkit-transition: background-color .2s ease-in; /* Safari */
+    transition: background-color .2s ease-in;
+}
+
+
+.col-lg-6 {
+    padding: 6rem 3rem 6rem 3rem;
+    position: relative;
+}
+
+.col-lg-6:last-child::after {
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-image: url('/assets/img/admin-bg.jpg');
+    background-position: center;
+    background-size:cover;
+    background-repeat: no-repeat;
+    position: absolute;
+    border-top-right-radius: .7rem;
+    border-bottom-right-radius: .7rem;
+    content: "";
+}
+
+.login-info {
+    border: .1px solid rgb(213, 213, 219);
+    width: 100%;
+    line-height: 2.3rem;
+    font-size: small;
+    text-indent: 1rem;
+    border-radius: .3rem;
+    outline: unset;    
+}
+
+.login-info:focus-visible {
+    border: .1px solid #84C69B;
+    outline: unset;
+}
+
+
+.button-wrapper button {
+    width: 100%;
+    height: 2.3rem;
+    border: unset;
+    color: white;
+    border-radius: .5rem;
+    background-color: #4dc978;
+    -webkit-transition: background-color .2s ease-in; /* Safari */
+    transition: background-color .2s ease-in;
+}
+
+.button-wrapper button:hover {
+    background-color: #9dd4b0;
+    -webkit-transition: background-color .2s ease-in; /* Safari */
+    transition: background-color .2s ease-in;
+}
+
+@media screen and (max-width: 960px) {
+    .col-lg-6:last-child {
+        padding: 0;
+        position: relative;
+    }
+
+    .col-lg-6:last-child::after {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: .7rem;
+        border-bottom-left-radius: .7rem;
+        height: 0;
+    }
+}

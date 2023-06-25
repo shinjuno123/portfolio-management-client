@@ -28,6 +28,7 @@ import { AdminRelevantSitesListComponent } from "./components/admin/relevant-sit
 import { AdminRelevantSitesEditComponent } from "./components/admin/relevant-sites/relevant-sites-edit/relevant-sites-edit.component";
 import { AdminSkillSetHomeComponent } from "./components/admin/skillset/skillset-home/skillset-home.component";
 import { AdminSkillSetEditComponent } from "./components/admin/skillset/skillset-edit/skillset-edit.component";
+import { AdminLoginComponent } from "./components/admin/login/login.component";
 
 
 
@@ -36,6 +37,7 @@ const appRoutes: Routes = [
     {path:"", component:PublicComponent},
     {path:"admin", component: AdminComponent, children:[
         {path:"",component:AdminHomeComponent},
+        {path:"login", component: AdminLoginComponent},
         {path:"intro", component: AdminIntroComponent, children:[
             {path: "", component: AdminIntroListComponent},
             {path: "edit", component: AdminIntroEditComponent},
