@@ -1,0 +1,35 @@
+<menu>
+    <button class="hamburger-button" type="button" (click)="toggleMenu()">
+        <fa-icon [icon]="faBars"></fa-icon>
+    </button>
+    <div class="menu-wrapper" #menuWrapper>
+        <p class="menu-title">Admin Management</p>
+        <li>
+            <a class="btn btn-primary" routerLink="/admin">Home</a>
+        </li>
+        <li>
+            <a class="btn btn-primary" routerLink="intro">Introduction</a>
+        </li>
+        <li>
+            <a class="btn btn-primary" routerLink="about">About Me</a>
+        </li>
+        <li>
+            <a class="btn btn-primary" routerLink="experience">Experience</a>
+        </li>
+        <li>
+            <a class="btn btn-primary" routerLink="skill-set">Skill-Set & Relevant Projects</a>
+        </li>
+        <li>
+            <a class="btn btn-primary" routerLink="project">Project</a>
+        </li>
+        <li>
+            <a class="btn btn-primary" routerLink="contact">Contact</a>
+        </li>
+        <li>
+            <a class="btn btn-primary" routerLink="notification">Notification</a>
+        </li>
+        <li>
+            <a class="btn btn-primary" routerLink="relevant-sites">Relevant Sites</a>
+        </li>
+    </div>
+</menu>

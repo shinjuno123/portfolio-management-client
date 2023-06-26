@@ -1,0 +1,13 @@
+.row {
+    margin: 0;
+}
+
+.col-md-3 {
+    padding: 0;
+    min-height: fit-content;
+    position: relative;
+}
+
+.container {
+    --bs-gutter-x: 5rem;
+}

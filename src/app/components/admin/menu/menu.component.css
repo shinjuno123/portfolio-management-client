@@ -1,0 +1,98 @@
+menu {
+    margin: 0;
+    z-index: 10;
+    height: 100%;
+    width: 100%;
+    padding: 1rem;
+    background-color: #171a1d;
+    position: relative;
+}
+
+menu::after {
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #171a1d;
+    content: "";
+    width: 100%;
+    height: 100vh;
+}
+
+.menu-wrapper {
+    position: sticky;
+    top: 1rem;
+}
+
+
+
+
+p.menu-title {
+    text-align: center;
+    background-color: #3d434d;
+    padding: 2rem;
+    border-radius: .7rem;
+    color: rgb(18, 214, 221)!important;
+    font-family: 'Raleway', sans-serif!important;
+}
+
+li {
+    margin-bottom: .5rem;
+    list-style: none;
+}
+
+.btn {
+    width: 100%;
+}
+
+.btn-primary {
+    background-color: transparent;
+    border: unset;
+    margin-bottom: .3rem;
+    color: rgb(18, 214, 221)!important;
+    font-family: 'Raleway', sans-serif!important;
+}
+
+.btn-primary:hover,.btn-primary:active {
+    background-color: #3d434d;
+}
+
+.hamburger-button {
+    display: none;
+}
+
+@media screen and (max-width:768px) {
+
+    menu {
+        background-color: transparent;
+        padding: 0;
+        position: fixed;
+        height: fit-content;
+        width: 100%;
+        bottom: 4.5rem;
+        background-color: #171a1d;
+    }
+
+    menu::after {
+        background-color: transparent;
+    }
+
+    .hamburger-button {
+        position: absolute;
+        display: block;
+        width: fit-content;
+        height: fit-content;
+        right: 0;
+        padding: .5rem 1rem .5rem 1rem;
+        color: white;
+        margin: 0 2rem 0;
+        background-color: #3d434d;
+        border: unset;
+        border-radius: .5rem;
+    }
+
+
+    .menu-wrapper {
+        display: none;
+    }
+}
