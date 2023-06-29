@@ -87,7 +87,7 @@
     transition: background-color .2s ease-in;
 }
 
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 992px) {
     .col-lg-6:last-child {
         padding: 0;
         position: relative;
