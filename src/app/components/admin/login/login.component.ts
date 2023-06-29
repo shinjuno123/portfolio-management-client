@@ -1,4 +1,6 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+import { FormGroup, NgForm } from "@angular/forms";
+import { User } from "src/app/model/user.model";
 
 
 @Component({
@@ -6,6 +8,13 @@ import { Component } from "@angular/core";
     templateUrl: './login.component.html',
     styleUrls:['./login.component.css']
 })
-export class AdminLoginComponent {
-    
+export class AdminLoginComponent implements OnInit{
+    userForm!: FormGroup;
+
+    ngOnInit(): void {
+    }
+
+    validateUser(loginForm: NgForm){
+        console.log(loginForm.value);
+    }
 }

@@ -4,7 +4,7 @@ import { AppComponent } from './app.component';
 import { ReplacePipe } from './pipe/replace.pipe';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 import { PublicComponent } from './components/public/public.component';
 import { IntroComponent } from './components/public/intro/intro.component';
 import { AboutMeComponent } from './components/public/about-me/about-me.component';
@@ -63,6 +63,7 @@ import { AdminSkillSetHomeSecondCategoryComponent } from './components/admin/ski
 import { AdminSkillSetHomeSkillItemComponent } from './components/admin/skillset/skillset-home/skillset-home-skill-item/skillset-home-skill-item.component';
 import { AdminLoginComponent } from './components/admin/login/login.component';
 import { AdminMenuComponent } from './components/admin/menu/menu.component';
+import { XhrInterceptor } from './interceptors/app.request.interceptor';
 
 @NgModule({
   declarations: [
@@ -131,9 +132,17 @@ import { AdminMenuComponent } from './components/admin/menu/menu.component';
     FormsModule,
     FontAwesomeModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientXsrfModule.withOptions({
+      cookieName: 'XSRF-TOKEN',
+      headerName: 'X-XSRF-TOKEN',
+    })
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: XhrInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
