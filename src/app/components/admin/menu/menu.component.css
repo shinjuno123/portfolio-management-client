@@ -24,6 +24,9 @@ menu::after {
     top: 1rem;
 }
 
+.exit-button {
+    display: none;
+}
 
 
 
@@ -39,6 +42,9 @@ p.menu-title {
 li {
     margin-bottom: .5rem;
     list-style: none;
+}
+.background-wrapper {
+    display: none;
 }
 
 .btn {
@@ -85,14 +91,63 @@ li {
         right: 0;
         padding: .5rem 1rem .5rem 1rem;
         color: white;
-        margin: 0 2rem 0;
+        margin-bottom: 2rem;
+        margin-right: 2rem;
+        background-color: #3d434d;
+        border: unset;
+        border-radius: .5rem;
+    }
+    
+
+
+    .menu-wrapper {
+        display: none;
+    }
+
+    .open {
+        height: 100%;
+        top:0;
+        background-color:rgba(23, 26, 29, .7);
+        overflow-y: auto;
+    }
+
+    .open > .hamburger-button {
+        bottom: 0;
+        margin-bottom: 2rem;
+        position: fixed;
+    }
+
+    .open > .menu-wrapper {
+        display: block;
+        padding: 1.5rem;
+        top:0;
+        background-color:rgba(23, 26, 29, 1);
+    }
+
+    .open > .background-wrapper {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+
+    .open .exit-button  {
+        z-index: 5;
+        margin-left: auto;
+        margin-bottom: 1rem;
+        position: relative;
+        
+        display: block;
+        width: fit-content;
+        height: fit-content;
+        right: 0;
+        padding: .5rem 1rem .5rem 1rem;
+        color: white;
         background-color: #3d434d;
         border: unset;
         border-radius: .5rem;
     }
 
 
-    .menu-wrapper {
-        display: none;
-    }
+
+
 }

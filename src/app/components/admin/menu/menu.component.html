@@ -1,8 +1,11 @@
-<menu>
+<menu #menu>
     <button class="hamburger-button" type="button" (click)="toggleMenu()">
         <fa-icon [icon]="faBars"></fa-icon>
     </button>
     <div class="menu-wrapper" #menuWrapper>
+        <button class="exit-button" type="button" (click)="toggleMenu()">
+            <fa-icon [icon]="faXmark"></fa-icon>
+        </button>
         <p class="menu-title">Admin Management</p>
         <li>
             <a class="btn btn-primary" routerLink="/admin">Home</a>
@@ -32,4 +35,5 @@
             <a class="btn btn-primary" routerLink="relevant-sites">Relevant Sites</a>
         </li>
     </div>
+    <div class="background-wrapper" (click)="toggleMenu()"></div>
 </menu>

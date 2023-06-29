@@ -1,6 +1,5 @@
-import { AfterViewChecked, Component, ContentChild, ElementRef, HostListener, OnChanges, OnInit, Renderer2, ViewChild } from "@angular/core";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
-import { fromEvent } from "rxjs";
+import { Component, ElementRef, Renderer2, ViewChild } from "@angular/core";
+import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 
 
 @Component({
@@ -10,13 +9,25 @@ import { fromEvent } from "rxjs";
 })
 export class AdminMenuComponent{
     faBars = faBars;
+    faXmark = faXmark;
+    isOpened = false;
+    @ViewChild("menu") menuWrapper!:ElementRef;
 
 
     constructor(private renderer:Renderer2){}
 
 
     toggleMenu() {
-    
+        if(this.isOpened) {
+            this.renderer.removeClass(this.menuWrapper.nativeElement,"open");
+            this.renderer.addClass(this.menuWrapper.nativeElement,"close");
+            this.isOpened = false;
+            return;
+        }
+
+        this.renderer.removeClass(this.menuWrapper.nativeElement,"close");
+        this.renderer.addClass(this.menuWrapper.nativeElement,"open");
+        this.isOpened = true;
     }
 
 }
