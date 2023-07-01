@@ -61,7 +61,7 @@
     font-size: small;
     text-indent: 1rem;
     border-radius: .3rem;
-    outline: unset;    
+    outline: unset;
 }
 
 .login-info:focus-visible {
@@ -85,6 +85,29 @@
     background-color: #9dd4b0;
     -webkit-transition: background-color .2s ease-in; /* Safari */
     transition: background-color .2s ease-in;
+}
+
+.button-wrapper button:disabled {
+    background-color: #9dd4b0;
+}
+
+.not-valid {
+    color: rgb(236, 63, 63);
+    font-size: small;
+}
+
+.auth-false {
+    display: block;
+    background-color: #da5757;
+    padding: 2rem;
+    text-align: center;
+    color: white;
+    border: 2px solid #920707;
+    border-radius: .3rem;
+}
+
+.auth-false p {
+    margin: 0;
 }
 
 @media screen and (max-width: 992px) {

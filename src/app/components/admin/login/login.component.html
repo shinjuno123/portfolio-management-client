@@ -1,21 +1,37 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-6">
-            <form (ngSubmit)="validateUser(loginForm)" #loginForm="ngForm">
+            <form class="mb-4" (ngSubmit)="form.valid && validateUser()" #form="ngForm">
 
                 <a class="home-button" routerLink="/">Go back home</a>
                 <h2>Log in</h2>
                 <p class="mb-4">Enter your credentials to access admin page.</p>
+
                 <p class="mb-2">Email address</p>
-                <input class="mb-4 login-info" type="email" name="email" ngModel>
-                <p class="mb-2">Password</p>
-                <input class="mb-max login-info" type="password" name="password" ngModel>
-    
-                <div class="button-wrapper">
-                    <button type="submit">Login</button>
+
+                <div class="mb-4">
+                    <input class="login-info" type="email" name="email" [(ngModel)]="user.email" email required
+                        #email="ngModel">
+                    <span class="not-valid" *ngIf="!email.valid && email.touched">Please enter valid email!</span>
                 </div>
 
+                <p class="mb-2">Password</p>
+
+                <div class="mb-max">
+                    <input class="login-info" type="password" name="password" [(ngModel)]="user.password" required
+                        #password="ngModel">
+                    <span class="not-valid" *ngIf="!password.valid && password.touched">Please enter your
+                        password!</span>
+                </div>
+
+                <div class="button-wrapper">
+                    <button type="submit" [disabled]="form.form.status === 'INVALID'">Login</button>
+                </div>
             </form>
+            
+            <div class="auth-false" *ngIf="authenticatedResult">
+                <p>Login is failed. Check your password or email account!</p>
+            </div>
         </div>
         <div class="col-lg-6">
         </div>

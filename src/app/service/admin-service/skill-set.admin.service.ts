@@ -34,15 +34,15 @@ export class SkillSetAdminService {
     }
 
 
-    getSecondCategory() {
+    public getSecondCategory() {
         return this.secondCategory.slice();
     }
 
-    getSkillSetItems() {
+    public getSkillSetItems() {
         return this.skillSetItem.slice();
     }
 
-    getRelevantProjects() {
+    public getRelevantProjects() {
 
     }
 }

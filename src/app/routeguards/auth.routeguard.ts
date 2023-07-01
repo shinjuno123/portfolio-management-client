@@ -10,8 +10,10 @@ import { User } from "../model/user.model";
 class PermissionsService {
     constructor(private router: Router){}
 
-    canActivate(user: User) {
-        if(!user.name && !user.email) {
+    canActivate() {
+        const authorization = sessionStorage.getItem("Authorization");
+
+        if(!authorization) {
             this.router.navigate(['admin','login']);
             return false;
         }
@@ -23,11 +25,5 @@ class PermissionsService {
 
 export const canActivate = 
     (permissionsService = inject(PermissionsService)) => {
-        let user = JSON.parse(sessionStorage.getItem('userDetails')!);
-
-        if(!user) {
-            user = new User();
-        }
-        
-        return permissionsService.canActivate(user);
+        return permissionsService.canActivate();
 }

@@ -18,6 +18,7 @@ export class XhrInterceptor implements HttpInterceptor {
             return next.handle(req);
         }
 
+
         let httpHeaders = new HttpHeaders();
     
         if(sessionStorage.getItem('userDetails')) {
@@ -25,7 +26,7 @@ export class XhrInterceptor implements HttpInterceptor {
         }
 
         if(this.user && this.user.email && this.user.password) {
-            httpHeaders = httpHeaders.append('Authorization', 'Basic ' + window.btoa(this.user.email) + ':' + this.user.password);
+            httpHeaders = httpHeaders.append('Authorization', 'Basic ' + window.btoa(this.user.email + ':' + this.user.password));
         } else {
             let authorization = sessionStorage.getItem('Authorization');
             if(authorization) {
@@ -43,17 +44,7 @@ export class XhrInterceptor implements HttpInterceptor {
             headers: httpHeaders
         });
 
-        return next.handle(xhr).pipe(tap(
-            (err: any) => {
-                if(err instanceof HttpErrorResponse) {
-                    if(err.status !== 401) {
-                        return;
-                    }
-
-                    this.router.navigate(['admin','login',{status: 'failed'}]);
-                }
-            }
-        ))
+        return next.handle(xhr);
     }
 
 }
