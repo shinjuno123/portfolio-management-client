@@ -11,7 +11,6 @@ import { Router } from "@angular/router";
 export class XhrInterceptor implements HttpInterceptor {
 
     user = new User();
-    constructor(private router: Router) {}
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         if(req.url.includes("public")) {

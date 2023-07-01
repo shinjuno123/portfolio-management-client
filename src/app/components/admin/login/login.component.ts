@@ -1,8 +1,8 @@
-import { HttpParams, HttpResponse } from "@angular/common/http";
+import { HttpResponse } from "@angular/common/http";
 import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { ActivatedRoute, Params, Router } from "@angular/router";
-import { Subject, Subscription } from "rxjs";
+import { Subscription } from "rxjs";
 import { User } from "src/app/model/user.model";
 import { AdminLoginService } from "src/app/service/admin-service/login.admin.service";
 import { getCookie } from 'typescript-cookie';
@@ -30,7 +30,7 @@ export class AdminLoginComponent implements OnInit, OnDestroy{
         )
     }
 
-    validateUser(){
+    validateUser() {
         // Deepcopy user information
         const copiedUser: User = structuredClone(this.user);
 
@@ -69,6 +69,8 @@ export class AdminLoginComponent implements OnInit, OnDestroy{
     }
 
     ngOnDestroy(): void {
-        this.loginRequestSubscription.unsubscribe();
+        if(this.loginRequestSubscription) {
+            this.loginRequestSubscription.unsubscribe();
+        }
     }
 }

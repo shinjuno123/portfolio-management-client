@@ -1,6 +1,5 @@
 import { Injectable, inject } from "@angular/core";
-import { Router } from "@angular/router";
-import { User } from "../model/user.model";
+import { ActivatedRouteSnapshot, CanActivateFn, Router,  RouterStateSnapshot } from "@angular/router";
 
 
 
@@ -8,13 +7,22 @@ import { User } from "../model/user.model";
     providedIn: "root"
 })
 class PermissionsService {
-    constructor(private router: Router){}
 
-    canActivate() {
+    canActivate(router:Router, currentUrl: string) {
         const authorization = sessionStorage.getItem("Authorization");
 
+        if(!authorization && currentUrl === "/admin/login") {
+            return true;
+        }
+
         if(!authorization) {
-            this.router.navigate(['admin','login']);
+            router.navigate(['admin','login']);
+            return false;
+        }
+
+
+        if(authorization && currentUrl === "/admin/login") {
+            router.navigate(['admin']);
             return false;
         }
 
@@ -23,7 +31,10 @@ class PermissionsService {
 }
 
 
-export const canActivate = 
-    (permissionsService = inject(PermissionsService)) => {
-        return permissionsService.canActivate();
+export function canActivate():CanActivateFn {
+    return (_: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+        const permissionsService: PermissionsService = inject(PermissionsService);
+        const router= inject(Router);
+        return permissionsService.canActivate(router, state.url);
+    }
 }

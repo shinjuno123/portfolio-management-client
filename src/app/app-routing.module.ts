@@ -36,39 +36,39 @@ import { canActivate } from "./routeguards/auth.routeguard";
 
 const appRoutes: Routes = [
     {path:"", component:PublicComponent},
-    {path:"admin", component: AdminComponent, children:[
-        {path:"",component:AdminHomeComponent,  canActivate:[()=>canActivate()]},
+    {path:"admin", component: AdminComponent, canActivateChild:[canActivate()], children:[
+        {path:"",component:AdminHomeComponent},
         {path:"login", component: AdminLoginComponent},
-        {path:"intro", component: AdminIntroComponent,  canActivate:[()=>canActivate()], children:[
+        {path:"intro", component: AdminIntroComponent, children:[
             {path: "", component: AdminIntroListComponent},
             {path: "edit", component: AdminIntroEditComponent},
         ]},
-        {path:"about", component: AdminAboutComponent,  canActivate:[()=>canActivate()], children:[
+        {path:"about", component: AdminAboutComponent, children:[
             {path: "", component: AdminAboutListComponent},
             {path: "edit", component: AdminAboutEditComponent},
             {path: "certification/edit", component: AdminAboutCertificationEditComponent}
         ]},
-        {path:"experience", component: AdminExperienceComponent,  canActivate:[()=>canActivate()], children:[
+        {path:"experience", component: AdminExperienceComponent, children:[
             {path:"", component:AdminExperienceListComponent},
             {path:"edit", component: AdminExperienceEditComponent}
         ]},
-        {path:"project", component: AdminProjectComponent, canActivate:[()=>canActivate()], children: [
+        {path:"project", component: AdminProjectComponent, children: [
             {path:"", component:AdminProjectListComponent},
             {path:"edit", component:AdminProjectEditComponent}
         ]},
-        {path:"contact", component: AdminContactComponent, canActivate:[()=>canActivate()], children: [
+        {path:"contact", component: AdminContactComponent, children: [
             {path:"", component:AdminContactListComponent},
             {path:"view", component:AdminContactViewComponent}
         ]},
-        {path:"notification", component: AdminNotificationComponent, canActivate:[()=>canActivate()], children: [
+        {path:"notification", component: AdminNotificationComponent, children: [
             {path:"", component:AdminNotificationListComponent},
             {path:"edit", component:AdminNotificationEditComponent}
         ]},
-        {path:"relevant-sites", component: AdminRelevantSitesComponent, canActivate:[()=>canActivate()], children: [
+        {path:"relevant-sites", component: AdminRelevantSitesComponent, children: [
             {path:"", component:AdminRelevantSitesListComponent},
             {path:"edit", component:AdminRelevantSitesEditComponent}
         ]},
-        {path:"skill-set", component: AdminSkillSetComponent, canActivate:[()=>canActivate()], children: [
+        {path:"skill-set", component: AdminSkillSetComponent, children: [
             {path:"", component:AdminSkillSetHomeComponent},
             {path:"edit", component:AdminSkillSetEditComponent}
         ]}
