@@ -1,22 +1,22 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { faCirclePlus, faHandPointer, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { SkillSetAdminService } from "src/app/service/admin-service/skill-set.admin.service";
 
 
 @Component({
-    selector: 'admin-skillset-home-second-category',
-    templateUrl: './skillset-home-second-category.component.html',
-    styleUrls:['./skillset-home-second-category.component.css']
+    selector: 'admin-skillset-home-relevant-projects',
+    templateUrl: './skillset-home-relevant-projects.component.html',
+    styleUrls:['./skillset-home-relevant-projects.component.css']
 })
-export class AdminSkillSetHomeSecondCategoryComponent implements OnInit {
-    secondCategory!:{id:string, name:string}[];
+export class AdminSkillSetHomeRelevantProjectsComponent {
+    firstCategory!:{id:string, name:string}[];
     faCirclePlus = faCirclePlus;
     toggleEditIcon= faHandPointer;
 
     constructor(private skillSetAdminService:SkillSetAdminService){}
 
     ngOnInit(): void {
-        this.secondCategory = this.skillSetAdminService.getSecondCategory(); 
+        // this.firstCategory = this.skillSetAdminService.getRelevantProjects(); 
     }
 
     addCategory() {

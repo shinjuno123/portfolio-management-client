@@ -2,34 +2,37 @@
     <a class="btn btn-primary mb-4" routerLink="../">Back</a>
     <h2 class="text-start mb-4">Edit Introduction</h2>
     <div class="board-wrapper">
-        <form>
-            <p class="text-start">id: 5258b3c4-0e3e-11ee-be56-0242ac120002</p>
+        <form (ngSubmit)="submitIntroduction()">
+            <p class="text-start">id: {{introToEdit.id}}</p>
             <div class="input-group mb-3">
                 <span class="input-group-text" [id]="'basic-addon1'">Say Hi</span>
-                <input type="text" class="form-control" placeholder="Say Hi" aria-label="Username" aria-describedby="basic-addon1">
+                <input type="text" class="form-control" placeholder="Say Hi" aria-label="Username" aria-describedby="basic-addon1"
+                  [(ngModel)]="introToEdit.sayHi" name="sayHi">
             </div>
             <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon2">Name</span>
-                <input type="text" class="form-control" placeholder="Name" aria-label="Username" aria-describedby="basic-addon2">
+                <input type="text" class="form-control" placeholder="Name" aria-label="Username" aria-describedby="basic-addon2"
+                [(ngModel)]="introToEdit.name" name="name">
             </div>
 
             <div class="form-floating text-black mb-3">
-                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"
+                  [(ngModel)]="introToEdit.opening" name="opening">{{introToEdit.opening}}</textarea>
                 <label for="floatingTextarea">Comments</label>
             </div>
             <div class="form-check form-switch">
-                <input #activated class="form-check-input" name="actviated" [(ngModel)]="isActivated" (change)="activateIntroduction()" value="true" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                <input #activated class="form-check-input" name="active" [(ngModel)]="introToEdit.active" (change)="activateIntroduction()" type="checkbox" role="switch" id="flexSwitchCheckDefault">
                 <label class="form-check-label" for="flexSwitchCheckDefault">Activate this introduction</label>
               </div>
-            <div class="date-form mb-3">
+            <div class="date-form mb-3" *ngIf="introToEdit.updated">
                 <p>Updated</p>
-                <p>Fri Jul 02 2021 12:44:45 GMT+0100</p>
+                <p>{{introToEdit.updated}}</p>
             </div>
-            <div class="date-form mb-5">
+            <div class="date-form mb-5" *ngIf="introToEdit.uploaded">
                 <p>Uploaded</p>
-                <p>Fri Jul 02 2021 12:44:45 GMT+0100</p>
+                <p>{{introToEdit.uploaded}}</p>
             </div>
-            <button class="btn btn-primary mb-4">Update & Save</button>
+            <button class="btn btn-primary mb-4">{{introToEdit.id? 'Update':'Save'}}</button>
             <button class="btn btn-danger" (click)="deleteIntroduction()">Delete</button>
         </form>
     </div>

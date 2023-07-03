@@ -51,14 +51,14 @@ export class AdminLoginComponent implements OnInit, OnDestroy{
         const authorization = responseData.headers.get('Authorization');
 
         if(authorization) {
-            sessionStorage.setItem("Authorization", authorization);
+            window.sessionStorage.setItem("Authorization", authorization);
         }
 
         if(userInfo) {
             const user: User = userInfo;
-            sessionStorage.setItem("userDetails", JSON.stringify(user));
+            window.sessionStorage.setItem("userDetails", JSON.stringify(user));
             const xsrf = getCookie('XSRF-TOKEN')!;
-            sessionStorage.setItem("XSRF-TOKEN", xsrf);
+            window.sessionStorage.setItem("XSRF-TOKEN", xsrf);
         }
 
         this.router.navigate(['admin']);

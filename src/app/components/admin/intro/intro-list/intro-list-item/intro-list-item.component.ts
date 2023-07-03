@@ -1,5 +1,7 @@
-import { Component } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
+import { Intro } from "src/app/model/intro.model";
+import { AdminIntroService } from "src/app/service/admin-service/admin.intro.service";
 
 
 @Component({
@@ -7,13 +9,18 @@ import { ActivatedRoute, Router } from "@angular/router";
     templateUrl: './intro-list-item.component.html',
     styleUrls:['./intro-list-item.component.css']
 })
-export class AdminIntroListItemComponent {
+export class AdminIntroListItemComponent implements OnInit{
+    @Input() items!: Intro[];
 
     constructor(private router: Router,
-        private route: ActivatedRoute){}
+        private route: ActivatedRoute, private adminIntroService: AdminIntroService){}
+
+
+    ngOnInit(): void {
+    }
     
 
-    routeToEditPage() {
-        this.router.navigate(["edit"], {relativeTo: this.route})
+    routeToEditPage(id: string) {
+        this.router.navigate(["edit"], {queryParams:{id:id},relativeTo: this.route})
     }
 }

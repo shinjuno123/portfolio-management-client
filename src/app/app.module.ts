@@ -4,7 +4,7 @@ import { AppComponent } from './app.component';
 import { ReplacePipe } from './pipe/replace.pipe';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule, HttpXsrfTokenExtractor } from '@angular/common/http';
 import { PublicComponent } from './components/public/public.component';
 import { IntroComponent } from './components/public/intro/intro.component';
 import { AboutMeComponent } from './components/public/about-me/about-me.component';
@@ -64,6 +64,7 @@ import { AdminSkillSetHomeSkillItemComponent } from './components/admin/skillset
 import { AdminLoginComponent } from './components/admin/login/login.component';
 import { AdminMenuComponent } from './components/admin/menu/menu.component';
 import { XhrInterceptor } from './interceptors/app.request.interceptor';
+import { AdminSkillSetHomeRelevantProjectsComponent } from './components/admin/skillset/skillset-home/skillset-home-relevant-projects/skillset-home-relevant-projects.component';
 
 @NgModule({
   declarations: [
@@ -107,6 +108,7 @@ import { XhrInterceptor } from './interceptors/app.request.interceptor';
     AdminSkillSetHomeFirstCategoryComponent,
     AdminSkillSetHomeSecondCategoryComponent,
     AdminSkillSetHomeSkillItemComponent,
+    AdminSkillSetHomeRelevantProjectsComponent,
     AdminMenuComponent,
     AdminLoginComponent,
     PublicComponent,

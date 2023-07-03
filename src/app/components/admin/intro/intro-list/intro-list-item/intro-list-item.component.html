@@ -1,12 +1,12 @@
-<div class="row g-1 pb-2 text-start" *ngFor="let i of [false,false,true,false,false,false]" (click)="routeToEditPage()">
-    <div class="col-1"><div><p>8ad</p></div></div>
-    <div class="col-2"><div><p>Say Hi Data</p></div></div>
-    <div class="col-2"><div><p>Name Data</p></div></div>
-    <div class="col-6"><div><p>Opening Data</p></div></div>
+<div class="row g-1 pb-2 text-start" *ngFor="let intro of items;" (click)="routeToEditPage(intro.id)">
+    <div class="col-1"><div><p>{{intro.id | slice : 0: 5}}...</p></div></div>
+    <div class="col-2"><div><p>{{intro.sayHi | slice : 0: 10}}...</p></div></div>
+    <div class="col-2"><div><p>{{intro.name | slice : 0: 10}}...</p></div></div>
+    <div class="col-6"><div><p>{{intro.opening | slice : 0: 20}}...</p></div></div>
     <div class="col-1">
         <div>
             <label>
-                <input type="checkbox" [checked]="i">
+                <input type="checkbox" [checked]="intro.active">
                 <span class="greenmark"></span>
             </label>
         </div>

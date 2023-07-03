@@ -8,3 +8,8 @@ export const  AppConstants = {
     CERTIFICATIONS_API_URL : "/api/public/certifications",
     SKILL_SET_API_URL : "/api/public/skill-set",
 }
+
+
+export const AdminConstants = {
+    INTRO_API_URL : "/api/admin/introduction",
+}
