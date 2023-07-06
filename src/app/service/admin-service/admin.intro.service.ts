@@ -45,4 +45,8 @@ export class AdminIntroService {
     saveIntro(intro : Intro) {
         return this.http.post<Intro>(environment.rootUrl + AdminConstants.INTRO_API_URL, intro,{observe:"response", withCredentials:true} );
     }
+
+    deleteIntroById(id : string) {
+        return this.http.delete<Intro>(environment.rootUrl + `${AdminConstants.INTRO_API_URL}/${id}`,{observe:"response", withCredentials:true} );
+    }
 }

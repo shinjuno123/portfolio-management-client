@@ -1,11 +1,11 @@
-<div class="row g-1 pb-2 text-start" *ngFor="let i of [false,false,true,false,false,false]" (click)="routeToEditPage()">
-    <div class="col-3"><div><p>9wedwda</p></div></div>
-    <div class="col-4"><div><p>{{dummyDate}}</p></div></div>
-    <div class="col-4"><div><p>{{dummyDate}}</p></div></div>
+<div class="row g-1 pb-2 text-start" *ngFor="let about of aboutList" (click)="routeToEditPage(about.id)">
+    <div class="col-3"><div><p>{{about.id | slice : 0: 5}}...</p></div></div>
+    <div class="col-4"><div><p>{{about.updated}}</p></div></div>
+    <div class="col-4"><div><p>{{about.uploaded}}</p></div></div>
     <div class="col-1">
         <div>
             <label>
-                <input type="checkbox" [checked]="i">
+                <input type="checkbox" [checked]="about.active">
                 <span class="greenmark"></span>
             </label>
         </div>

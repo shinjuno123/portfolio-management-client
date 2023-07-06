@@ -3,26 +3,26 @@
     <h2 class="text-start mb-4">Edit Introduction</h2>
     <div class="board-wrapper">
         <form (ngSubmit)="submitIntroduction()">
-            <p class="text-start">id: {{introToEdit.id}}</p>
+            <p class="text-start" *ngIf="introToEdit.id">id: {{introToEdit.id}}</p>
             <div class="input-group mb-3">
-                <span class="input-group-text" [id]="'basic-addon1'">Say Hi</span>
-                <input type="text" class="form-control" placeholder="Say Hi" aria-label="Username" aria-describedby="basic-addon1"
+                <span class="input-group-text">Say Hi</span>
+                <input type="text" class="form-control" placeholder="Say Hi"
                   [(ngModel)]="introToEdit.sayHi" name="sayHi">
             </div>
             <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon2">Name</span>
-                <input type="text" class="form-control" placeholder="Name" aria-label="Username" aria-describedby="basic-addon2"
+                <span class="input-group-text">Name</span>
+                <input type="text" class="form-control" placeholder="Name"
                 [(ngModel)]="introToEdit.name" name="name">
             </div>
 
             <div class="form-floating text-black mb-3">
-                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"
+                <textarea class="form-control" placeholder="Leave a comment here" id="introComment"
                   [(ngModel)]="introToEdit.opening" name="opening">{{introToEdit.opening}}</textarea>
-                <label for="floatingTextarea">Comments</label>
+                <label for="introComment">Comments</label>
             </div>
-            <div class="form-check form-switch">
-                <input #activated class="form-check-input" name="active" [(ngModel)]="introToEdit.active" (change)="activateIntroduction()" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                <label class="form-check-label" for="flexSwitchCheckDefault">Activate this introduction</label>
+            <div class="form-check form-switch mb-4">
+                <input #activated class="form-check-input" name="active" [(ngModel)]="introToEdit.active" (change)="activateIntroduction()" type="checkbox" role="switch" id="introActiveSwitch">
+                <label class="form-check-label" for="introActiveSwitch">Activate this introduction</label>
               </div>
             <div class="date-form mb-3" *ngIf="introToEdit.updated">
                 <p>Updated</p>
@@ -33,18 +33,18 @@
                 <p>{{introToEdit.uploaded}}</p>
             </div>
             <button class="btn btn-primary mb-4">{{introToEdit.id? 'Update':'Save'}}</button>
-            <button class="btn btn-danger" (click)="deleteIntroduction()">Delete</button>
+            <button class="btn btn-danger" *ngIf="introToEdit.id" type="button" (click)="deleteIntroduction()">Delete</button>
         </form>
     </div>
 </div>
 
-<button #modalButton type="button" class="modal-button" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
+<button #modalButton type="button" class="modal-button" data-bs-toggle="modal" data-bs-target="#introActiveModal"></button>
 
-<div (click)="closeModal()" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div (click)="closeModal()" class="modal fade" id="introActiveModal" tabindex="-1" aria-labelledby="introActiveModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Warning</h1>
+          <h1 class="modal-title fs-5" id="introActiveModalLabel">Warning</h1>
           <button #closeModalButton type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -60,13 +60,13 @@
   </div>
 
 
-  <button #deleteModalButton type="button" class="modal-button" data-bs-toggle="modal" data-bs-target="#exampleModal2"></button>
+  <button #deleteModalButton type="button" class="modal-button" data-bs-toggle="modal" data-bs-target="#introDeleteModal"></button>
 
-  <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+  <div class="modal fade" id="introDeleteModal" tabindex="-1" aria-labelledby="introDeleteModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel2">Warning</h1>
+          <h1 class="modal-title fs-5" id="introDeleteModalLabel">Warning</h1>
           <button #closeModalButton type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -75,7 +75,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No</button>
-          <button type="button" class="btn btn-primary" (click)="submitDelete()">Yes</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="submitDelete()">Yes</button>
         </div>
       </div>
     </div>

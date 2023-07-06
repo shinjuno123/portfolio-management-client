@@ -34,19 +34,7 @@ export class XhrInterceptor implements HttpInterceptor {
         }
 
 
-        let csrfToken = this.tokenExtractor.getToken() as string;
-        sessionStorage.setItem("XSRF-TOKEN" ,csrfToken);
-
-        if(csrfToken !== null) {
-            httpHeaders = httpHeaders.append("X-XSRF-TOKEN", csrfToken);
-        }
-
         httpHeaders = httpHeaders.append('X-Requested-With', 'XMLHttpRequest');
-        httpHeaders = httpHeaders.append('Content-Type', 'application/json');
-        httpHeaders = httpHeaders.append('Accept', 'application/json');
-        httpHeaders = httpHeaders.append('withCredentials', "true");
-
-
 
         const xhr = req.clone({
             headers: httpHeaders
@@ -54,18 +42,7 @@ export class XhrInterceptor implements HttpInterceptor {
 
 
 
-        return next.handle(xhr)
-            .pipe(tap(
-                value => {
-                    if(value instanceof HttpResponse){
-                        if(!getCookie("XSRF-TOKEN")) {
-                            setCookie("XSRF-TOKEN",sessionStorage.getItem("XSRF-TOKEN"));
-                        } else {
-                            setCookie("XSRF-TOKEN",getCookie("XSRF-TOKEN"));
-                        }
-                    }
-                }
-            ));
+        return next.handle(xhr);
     }
 
 }

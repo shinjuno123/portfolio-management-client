@@ -135,10 +135,6 @@ import { AdminSkillSetHomeRelevantProjectsComponent } from './components/admin/s
     FontAwesomeModule,
     HttpClientModule,
     AppRoutingModule,
-    HttpClientXsrfModule.withOptions({
-      cookieName: 'XSRF-TOKEN',
-      headerName: 'X-XSRF-TOKEN',
-    })
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

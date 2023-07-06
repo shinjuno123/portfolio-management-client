@@ -80,7 +80,7 @@ li {
     }
 
     menu::after {
-        background-color: transparent;
+        display: none;
     }
 
     .hamburger-button {

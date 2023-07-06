@@ -1,5 +1,6 @@
 import { Component, ElementRef, Renderer2, ViewChild } from "@angular/core";
 import { About } from "src/app/model/about.model";
+import { AdminAboutService } from "src/app/service/admin-service/admin.about.service";
 
 
 @Component({
@@ -15,7 +16,7 @@ export class AdminAboutListComponent {
     constructor(private renderer:Renderer2){}
 
     ngOnInit(): void {
-       const dummyAbout = new About("","","","","","","","","","",new Date());
+       const dummyAbout = new About();
        this.propertyNames = Object.getOwnPropertyNames(dummyAbout);
     }
 
@@ -37,5 +38,10 @@ export class AdminAboutListComponent {
 
         this.selectedPropertyName = propertyName;
     }
+
+
+
+
+
     
 }

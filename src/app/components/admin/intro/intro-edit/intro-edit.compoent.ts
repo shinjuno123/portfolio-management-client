@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Renderer2, ViewChild } from "@angular/core";
+import { AfterViewInit, Component, ElementRef, OnDestroy, Renderer2, ViewChild } from "@angular/core";
 import { ActivatedRoute, Params, Router } from "@angular/router";
 import { Subscription, map } from "rxjs";
 import { Intro } from "src/app/model/intro.model";
@@ -17,6 +17,7 @@ export class AdminIntroEditComponent implements AfterViewInit{
     @ViewChild('deleteModalButton') deleteModalButton!: ElementRef;
     introToEdit = new Intro();
     getIntroByIdSubscription!: Subscription;
+    routeSubscription!: Subscription;
 
     constructor(private renderer: Renderer2,
         private adminIntroService: AdminIntroService,
@@ -24,24 +25,30 @@ export class AdminIntroEditComponent implements AfterViewInit{
         private router: Router){}
 
     ngAfterViewInit(): void {
-        this.route.queryParams.pipe(
+        this.routeSubscription = this.route.queryParams.pipe(
             map(
                 (params) => {
-                    return <string>params['id']
+                    return <string>params['id'];  
                 }
             )
         ).subscribe({
-            next: (id: string) => this.getIntroById(id)
+            next: (id: string) => {
+                if(id) {
+                    this.getIntroById(id);
+                }
+            },
         })
 
     }
+    
+
 
     submitIntroduction() {
         const introClone = structuredClone(this.introToEdit);
         introClone.updated = null;
         introClone.uploaded = null;
 
-        this.adminIntroService.saveIntro(introClone)
+        this.getIntroByIdSubscription = this.adminIntroService.saveIntro(introClone)
             .subscribe({
                 next:() =>this.processIntroductionSaveSuccess(),
                 error:() => this.processIntroductionSaveFailed()
@@ -49,11 +56,11 @@ export class AdminIntroEditComponent implements AfterViewInit{
     }
 
     processIntroductionSaveSuccess() {
-        this.router.navigate(['../'],  {queryParams:{success:true},relativeTo:this.route});
+        this.router.navigate(['../'],  {queryParams:{saveSuccess:true},relativeTo:this.route});
     }
 
     processIntroductionSaveFailed() {
-        this.router.navigate(['../'],  {queryParams:{success:false},relativeTo:this.route});
+        this.router.navigate(['../'],  {queryParams:{saveSuccess:false},relativeTo:this.route});
     }
 
 
@@ -97,7 +104,19 @@ export class AdminIntroEditComponent implements AfterViewInit{
     }
 
     submitDelete(){
-        console.log("Your data is removed!");
+        this.adminIntroService.deleteIntroById(this.introToEdit.id)
+            .subscribe({
+                next: () => this.processIntroductionDeleteSuccess(),
+                error: () => this.processIntroductionDeleteFailed(),
+            })
+    }
+
+    processIntroductionDeleteSuccess() {
+        this.router.navigate(['../'],  {queryParams:{deleteSuccess:true},relativeTo:this.route});
     }
     
+
+    processIntroductionDeleteFailed() {
+        this.router.navigate(['../'],  {queryParams:{deleteSuccess:false},relativeTo:this.route});
+    }
 }

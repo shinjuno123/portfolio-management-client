@@ -17,7 +17,7 @@ export class IntroService {
     constructor(private http:HttpClient){}
 
     fetchIntro() {
-        return this.http.get<Intro>(environment.rootUrl + AppConstants.INTRO_API_URL,{observe:"response"})
+        return this.http.get<Intro>(environment.rootUrl + `${AppConstants.INTRO_API_URL}?active=true`,{observe:"response"})
         .pipe(map(response=> response.body));
     }
 }

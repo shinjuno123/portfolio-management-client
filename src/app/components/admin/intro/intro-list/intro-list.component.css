@@ -7,7 +7,7 @@ h3 {
     color: rgb(18, 214, 221);
 }
 
-a.btn {
+a.btn.btn-primary {
     display: block;
     width: fit-content;
     margin-right: auto;
@@ -17,6 +17,15 @@ a.btn {
     --bs-btn-hover-border-color: #9DB2BF;
     padding: .5rem 4rem;
     box-shadow: 3px 3px 8px rgba(0, 0, 0, .7);
+}
+
+.btn.btn-primary {
+    width: fit-content;
+    margin-right: auto;
+    --bs-btn-bg:#2F8886;
+    --bs-btn-hover-bg:#84C69B;
+    border: none;
+    padding: .5rem 1rem;
 }
 
 .row {
@@ -53,3 +62,8 @@ a.btn {
 ul.dropdown-menu li.selected {
     background-color: rgba(127, 233, 162,.5);
 }
+
+p {
+   margin: 0; 
+}
+

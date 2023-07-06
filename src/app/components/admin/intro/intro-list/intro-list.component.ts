@@ -17,8 +17,8 @@ export class AdminIntroListComponent implements OnInit, AfterViewInit{
     listIntrosSubscription!: Subscription;
     introList: Intro[] = [];
 
-    constructor(private renderer:Renderer2, private route: ActivatedRoute,
-        private adminIntroService:AdminIntroService){}
+    constructor(private renderer:Renderer2, private router: Router,
+        private adminIntroService:AdminIntroService, private route:ActivatedRoute){}
 
     ngOnInit(): void {
        const dummyIntro = new Intro("","","","");
@@ -56,6 +56,10 @@ export class AdminIntroListComponent implements OnInit, AfterViewInit{
         }
 
         this.selectedPropertyName = propertyName;
+    }
+
+    addItem() {
+        this.router.navigate(['./edit'],{queryParams:{id:""},relativeTo:this.route})
     }
     
     
