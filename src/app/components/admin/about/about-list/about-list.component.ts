@@ -1,4 +1,5 @@
 import { Component, ElementRef, Renderer2, ViewChild } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
 import { About } from "src/app/model/about.model";
 import { AdminAboutService } from "src/app/service/admin-service/admin.about.service";
 
@@ -13,7 +14,8 @@ export class AdminAboutListComponent {
     @ViewChild("sortByList") sortByList!:ElementRef;
     selectedPropertyName: string = "";
 
-    constructor(private renderer:Renderer2){}
+    constructor(private renderer:Renderer2, private router:Router,
+        private route: ActivatedRoute){}
 
     ngOnInit(): void {
        const dummyAbout = new About();
@@ -40,7 +42,9 @@ export class AdminAboutListComponent {
     }
 
 
-
+    addItem() {
+        this.router.navigate(['./edit'],{queryParams:{id:""},relativeTo:this.route})
+    }
 
 
     

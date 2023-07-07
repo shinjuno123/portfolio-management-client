@@ -26,6 +26,11 @@ a.btn.btn-primary {
     --bs-btn-hover-bg:#84C69B;
     border: none;
     padding: .5rem 1rem;
+    font-size: .8rem;
+}
+
+.btn.btn-secondary {
+    font-size: .8rem;
 }
 
 .row {

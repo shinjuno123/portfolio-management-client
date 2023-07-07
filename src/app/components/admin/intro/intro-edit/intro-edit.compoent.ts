@@ -46,7 +46,6 @@ export class AdminIntroEditComponent implements AfterViewInit{
     submitIntroduction() {
         const introClone = structuredClone(this.introToEdit);
         introClone.updated = null;
-        introClone.uploaded = null;
 
         this.getIntroByIdSubscription = this.adminIntroService.saveIntro(introClone)
             .subscribe({

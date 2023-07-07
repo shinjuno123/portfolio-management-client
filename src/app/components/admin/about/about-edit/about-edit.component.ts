@@ -191,7 +191,6 @@ export class AdminAboutEditComponent implements OnInit{
         const aboutClone = structuredClone(this.about);
 
         aboutClone.updated = null;
-        aboutClone.uploaded = null;
         
         if(this.faceImage && this.transcript && this.diploma)
             this.saveOrUpdateAbout(aboutClone, this.faceImage, this.transcript, this.diploma);
