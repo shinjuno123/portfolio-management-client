@@ -1,5 +1,6 @@
+import { HttpStatusCode } from "@angular/common/http";
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from "@angular/core";
-import { ActivatedRoute, Params } from "@angular/router";
+import { ActivatedRoute, Params, Router } from "@angular/router";
 import { faPaperclip } from "@fortawesome/free-solid-svg-icons";
 import { About } from "src/app/model/about.model";
 import { AdminAboutService } from "src/app/service/admin-service/admin.about.service";
@@ -15,14 +16,23 @@ export class AdminAboutEditComponent implements OnInit{
     @ViewChild('modalButton') modalButton!:ElementRef;
     @ViewChild('closeModalButton') closeModelButton!: ElementRef;
     @ViewChild('deleteModalButton') deleteModalButton!: ElementRef;
+    @ViewChild("faceImageUpload") faceImageUpload!: ElementRef;
+    @ViewChild("diplomaUpload") diplomaUpload!: ElementRef;
+    @ViewChild("transcriptUpload") transcriptUpload!: ElementRef;
     about = new About();
-    faceImage!: File;
-    transcript!: File;
-    diploma!: File;
+    faceImage: File | null = null;
+    transcript: File | null = null;
+    diploma: File | null = null;
+    isFaceImageNotPermitted = false;
+    isTranscriptNotPermitted = false;
+    isDiplomaNotPermitted = false;
+    isSuccessfullySubmitted: boolean | null = null;
+    failedSubmissionMessage: string | null = null;
+
 
 
     constructor(private renderer: Renderer2, private adminAboutService: AdminAboutService,
-        private route: ActivatedRoute){}
+        private route: ActivatedRoute, private router: Router){}
 
 
     ngOnInit(): void {
@@ -40,8 +50,34 @@ export class AdminAboutEditComponent implements OnInit{
         this.adminAboutService.getAboutById(id).subscribe({
             next: (about: About) => {
                 this.about = about;
+                this.checkIfAllFilesAreAlreadyExistInServer();
             }
         })
+    }
+
+    checkIfAllFilesAreAlreadyExistInServer() {
+        if(this.about.transcriptUrl) {
+            this.transcript = this.createDummyFile(this.about.transcriptUrl.split("/").at(-1));
+            this.setFileNameToTag(this.transcript,
+                 this.transcriptUpload.nativeElement, true);
+        }
+
+        if(this.about.diplomaUrl) {
+            this.diploma = this.createDummyFile(this.about.diplomaUrl.split("/").at(-1));
+            this.setFileNameToTag(this.diploma,
+                 this.diplomaUpload.nativeElement, true);
+        }
+
+        if(this.about.faceImagePath) {
+            this.faceImage = this.createDummyFile(this.about.faceImagePath.split("/").at(-1));
+            this.setFileNameToTag(this.faceImage,
+                 this.faceImageUpload.nativeElement, true);
+        }
+
+    }
+
+    createDummyFile(filename: string | undefined) {
+        return <File> new File([""], filename? filename: "fileNameNotFound.png");
     }
 
     activateAboutMe() {
@@ -83,27 +119,48 @@ export class AdminAboutEditComponent implements OnInit{
         const files = target.files;
 
         if(files !== undefined && files !== null && files.length > 0){
-            console.log(target.name);
 
             const attachment: File = files[0];
+            let hasToContinue = false;
 
             if(target.name === "faceImage") {
-                this.faceImage = attachment;
-                this.validateFileExtension(attachment, "","","")
-
+                hasToContinue = this.validateFileExtension(attachment, 
+                    "image/jpeg",
+                    "image/png",
+                    "image/jpg");
+                this.isFaceImageNotPermitted = !hasToContinue;
+                this.faceImage = this.isFaceImageNotPermitted? null: attachment;
             } else if (target.name === "diploma") {
-                this.diploma = attachment;
+                hasToContinue = this.validateFileExtension(attachment,
+                     "application/pdf","image/jpeg","image/png","image/jpg");
+                this.isDiplomaNotPermitted = !hasToContinue;
+                this.diploma = this.isDiplomaNotPermitted? null: attachment;
+
             } else if(target.name === "transcript") {
-                this.transcript = attachment;
+                hasToContinue = this.validateFileExtension(attachment,
+                    "application/pdf","image/jpeg","image/png","image/jpg");
+                this.isTranscriptNotPermitted = !hasToContinue;
+                this.transcript = this.isTranscriptNotPermitted? null: attachment;
             }
 
-        
-            console.log(attachment.type);
-
-            const pTag: ChildNode | null = target.nextSibling;
-            if(pTag) {
-                pTag.textContent = attachment.name;
+            if(!hasToContinue) {
+                this.setFileNameToTag(attachment, target, false, target.name);
+                return;
             }
+
+            this.setFileNameToTag(attachment, target, true);
+        }
+    }
+
+
+    setFileNameToTag(attachment: File, target: HTMLInputElement, isSuccess:boolean, fileType: string = "") {
+
+        const pTag: ChildNode | null = target.nextSibling;
+
+        if(pTag && isSuccess) {
+            pTag.textContent = attachment.name.length > 10?  attachment.name.slice(0, 10)+"...": attachment.name;
+        } else if(pTag && !isSuccess) {
+            pTag.textContent = `Please upload your ${fileType} again.`;
         }
     }
 
@@ -120,5 +177,47 @@ export class AdminAboutEditComponent implements OnInit{
         );
         
         return flag;
+    }
+
+    submitForm() {
+        const wereAllFilesProvided = this.validateFilesAreExist();
+
+        if(!wereAllFilesProvided) {
+            this.isSuccessfullySubmitted = false;
+            this.failedSubmissionMessage = "Please upload all the files needed."
+            return;
+        }
+
+        const aboutClone = structuredClone(this.about);
+
+        aboutClone.updated = null;
+        aboutClone.uploaded = null;
+        
+        if(this.faceImage && this.transcript && this.diploma)
+            this.saveOrUpdateAbout(aboutClone, this.faceImage, this.transcript, this.diploma);
+    }
+
+    saveOrUpdateAbout(about: About, faceImage: File, transcript: File, diploma: File) {
+        this.adminAboutService.saveOrUpdateAbout(about, faceImage, transcript, diploma)
+            .subscribe({
+                next: (response) => {
+                    if(response.status === HttpStatusCode.Created) {
+                        this.router.navigate(["../"],{queryParams:{saveSuccess:true},relativeTo: this.route})
+                    }
+                },
+                error: () => {
+                    this.router.navigate(["../"],{queryParams:{saveSuccess:false},relativeTo: this.route})
+                }
+            })
+    }
+
+    validateFilesAreExist() : boolean {
+
+        if(this.faceImage && this.diploma && this.transcript) {
+            return true;
+        }
+
+
+        return false;
     }
 }
