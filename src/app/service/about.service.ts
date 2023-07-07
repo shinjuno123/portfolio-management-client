@@ -26,7 +26,7 @@ export class AboutService {
     // );
 
     fetchAbout() {
-        return this.http.get<About>(environment.rootUrl + AppConstants.ABOUT_API_URL,{observe:"response"});
+        return this.http.get<About>(environment.rootUrl + AppConstants.ABOUT_API_URL + "?active=true",{observe:"response"});
     }
 
     fetchCertifications() {
