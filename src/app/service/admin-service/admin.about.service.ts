@@ -50,4 +50,8 @@ export class AdminAboutService {
         return payload;
     }
 
+    deleteAbout(id: string) {
+        return this.http.delete(`${environment.rootUrl}${AdminConstants.ADMIN_API_URL}/${id}`,{withCredentials:true, observe:"response"});
+    }
+
 }

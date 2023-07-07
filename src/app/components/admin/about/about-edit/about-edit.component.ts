@@ -111,7 +111,16 @@ export class AdminAboutEditComponent implements OnInit{
     }
 
     submitDelete(){
-        console.log("Your data is removed!");
+        this.adminAboutService.deleteAbout(this.about.id)
+            .subscribe({
+                next: () => {
+                    this.router.navigate(["../"],{queryParams:{deleteSuccess:true},relativeTo: this.route});
+                },
+                error: (response) => {
+                    console.log(response);
+                    this.router.navigate(["../"],{queryParams:{deleteSuccess:false},relativeTo: this.route});
+                }
+            })
     }
 
     setAttachment(event: Event) {

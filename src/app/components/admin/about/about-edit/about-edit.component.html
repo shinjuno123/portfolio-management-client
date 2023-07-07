@@ -141,13 +141,13 @@
     </div>
 </div>
 
-<button #modalButton type="button" class="modal-button" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
+<button #modalButton type="button" class="modal-button" data-bs-toggle="modal" data-bs-target="#aboutActivationModal"></button>
 
-<div (click)="closeModal()" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div (click)="closeModal()" class="modal fade" id="aboutActivationModal" tabindex="-1" aria-labelledby="aboutActivationModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Warning</h1>
+          <h1 class="modal-title fs-5" id="aboutActivationModalLabel">Warning</h1>
           <button #closeModalButton type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -163,13 +163,13 @@
   </div>
 
 
-  <button #deleteModalButton type="button" class="modal-button" data-bs-toggle="modal" data-bs-target="#exampleModal2"></button>
+  <button #deleteModalButton type="button" class="modal-button" data-bs-toggle="modal" data-bs-target="#aboutDeleteModal"></button>
 
-  <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+  <div class="modal fade" id="aboutDeleteModal" tabindex="-1" aria-labelledby="aboutDeleteModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel2">Warning</h1>
+          <h1 class="modal-title fs-5" id="aboutDeleteModalLabel">Warning</h1>
           <button #closeModalButton type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -178,7 +178,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No</button>
-          <button type="button" class="btn btn-primary" (click)="submitDelete()">Yes</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="submitDelete()">Yes</button>
         </div>
       </div>
     </div>
