@@ -28,7 +28,7 @@
                   </div>
                 </div>
             </div>
-            <div class="file-viewer-button" *ngIf="!certFile?.type" (click)="reviewFile('downloadUrl')">
+            <div class="file-viewer-button" *ngIf="certification.id" (click)="reviewFile('downloadUrl')">
               <button type="button">Review this file</button>
             </div>
 
@@ -37,12 +37,12 @@
                 <p>Updated</p>
                 <p>{{certification.updated}}</p>
             </div>
-            <div class="date-form mb-5" *ngIf="certification.uploaded">
+            <div class="date-form mt-3" *ngIf="certification.uploaded">
                 <p>Uploaded</p>
                 <p>{{certification.uploaded}}</p>
             </div>
             <div></div>
-            <button class="btn btn-primary mb-4" 
+            <button class="btn mt-5 btn-primary mb-4" 
               [disabled]="!certFile ||!form.valid"
               >{{certification.id? 'Update':'Save'}}</button>
             <button class="btn btn-danger" type="button" (click)="deleteCeritication()">Delete</button>

@@ -4,6 +4,7 @@ import { ActivatedRoute, Params, Router } from "@angular/router";
 import { faPaperclip } from "@fortawesome/free-solid-svg-icons";
 import { About } from "src/app/model/about.model";
 import { AdminAboutService } from "src/app/service/admin-service/admin.about.service";
+import { environment } from "src/environments/environment";
 
 @Component({
     selector: 'admin-about-edit',
@@ -227,5 +228,15 @@ export class AdminAboutEditComponent implements OnInit{
 
 
         return false;
+    }
+
+    reviewFile(fileName: string) {
+        let filePath: string = '';
+
+        if(fileName) {
+            filePath = <string> this.about[fileName as keyof About];
+        }
+
+        window.open(environment.rootUrl + filePath);
     }
 }

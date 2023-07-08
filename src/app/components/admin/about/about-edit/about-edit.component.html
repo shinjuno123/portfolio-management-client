@@ -55,7 +55,6 @@
                   class="form-control" 
                   placeholder="diploma" 
                   name="diploma" 
-                  #diploma = "ngModel"
                   [(ngModel)]="about.diploma"
                   required>
             </div>
@@ -85,8 +84,8 @@
             </div>
 
             <div class="d-flex mb-5 attachment-box">
-                <div class="attachment-form" (click)="faceImageUpload.click()">
-                    <div class="attachment-background">
+                <div class="attachment-form">
+                    <div class="attachment-background" (click)="faceImageUpload.click()">
                       <p class="attachment-type">Face Image</p>
                       <input type="file" name="faceImage" id="faceImage"  (change)="setAttachment($event)" #faceImageUpload hidden>
                       <p class="icon-description">Click to upload your face Image</p>
@@ -95,10 +94,11 @@
                           <fa-icon class="fa-icon" [icon]="faPaperclip"></fa-icon>
                       </div>
                     </div>
+                    <button *ngIf="about.id" (click)="reviewFile('faceImagePath')" type="button" class="file-viewer-button mt-2">Review this file</button>
                 </div>
     
-                <div class="attachment-form" (click)="diplomaUpload.click()">
-                    <div class="attachment-background">
+                <div class="attachment-form">
+                    <div class="attachment-background" (click)="diplomaUpload.click()">
                       <p class="attachment-type">Diploma</p>
                       <input type="file" name="diploma" id="diploma" (change)="setAttachment($event)" #diplomaUpload hidden>
                       <p class="icon-description">Click to upload your diploma</p>
@@ -107,10 +107,11 @@
                           <fa-icon class="fa-icon" [icon]="faPaperclip"></fa-icon>
                       </div>
                     </div>
+                    <button *ngIf="about.id" (click)="reviewFile('diplomaUrl')" type="button" class="file-viewer-button mt-2">Review this file</button>
                 </div>
     
-                <div class="attachment-form" (click)="transcriptUpload.click()">
-                    <div class="attachment-background">
+                <div class="attachment-form">
+                    <div class="attachment-background" (click)="transcriptUpload.click()">
                       <p class="attachment-type">Transcript</p>
                       <input type="file" name="transcript" id="transcript" (change)="setAttachment($event)" #transcriptUpload hidden>
                       <p class="icon-description">Click to upload your transcript</p>
@@ -119,6 +120,7 @@
                           <fa-icon class="fa-icon" [icon]="faPaperclip"></fa-icon>
                       </div>
                     </div>
+                    <button *ngIf="about.id" (click)="reviewFile('transcriptUrl')" type="button" class="file-viewer-button mt-2">Review this file</button>
                 </div>
 
             </div>
