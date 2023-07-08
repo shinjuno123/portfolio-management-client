@@ -4,6 +4,7 @@ import { ActivatedRoute, Params, Router } from "@angular/router";
 import { faPaperclip } from "@fortawesome/free-solid-svg-icons";
 import { Certification } from "src/app/model/certification.model";
 import { AdminAboutService } from "src/app/service/admin-service/admin.about.service";
+import { environment } from "src/environments/environment";
 
 
 @Component({
@@ -79,7 +80,7 @@ export class AdminAboutCertificationEditComponent implements OnInit{
             const attachment: File = files[0];
             let hasToContinue = false;
 
-            if(target.name === "certification"){
+            if(target.name === "certFile"){
                 hasToContinue = this.validateFileExtension(attachment, 
                     "application/pdf",
                     "image/jpeg",
@@ -139,21 +140,22 @@ export class AdminAboutCertificationEditComponent implements OnInit{
 
         certificationClone.updated = null;
         
-        if(this.certFile) this.saveOrUpdateAbout(certificationClone, this.certFile);
+        if(this.certFile) this.saveOrUpdateCertification(certificationClone, this.certFile);
     }
 
-    saveOrUpdateAbout(certification: Certification, certFile: File) {
+    saveOrUpdateCertification(certification: Certification, certFile: File) {
         this.adminAboutService.saveOrUpdateCertification(certification, certFile)
             .subscribe({
                 next: (response) => {
                     if(response.status === HttpStatusCode.Accepted) {
-                        this.router.navigate(["../"],{queryParams:{saveSuccess:true},relativeTo: this.route})
+                        this.router.navigate(["../../"],{queryParams:{saveSuccess:true},relativeTo: this.route})
                     }
                 },
-                error: () => {
-                    this.router.navigate(["../"],{queryParams:{saveSuccess:false},relativeTo: this.route})
+                error: (response) => {
+                    console.log(response);
+                    this.router.navigate(["../../"],{queryParams:{saveSuccess:false},relativeTo: this.route})
                 }
-            })
+            });
     }
 
 
@@ -165,5 +167,15 @@ export class AdminAboutCertificationEditComponent implements OnInit{
 
 
         return false;
+    }
+
+    reviewFile(name: string | null) {
+        let filePath: string = '';
+
+        if(name) {
+            filePath = <string> this.certification[name as keyof Certification];
+        }
+
+        window.open(environment.rootUrl + filePath);
     }
 }

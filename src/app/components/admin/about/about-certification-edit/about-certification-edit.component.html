@@ -14,12 +14,12 @@
                   [(ngModel)]="certification.name">
             </div>
             
-            <div class="d-flex mb-5 attachment-box">
+            <div class="d-flex attachment-box">
                 
                 <div class="attachment-form" (click)="certificationUpload.click()">
                   <div class="attachment-background">
                     <p class="attachment-type">Face Image</p>
-                    <input type="file" name="certification" id="certification"  (change)="setAttachment($event)" #certificationUpload hidden>
+                    <input type="file" name="certFile" id="certFile"  (change)="setAttachment($event)" #certificationUpload hidden>
                     <p class="icon-description">Click to upload your certification </p>
                     <p *ngIf="isCertNotPermitted" class="warning">(Not permitted type!)</p>
                     <div class="icon-wrapper">
@@ -27,10 +27,13 @@
                     </div>
                   </div>
                 </div>
-             
+            </div>
+            <div class="file-viewer-button" *ngIf="!certFile?.type" (click)="reviewFile('downloadUrl')">
+              <button type="button">Review this file</button>
             </div>
 
-            <div class="date-form mb-3" *ngIf="certification.updated">
+
+            <div class="date-form mb-3 mt-5" *ngIf="certification.updated">
                 <p>Updated</p>
                 <p>{{certification.updated}}</p>
             </div>

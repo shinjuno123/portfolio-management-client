@@ -71,9 +71,9 @@ export class AdminAboutService {
     }
 
 
-    createRequestBodyForCertification(about: Certification, certFile: File) : FormData {
+    createRequestBodyForCertification(certification: Certification, certFile: File) : FormData {
         const payload = new FormData();
-        payload.append("about", new Blob([JSON.stringify({...about})], {
+        payload.append("certification", new Blob([JSON.stringify({...certification})], {
             type:"application/json"
         }));
 
