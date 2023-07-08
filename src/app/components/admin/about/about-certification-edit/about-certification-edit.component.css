@@ -17,7 +17,6 @@ h2 {
 }
 
 p {
-    
     width: fit-content;
     padding: 0.5rem;
     background-color: #2F8886;
@@ -59,6 +58,7 @@ input:focus {
 .date-form p {
     margin-left: auto;
     margin-bottom: 0.3rem;
+    width: 100%;
 }
 
 .btn.btn-primary {
@@ -148,20 +148,20 @@ form {
 }
 
 .attachment-box {
+    justify-content:space-evenly;
+    align-items: center;
     gap: 0.5rem;
     flex-wrap: wrap;
-    align-items: center;
 }
 
 
 .attachment-form {
     cursor: pointer;
     position: relative;
-    padding: 1rem;
+    width: 100%;
+    padding: .5rem;
     display: flex;
-    width:100%;
-    flex-flow: row-reverse;
-    justify-content: center;
+    flex-flow: column;
     align-items: center;
 }
 
@@ -192,8 +192,36 @@ form {
     content: "";
 }
 
+.attachment-form .attachment-background {
+    background-color: #1F6E8C;
+    padding: .5rem;
+    border-radius: .375rem;
+    width: 100%;
+}
+
+.attachment-form .attachment-background p {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
 .attachment-form .icon-description {
     margin-bottom: 1rem;
-    margin: 0 0 0 1rem;
-    width: 60%;
+    margin: 0 0 0 0;
+    width: 100%;
+    font-size: .85rem;
+    background-color: transparent;
+}
+
+.attachment-form .attachment-type{
+    font-size: .7rem;
+    border-radius: .375rem;
+}
+
+p.warning {
+    color: red;
+    line-height: 1;
+    padding: 0;
+    background-color: transparent;
+    margin: 0;
+    font-size: small;
 }

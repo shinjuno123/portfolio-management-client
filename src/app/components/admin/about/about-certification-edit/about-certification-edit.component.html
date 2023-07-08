@@ -2,37 +2,47 @@
     <a class="btn btn-primary mb-4" routerLink="../../">Back</a>
     <h2 class="text-start mb-4">Edit Certification</h2>
     <div class="board-wrapper">
-        <form>
-            <p class="text-start">id: 5258b3c4-0e3e-11ee-be56-0242ac120002</p>
+        <form (ngSubmit)="submitForm()" #form="ngForm">
+            <p class="text-start" *ngIf="certification.id">id: {{certification.id}}</p>
 
             <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon2">Name</span>
-                <input type="text" class="form-control" placeholder="Name" aria-label="Username" aria-describedby="basic-addon2">
+                <span class="input-group-text">Name</span>
+                <input type="text" 
+                  class="form-control" 
+                  placeholder="Name"
+                  name="name"
+                  [(ngModel)]="certification.name">
             </div>
+            
             <div class="d-flex mb-5 attachment-box">
-                <div class="attachment-form" (click)="certificationUpload.click()" #certification>
+                
+                <div class="attachment-form" (click)="certificationUpload.click()">
+                  <div class="attachment-background">
+                    <p class="attachment-type">Face Image</p>
                     <input type="file" name="certification" id="certification"  (change)="setAttachment($event)" #certificationUpload hidden>
                     <p class="icon-description">Click to upload your certification </p>
+                    <p *ngIf="isCertNotPermitted" class="warning">(Not permitted type!)</p>
                     <div class="icon-wrapper">
                         <fa-icon class="fa-icon" [icon]="faPaperclip"></fa-icon>
                     </div>
+                  </div>
                 </div>
-    
-
+             
             </div>
 
-
-            <div class="date-form mb-3">
+            <div class="date-form mb-3" *ngIf="certification.updated">
                 <p>Updated</p>
-                <p>Fri Jul 02 2021 12:44:45 GMT+0100</p>
+                <p>{{certification.updated}}</p>
             </div>
-            <div class="date-form mb-5">
+            <div class="date-form mb-5" *ngIf="certification.uploaded">
                 <p>Uploaded</p>
-                <p>Fri Jul 02 2021 12:44:45 GMT+0100</p>
+                <p>{{certification.uploaded}}</p>
             </div>
             <div></div>
-            <button class="btn btn-primary mb-4">Update & Save</button>
-            <button class="btn btn-danger" (click)="deleteAboutMe()">Delete</button>
+            <button class="btn btn-primary mb-4" 
+              [disabled]="!certFile ||!form.valid"
+              >{{certification.id? 'Update':'Save'}}</button>
+            <button class="btn btn-danger" type="button" (click)="deleteCeritication()">Delete</button>
         </form>
     </div>
 </div>
@@ -57,7 +67,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No</button>
-          <button type="button" class="btn btn-primary" (click)="submitDelete()">Yes</button>
+          <button type="button" class="btn btn-primary" (click)="submitDeleteCert()">Yes</button>
         </div>
       </div>
     </div>

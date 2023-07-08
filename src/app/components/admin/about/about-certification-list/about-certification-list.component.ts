@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Certification } from "src/app/model/certification.model";
 
 
@@ -12,7 +13,7 @@ export class AdminAboutCertificationListComponent implements OnInit{
     @ViewChild("sortByList") sortByList!:ElementRef;
     selectedPropertyName: string = "";
 
-    constructor(private renderer:Renderer2){}
+    constructor(private renderer:Renderer2, private route: ActivatedRoute, private router: Router){}
 
     ngOnInit(): void {
        const dummyCert = new Certification("","");
@@ -36,5 +37,9 @@ export class AdminAboutCertificationListComponent implements OnInit{
         }
 
         this.selectedPropertyName = propertyName;
+    }
+
+    addItem() {
+        this.router.navigate(['./certification/edit'],{queryParams:{id:''},relativeTo:this.route})
     }
 }

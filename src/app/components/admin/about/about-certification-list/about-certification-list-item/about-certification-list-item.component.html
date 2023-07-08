@@ -1,6 +1,6 @@
-<div class="row g-1 pb-2 text-start" *ngFor="let i of [false,false,true,false,false,false]" (click)="routeToEditPage()">
-    <div class="col-3"><div><p>9wedwda</p></div></div>
-    <div class="col-5"><div><p>Filename.png</p></div></div>
-    <div class="col-2"><div><p>{{this.dummyDate}}</p></div></div>
-    <div class="col-2"><div><p>{{this.dummyDate}}</p></div></div>
+<div class="row g-1 pb-2 text-start" *ngFor="let certification of certifications" (click)="routeToEditPage(certification.id)">
+    <div class="col-3"><div><p>{{certification.id | slice : 0: 5}}...</p></div></div>
+    <div class="col-5"><div><p>{{certification.downloadUrl.split("/").at(-1) | slice : 0: 25 }}...</p></div></div>
+    <div class="col-2"><div><p>{{certification.updated}}</p></div></div>
+    <div class="col-2"><div><p>{{certification.uploaded}}</p></div></div>
 </div>

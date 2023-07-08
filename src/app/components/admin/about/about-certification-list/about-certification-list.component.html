@@ -3,9 +3,12 @@
         <h3 class="text-start">Certifications</h3>
         <div class="row text-end text-start mb-3">
             <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                <button class="btn btn-secondary dropdown-toggle me-2" type="button" data-bs-toggle="dropdown"
                     aria-expanded="false">
                     Sort by {{selectedPropertyName !== ""? '(' + selectedPropertyName + ')': ''}}
+                </button>
+                <button class="btn btn-primary" (click)="addItem()">
+                    <p>Add</p>
                 </button>
                 <ul class="dropdown-menu" #sortByList>
                     <li *ngFor="let propertyName of propertyNames let idx=index"

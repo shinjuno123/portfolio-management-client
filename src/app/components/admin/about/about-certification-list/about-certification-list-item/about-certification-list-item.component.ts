@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
+import { Certification } from "src/app/model/certification.model";
+import { AdminAboutService } from "src/app/service/admin-service/admin.about.service";
 
 
 @Component({
@@ -9,16 +11,28 @@ import { ActivatedRoute, Router } from "@angular/router";
 })
 export class AdminAboutCertificationListItemComponent implements OnInit{
     dummyDate!: Date;
+    certifications!: Certification[];
 
 
-    constructor(private router: Router, private route:ActivatedRoute){}
+    constructor(private router: Router, private route:ActivatedRoute,
+        private adminAboutService:AdminAboutService){}
 
     ngOnInit(): void {
         this.dummyDate = new Date();
+        this.listCertifications();
     }
 
-    routeToEditPage() {
-        this.router.navigate(["./certification/edit"], {relativeTo: this.route})
+    routeToEditPage(id: string) {
+        this.router.navigate(["./certification/edit"], {queryParams:{id:id},relativeTo: this.route})
+    }
+
+
+    listCertifications() {
+        this.adminAboutService.listCertifications().subscribe({
+            next: (certifications) => {
+                this.certifications = certifications;
+            }
+        })
     }
     
 }

@@ -135,7 +135,7 @@
             <div></div>
             <button class="btn btn-primary mb-4"
               [disabled]="!faceImage || !transcript || !diploma || !form.valid"
-              type="submit">Update & Save</button>
+              type="submit">{{about.id? 'Update':'Save'}}</button>
             <button class="btn btn-danger" type="button" (click)="deleteAboutMe()">Delete</button>
         </form>
     </div>
