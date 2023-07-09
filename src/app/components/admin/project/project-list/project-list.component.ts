@@ -1,4 +1,5 @@
 import { Component, ElementRef, Renderer2, ViewChild } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Project } from "src/app/model/project.model";
 
 
@@ -14,7 +15,8 @@ export class AdminProjectListComponent {
     @ViewChild("sortByList") sortByList!:ElementRef;
     selectedPropertyName: string = "";
 
-    constructor(private renderer:Renderer2){}
+    constructor(private renderer:Renderer2, private route: ActivatedRoute,
+        private router: Router){}
 
     ngOnInit(): void {
        const dummyProject = new Project("","","","");
@@ -38,5 +40,9 @@ export class AdminProjectListComponent {
         }
 
         this.selectedPropertyName = propertyName;
+    }
+
+    addItem() {
+        this.router.navigate(["./edit"],{queryParams:{id:""},relativeTo:this.route});
     }
 }

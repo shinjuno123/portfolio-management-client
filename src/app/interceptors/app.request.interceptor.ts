@@ -16,8 +16,6 @@ export class XhrInterceptor implements HttpInterceptor {
     constructor(private tokenExtractor: HttpXsrfTokenExtractor){}
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
-
         let httpHeaders = new HttpHeaders();
     
         if(sessionStorage.getItem('userDetails')) {
@@ -39,8 +37,6 @@ export class XhrInterceptor implements HttpInterceptor {
         const xhr = req.clone({
             headers: httpHeaders
         });
-
-
 
         return next.handle(xhr);
     }

@@ -13,8 +13,6 @@ import { environment } from "src/environments/environment";
     styleUrls:['./about-certification-edit.component.css']
 })
 export class AdminAboutCertificationEditComponent implements OnInit{
-    isActivated!: boolean;
-    isConfirmed: boolean = false;
     faPaperclip = faPaperclip;
     @ViewChild('modalButton') modalButton!:ElementRef;
     @ViewChild('closeModalButton') closeModelButton!: ElementRef;
@@ -57,8 +55,8 @@ export class AdminAboutCertificationEditComponent implements OnInit{
             this.setFileNameToTag(this.certFile,
                  this.certificationUpload.nativeElement, true);
         }
-
     }
+
     createDummyFile(filename: string | undefined) {
         return <File> new File([""], filename? filename: "fileNameNotFound.png");
     }
@@ -69,7 +67,16 @@ export class AdminAboutCertificationEditComponent implements OnInit{
     }
 
     submitDeleteCert(){
-        console.log("Your data is removed!");
+        this.adminAboutService.deleteCertification(this.certification.id)
+            .subscribe({
+                next: () => {
+                    this.router.navigate(["../../"],{queryParams:{deleteSuccess:true},relativeTo: this.route});
+                },
+                error: () => {
+                    this.router.navigate(["../../"],{queryParams:{deleteSuccess:false},relativeTo: this.route});
+                }
+            
+            })
     }
 
     setAttachment(event: Event) {
@@ -132,7 +139,7 @@ export class AdminAboutCertificationEditComponent implements OnInit{
 
         if(!wereAllFilesProvided) {
             this.isSuccessfullySubmitted = false;
-            this.failedSubmissionMessage = "Please upload all the files needed."
+            this.failedSubmissionMessage = "Please upload all the files needed.";
             return;
         }
 

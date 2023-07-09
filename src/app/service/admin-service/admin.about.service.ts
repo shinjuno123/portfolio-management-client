@@ -83,4 +83,8 @@ export class AdminAboutService {
 
         return payload;
     }
+
+    deleteCertification(id: string) {
+        return this.http.delete(environment.rootUrl + `${AdminConstants.CERTIFICATION_API_URL}/${id}`,{withCredentials:true});
+    }
 }

@@ -1,11 +1,14 @@
 <div class="container">
     <a class="btn btn-primary mb-5" routerLink="../">Back</a>
     <h3 class="text-start mb-4" >Experiences</h3>
-    <div class="row text-end text-start mb-4">
+    <div class="row text-end text-start mb-2">
         <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+            <button class="btn btn-secondary dropdown-toggle me-2" type="button" data-bs-toggle="dropdown"
                 aria-expanded="false">
                 Sort by {{selectedPropertyName !== ""? '(' + selectedPropertyName + ')': ''}}
+            </button>
+            <button class="btn btn-primary" (click)="addItem()">
+                <p>Add</p>
             </button>
             <ul class="dropdown-menu" #sortByList>
                 <li *ngFor="let propertyName of propertyNames let idx=index" (click)="selectSortBy(idx, propertyName)">

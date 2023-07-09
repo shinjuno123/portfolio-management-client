@@ -1,4 +1,5 @@
 import { Component, ElementRef, Renderer2, ViewChild } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Experience } from "src/app/model/experience.model";
 
 
@@ -12,7 +13,8 @@ export class AdminExperienceListComponent {
     @ViewChild("sortByList") sortByList!:ElementRef;
     selectedPropertyName: string = "";
 
-    constructor(private renderer:Renderer2){}
+    constructor(private renderer:Renderer2, private route: ActivatedRoute,
+        private router:Router){}
 
     ngOnInit(): void {
        const dummyExperience = new Experience("","","","","","","","");
@@ -36,5 +38,9 @@ export class AdminExperienceListComponent {
         }
 
         this.selectedPropertyName = propertyName;
+    }
+
+    addItem() {
+        this.router.navigate(['./edit'],{queryParams:{id:""},relativeTo:this.route})
     }
 }

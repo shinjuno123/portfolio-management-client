@@ -13,5 +13,7 @@ export const  AppConstants = {
 export const AdminConstants = {
     INTRO_API_URL : "/api/admin/introduction",
     ABOUT_API_URL : "/api/admin/about",
-    CERTIFICATION_API_URL: "/api/admin/certifications"
+    CERTIFICATION_API_URL: "/api/admin/certifications",
+    EXPERIENCE_API_URL: "/api/admin/experiences",
+    PROJECT_API_URL: "/api/admin/projects",
 }

@@ -2,103 +2,114 @@
   <a class="btn btn-primary mb-4" routerLink="../">Back</a>
   <h2 class="text-start mb-4">Edit Experience</h2>
   <div class="board-wrapper">
-    <form>
-      <p class="text-start">id: 5258b3c4-0e3e-11ee-be56-0242ac120002</p>
+    <form (ngSubmit)="submitForm()" #form="ngForm">
+      <p class="text-start" *ngIf="experience.id">id: {{experience.id}}</p>
 
       <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon2">Title</span>
-        <input type="text" class="form-control" placeholder="Title" aria-describedby="basic-addon2">
+        <span class="input-group-text">Title</span>
+        <input type="text" 
+          class="form-control" 
+          name="title" 
+          placeholder="Title" 
+          [(ngModel)]="experience.title"
+          required>
       </div>
       <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon2">Company</span>
-        <input type="text" class="form-control" placeholder="Company"
-          aria-describedby="basic-addon2">
+        <span class="input-group-text">Company</span>
+        <input type="text" 
+          class="form-control" 
+          name="company" 
+          placeholder="Company" 
+          autocomplete="additional-name"
+          [(ngModel)]="experience.company"
+          required>
       </div>
       <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon2">Period</span>
-        <input type="text" class="form-control" placeholder="Period"
-          aria-describedby="basic-addon2">
+        <span class="input-group-text">Period</span>
+        <input type="text" 
+          class="form-control" 
+          name="period" 
+          placeholder="Period"
+          [(ngModel)]="experience.workingPeriod"
+          required>
       </div>
       <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon2">Position</span>
-        <input type="text" class="form-control" placeholder="Position"
-          aria-describedby="basic-addon2">
+        <span class="input-group-text">Position</span>
+        <input type="text" 
+          class="form-control" 
+          name="position" 
+          placeholder="Position"
+          [(ngModel)]="experience.positionName"
+          required>
       </div>
       <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon2">Status</span>
-        <input type="text" class="form-control" placeholder="Status"
-          aria-describedby="basic-addon2">
+        <span class="input-group-text">Status</span>
+        <input type="text" 
+          class="form-control" 
+          name="status" 
+          placeholder="Status"
+          [(ngModel)]="experience.status"
+          required>
       </div>
 
       
 
       <div class="form-floating text-black mb-3">
-        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-        <label for="floatingTextarea">Description</label>
+        <textarea class="form-control" 
+          placeholder="Leave a comment here" 
+          id="ExperienceDescriptionTextArea"
+          name="description"
+          [(ngModel)]="experience.description"
+          required></textarea>
+        <label for="ExperienceDescriptionTextArea">Description</label>
       </div>
 
 
 
-      <div class="d-flex mb-5 attachment-box">
-        <div class="attachment-form" (click)="faceImageUpload.click()" #faceImage>
-          <input type="file" name="faceImage" id="faceImage" (change)="setAttachment($event)" #faceImageUpload hidden>
-          <p class="icon-description">Click to upload your Experience image</p>
-          <div class="icon-wrapper">
-            <fa-icon class="fa-icon" [icon]="faPaperclip"></fa-icon>
+      <div class="d-flex attachment-box">
+        <div class="attachment-form" (click)="experienceImageUpload.click()">
+          <div class="attachment-background">
+            <p class="attachment-type">Experience Image</p>
+            <input type="file" name="experienceImage" id="experienceImage" (change)="setAttachment($event)" #experienceImageUpload hidden>
+            <p class="icon-description">Click to upload your Experience image</p>
+            <p *ngIf="isExperienceNotPermitted" class="warning">(Not permitted type!)</p>
+            <div class="icon-wrapper">
+              <fa-icon class="fa-icon" [icon]="faPaperclip"></fa-icon>
+            </div>
           </div>
         </div>
-
+        
+      </div>
+      <div class="file-viewer-button" *ngIf="experience.id" (click)="reviewFile('imgPath')">
+        <button type="button">Review this file</button>
       </div>
 
 
-      <div class="date-form mb-3">
+      <div class="date-form mt-5" *ngIf="experience.updated">
         <p>Updated</p>
-        <p>Fri Jul 02 2021 12:44:45 GMT+0100</p>
+        <p>{{experience.updated}}</p>
       </div>
-      <div class="date-form mb-5">
+      <div class="date-form mt-3" *ngIf="experience.uploaded">
         <p>Uploaded</p>
-        <p>Fri Jul 02 2021 12:44:45 GMT+0100</p>
+        <p>{{experience.uploaded}}</p>
       </div>
       <div></div>
-      <button class="btn btn-primary mb-4">Update & Save</button>
-      <button class="btn btn-danger" (click)="deleteAboutMe()">Delete</button>
+      <button class="btn btn-primary mt-5 mb-4"
+      [disabled]="!experienceImage ||!form.valid" >{{experience.id? 'Update':'Save'}}</button>
+      <button class="btn btn-danger" type="button" (click)="deleteExperience()">Delete</button>
     </form>
-  </div>
-</div>
-
-<button #modalButton type="button" class="modal-button" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
-
-<div (click)="closeModal()" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Warning</h1>
-        <button #closeModalButton type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p class="text-start">Do you really want to activate this "About Me"?</p>
-        <p class="text-start">Warning, Other "About Me" will be deactivated!</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" (click)="cancelActivation()"
-          data-bs-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary" (click)="confirmActivation()">Confirm activating this "About
-          Me"</button>
-      </div>
-    </div>
   </div>
 </div>
 
 
 <button #deleteModalButton type="button" class="modal-button" data-bs-toggle="modal"
-  data-bs-target="#exampleModal2"></button>
+  data-bs-target="#experienceDeleteModel"></button>
 
-<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+<div class="modal fade" id="experienceDeleteModel" tabindex="-1" aria-labelledby="experienceDeleteModelLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel2">Warning</h1>
+        <h1 class="modal-title fs-5" id="experienceDeleteModelLabel">Warning</h1>
         <button #closeModalButton type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -107,7 +118,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No</button>
-        <button type="button" class="btn btn-primary" (click)="submitDelete()">Yes</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="submitDeleteExperience()">Yes</button>
       </div>
     </div>
   </div>

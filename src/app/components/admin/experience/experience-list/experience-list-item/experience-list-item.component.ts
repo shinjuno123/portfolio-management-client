@@ -1,6 +1,7 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from "@angular/core";
+import { Component, OnInit} from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { Certification } from "src/app/model/certification.model";
+import { Experience } from "src/app/model/experience.model";
+import { AdminExperienceService } from "src/app/service/admin-service/admin.experience.service";
 
 
 @Component({
@@ -10,16 +11,27 @@ import { Certification } from "src/app/model/certification.model";
 })
 export class AdminExperienceListItemComponent implements OnInit {
     dummyDate!: Date;
+    experiences: Experience[] = [];
 
-
-    constructor(private router: Router, private route:ActivatedRoute){}
+    constructor(private router: Router, private route:ActivatedRoute,
+        private adminExperienceService: AdminExperienceService){}
 
     ngOnInit(): void {
         this.dummyDate = new Date();
+        this.listExperiences();
     }
 
-    routeToEditPage() {
-        this.router.navigate(["edit"], {relativeTo: this.route})
+    routeToEditPage(id: string) {
+        this.router.navigate(["edit"], {queryParams:{id:id},relativeTo: this.route})
+    }
+
+    listExperiences() {
+        this.adminExperienceService.listExperiences()
+            .subscribe({
+                next: (experiences: Experience[]) => {
+                    this.experiences = experiences;
+                }
+            })
     }
     
 }

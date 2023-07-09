@@ -1,4 +1,6 @@
-<div class="row g-1 pb-2 text-start" *ngFor="let i of [false,false,true,false,false,false]" (click)="routeToEditPage()">
-    <div class="col-6"><div><p>Fish game</p></div></div>
-    <div class="col-6"><div><p>https://www.google.com</p></div></div>
+<div class="row g-1 pb-2 text-start" *ngFor="let project of projects" (click)="routeToEditPage(project.id)">
+    <div class="col-6" *ngIf="project.projectName.length > 20"><div><p>{{project.projectName | slice : 0 : 20}}...</p></div></div>
+    <div class="col-6" *ngIf="project.projectName.length <= 20"><div><p>{{project.projectName}}</p></div></div>
+    <div class="col-6" *ngIf="project.url.length > 20"><div><p>{{project.url | slice : 0 : 20}}...</p></div></div>
+    <div class="col-6" *ngIf="project.url.length <= 20"><div><p>{{project.url}}</p></div></div>
 </div>
