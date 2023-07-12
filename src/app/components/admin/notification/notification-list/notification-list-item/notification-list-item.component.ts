@@ -1,7 +1,6 @@
-import { Component } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-
-
+import { Notification } from "src/app/model/notification";
 
 @Component({
     selector: 'admin-notification-list-item',
@@ -10,7 +9,8 @@ import { ActivatedRoute, Router } from "@angular/router";
 })
 export class AdminNotificationListItemComponent {
     dummyDate!: Date;
-
+    pageNumber: number = 1;
+    @Input("notifications") notifications!: Notification[];
 
     constructor(private router: Router, private route:ActivatedRoute){}
 
@@ -18,8 +18,9 @@ export class AdminNotificationListItemComponent {
         this.dummyDate = new Date();
     }
 
-    routeToEditPage() {
-        this.router.navigate(["edit"], {relativeTo: this.route})
+    routeToEditPage(id: string) {
+        this.router.navigate(["edit"], {queryParams:{id:id},relativeTo: this.route})
     }
+
     
 }

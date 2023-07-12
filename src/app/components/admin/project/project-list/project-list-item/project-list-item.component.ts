@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Project } from "src/app/model/project.model";
 import { AdminProjectService } from "src/app/service/admin-service/admin.project.service";
@@ -13,30 +13,20 @@ import { AdminProjectService } from "src/app/service/admin-service/admin.project
 })
 export class AdminProjectListItemComponent {
     dummyDate!: Date;
-    projects!: Project[];
     PAGE_SIZE: number = 10;
     PAGE_NUMBER: number = 1;
+    @Input("projects") projects!: Project[];
 
-    constructor(private router: Router, private route:ActivatedRoute,
-        private adminProjectService: AdminProjectService){}
+    constructor(private router: Router, private route:ActivatedRoute){}
 
     ngOnInit(): void {
         this.dummyDate = new Date();
-        this.listProjects();
+
     }
 
     routeToEditPage(id: string) {
         this.router.navigate(["edit"], {queryParams:{id:id},relativeTo: this.route});
     }
 
-    listProjects() {
-        this.adminProjectService.listProject(this.PAGE_NUMBER, this.PAGE_SIZE)
-            .subscribe({
-                next: (projects) => {
-                    this.projects = <Project[]> projects.content;
-                }
-        });
 
-    }
-    
 }

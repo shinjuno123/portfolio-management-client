@@ -10,6 +10,8 @@ import { environment } from "src/environments/environment";
 })
 export class AdminProjectService {
 
+    PAGE_SIZE = 10;
+
     constructor(private http: HttpClient){}
 
     listProject(pageNumber: number,pageSize: number) {

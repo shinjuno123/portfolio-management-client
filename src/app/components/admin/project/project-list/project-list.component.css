@@ -80,3 +80,17 @@ p {
     margin: 0; 
 }
  
+
+.page-link {
+    cursor: pointer;
+}
+
+.page-link.active{
+    background-color:#84C69B;
+}
+
+.page-link{
+    background-color:#2F8886;
+    color: white;
+    border: none;
+}

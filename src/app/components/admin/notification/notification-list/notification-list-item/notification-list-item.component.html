@@ -1,9 +1,9 @@
-<div class="row g-1 pb-2 text-start" *ngFor="let i of [false,false,true,false,false,false]" (click)="routeToEditPage()">
-    <div class="col-6"><div><p>Fish game</p></div></div>
+<div class="row g-1 pb-2 text-start" *ngFor="let notification of notifications" (click)="routeToEditPage(notification.id)">
+    <div class="col-6"><div><p>{{notification.subject}}</p></div></div>
     <div class="col-2">
         <div>
             <label>
-                <input type="checkbox" [checked]="i">
+                <input type="checkbox" [checked]="notification.active">
                 <span class="greenmark"></span>
             </label>
         </div>
@@ -11,10 +11,10 @@
     <div class="col-2">
         <div>
             <label>
-                <input type="checkbox" [checked]="i">
+                <input type="checkbox" [checked]="notification.displayed">
                 <span class="greenmark"></span>
             </label>
         </div>
     </div>
-    <div class="col-2"><div><p>{{dummyDate}}</p></div></div>
+    <div class="col-2"><div><p>{{notification.uploaded}}</p></div></div>
 </div>

@@ -2,17 +2,19 @@
     <a class="btn btn-primary mb-4" routerLink="../">Back</a>
     <h2 class="text-start mb-4">Edit Notification</h2>
     <div class="board-wrapper">
-        <form>
-            <p class="text-start block-highlight">id: 5258b3c4-0e3e-11ee-be56-0242ac120002</p>
+        <form (ngSubmit)="submitForm()" #form="ngForm">
+            <p class="text-start block-highlight" *ngIf="notification.id">id: {{notification.id}}</p>
 
             <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon2">Subject</span>
-                <input type="text" class="form-control" placeholder="Subject" aria-label="Username" aria-describedby="basic-addon2">
+                <span class="input-group-text">Subject</span>
+                <input type="text" class="form-control" placeholder="Subject" [(ngModel)]="notification.subject"
+                    name="subject">
             </div>
-            
+
             <div class="form-floating text-black mb-3">
-                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-                <label for="floatingTextarea">Body</label>
+                <textarea class="form-control" placeholder="Leave a comment here" id="notificationBody" name="body"
+                    [(ngModel)]="notification.body"></textarea>
+                <label for="notificationBody">Body</label>
             </div>
 
             <div class="row mb-3 gx-1">
@@ -20,7 +22,7 @@
                     <div class="font-highlight checkbox-flex">
                         <div class="checkbox-wrapper">
                             <label>
-                                <input type="checkbox">
+                                <input type="checkbox" name="active" [(ngModel)]="notification.active">
                                 <span class="greenmark"></span>
                             </label>
                         </div>
@@ -31,69 +33,82 @@
                     <div class="font-highlight checkbox-flex">
                         <div class="checkbox-wrapper">
                             <label>
-                                <input type="checkbox">
+                                <input type="checkbox" name="displayed" [(ngModel)]="notification.displayed">
                                 <span class="greenmark"></span>
                             </label>
                         </div>
                         <p>displayed</p>
                     </div>
                 </div>
-    
+
             </div>
 
             <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon2">Video Url</span>
-                <input type="text" class="form-control" placeholder="Video Url" aria-label="Username" aria-describedby="basic-addon2">
+                <span class="input-group-text">Video Url</span>
+                <input type="text" class="form-control" placeholder="Video Url" name="videoUrl"
+                    [(ngModel)]="notification.videoUrl">
             </div>
 
-            <div class="d-flex mb-5 attachment-box">
-                <div class="attachment-form" (click)="certificationUpload.click()" #certification>
-                    <input type="file" name="certification" id="certification"  (change)="setAttachment($event)" #certificationUpload hidden>
-                    <p class="icon-description">Click to upload your notification image</p>
-                    <div class="icon-wrapper">
-                        <fa-icon class="fa-icon" [icon]="faPaperclip"></fa-icon>
+            <div class="d-flex attachment-box">
+                <div class="attachment-form" (click)="notificationImageUpload.click()">
+                    <div class="attachment-background">
+                        <p class="attachment-type">Notification Image</p>
+                        <input type="file" name="notificationImage" id="notificationImage"
+                            (change)="setAttachment($event)" #notificationImageUpload hidden>
+                        <p class="icon-description">Click to upload your notification image</p>
+                        <p *ngIf="isNotificationNotPermitted" class="warning">(Not permitted type!)</p>
+                        <div class="icon-wrapper">
+                            <fa-icon class="fa-icon" [icon]="faPaperclip"></fa-icon>
+                        </div>
                     </div>
                 </div>
             </div>
 
+            <div class="file-viewer-button" *ngIf="notification.id" (click)="reviewFile('imageUrl')">
+                <button type="button">Review this file</button>
+              </div>
 
-            <div class="date-form mb-3">
+
+            <div class="date-form mt-5" *ngIf="notification.updated">
                 <p class="block-highlight">Updated</p>
-                <p class="block-highlight">Fri Jul 02 2021 12:44:45 GMT+0100</p>
+                <p class="block-highlight">{{notification.updated}}</p>
             </div>
-            <div class="date-form mb-5">
+            <div class="date-form mt-3" *ngIf="notification.uploaded">
                 <p class="block-highlight">Uploaded</p>
-                <p class="block-highlight">Fri Jul 02 2021 12:44:45 GMT+0100</p>
+                <p class="block-highlight">{{notification.uploaded}}</p>
             </div>
             <div></div>
-            <button class="btn btn-primary mb-4">Update & Save</button>
-            <button class="btn btn-danger" (click)="deleteAboutMe()">Delete</button>
+            <button class="btn btn-primary mt-5" 
+                [disabled]="!notificationImage || !form.valid">
+                {{notification.id? 'Update':'Save'}}
+            </button>
+            <button class="btn btn-danger mt-4" *ngIf="notification.id"
+             type="button" (click)="deleteNotification()">Delete</button>
         </form>
     </div>
 </div>
 
-<button #modalButton type="button" class="modal-button" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
 
+<button #deleteModalButton type="button" class="modal-button" data-bs-toggle="modal"
+    data-bs-target="#notificationDeleteModal"></button>
 
-
-
-  <button #deleteModalButton type="button" class="modal-button" data-bs-toggle="modal" data-bs-target="#exampleModal2"></button>
-
-  <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+<div class="modal fade" id="notificationDeleteModal" tabindex="-1" aria-labelledby="notificationDeleteModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel2">Warning</h1>
-          <button #closeModalButton type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="notificationDeleteModalLabel">Warning</h1>
+                <button #closeModalButton type="button" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="text-start">Your data will be removed permanently.</p>
+                <p class="text-start">Do you agree with the permanent removal of your data?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="submitDelete()">Yes</button>
+            </div>
         </div>
-        <div class="modal-body">
-          <p class="text-start">Your data will be removed permanently.</p>
-          <p class="text-start">Do you agree with the permanent removal of your data?</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No</button>
-          <button type="button" class="btn btn-primary" (click)="submitDelete()">Yes</button>
-        </div>
-      </div>
     </div>
-  </div>
+</div>

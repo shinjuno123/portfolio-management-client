@@ -1,6 +1,8 @@
 import { Component, ElementRef, Renderer2, ViewChild } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Contact } from "src/app/model/contact.model";
 import { Experience } from "src/app/model/experience.model";
+import { AdminContactService } from "src/app/service/admin-service/admin.contact.service";
 
 
 
@@ -14,12 +16,15 @@ export class AdminContactListComponent {
     @ViewChild("sortByList") sortByList!:ElementRef;
     selectedPropertyName: string = "";
 
-    constructor(private renderer:Renderer2){}
+    constructor(private renderer:Renderer2, private route: ActivatedRoute, 
+        private router: Router){}
 
     ngOnInit(): void {
        const dummyExperience = new Contact("","","");
        this.propertyNames = Object.getOwnPropertyNames(dummyExperience);
     }
+
+
 
     selectSortBy(selectedIndex: number ,propertyName: string) {
         const childrenOfSoryByList: HTMLCollection = this.sortByList.nativeElement.children;
@@ -39,4 +44,6 @@ export class AdminContactListComponent {
 
         this.selectedPropertyName = propertyName;
     }
+
+
 }

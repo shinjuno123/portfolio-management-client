@@ -8,7 +8,7 @@ h3 {
     color: rgb(18, 214, 221);
 }
 
-a.btn {
+a.btn.btn-primary {
     display: block;
     width: fit-content;
     margin-right: auto;
@@ -19,6 +19,11 @@ a.btn {
     padding: .5rem 4rem;
     box-shadow: 3px 3px 8px rgba(0, 0, 0, .7);
 }
+
+.btn.btn-secondary {
+    font-size: .8rem;
+}
+
 
 
 h2 {
@@ -62,3 +67,8 @@ h2 {
 ul.dropdown-menu li.selected {
     background-color: rgba(127, 233, 162,.5);
 }
+
+p {
+    margin: 0; 
+ }
+ 

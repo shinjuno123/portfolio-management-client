@@ -1,5 +1,8 @@
-import { Component, ElementRef, Renderer2, ViewChild } from "@angular/core";
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from "@angular/core";
+import { ActivatedRoute, Params, Router } from "@angular/router";
 import { faPaperclip } from "@fortawesome/free-solid-svg-icons";
+import { Contact } from "src/app/model/contact.model";
+import { AdminContactService } from "src/app/service/admin-service/admin.contact.service";
 
 
 
@@ -8,42 +11,51 @@ import { faPaperclip } from "@fortawesome/free-solid-svg-icons";
     templateUrl: "./contact-view.component.html",
     styleUrls: ["./contact-view.component.css"]
 })
-export class AdminContactViewComponent {
+export class AdminContactViewComponent implements OnInit{
     isActivated!: boolean;
     isConfirmed: boolean = false;
     faPaperclip = faPaperclip;
     @ViewChild('modalButton') modalButton!:ElementRef;
     @ViewChild('closeModalButton') closeModelButton!: ElementRef;
     @ViewChild('deleteModalButton') deleteModalButton!: ElementRef;
+    contact = new Contact();
 
-    constructor(private renderer: Renderer2){}
+    constructor(private renderer: Renderer2, private route: ActivatedRoute,
+        private adminContactService: AdminContactService, private router: Router){}
 
-    activateAboutMe() {
-        if(this.isActivated) {
-            this.renderer.selectRootElement(this.modalButton.nativeElement).dispatchEvent(new Event('click'));
-        }
+    ngOnInit(): void {
+        this.route.queryParams.subscribe({
+            next: (params: Params) => {
+                if(params['id']) {
+                    this.getContactMessageById(params['id']);
+                }
+            }
+        })
+    }
+
+    getContactMessageById(id: string) {
+        this.adminContactService.getContactMessageById(id)
+            .subscribe({
+                next:(contact) => {
+                    this.contact = contact;
+                }
+            })
     }
 
 
+    submitDelete(){
+        this.adminContactService.deleteContactMessageById(this.contact.id).subscribe({
+            next: () => {
+                this.router.navigate(['../'],{queryParams:{deleteSuccess:true},relativeTo: this.route});
+            },
+            error: () => {
+                this.router.navigate(['../'],{queryParams:{deleteSuccess:false},relativeTo: this.route});
+            }
+        })
+    }
 
-    deleteAboutMe() {
+    deleteContactMessage() {
         this.renderer.selectRootElement(this.deleteModalButton.nativeElement).dispatchEvent(new Event('click'));
     }
 
-    submitDelete(){
-        console.log("Your data is removed!");
-    }
-
-    setAttachment(event: Event) {
-        const target = event.target as HTMLInputElement;
-        const files = target.files;
-
-        if(files !== undefined && files !== null && files.length > 0){
-            const attachment: File = files[0];
-            const pTag: ChildNode | null = target.nextSibling;
-            if(pTag) {
-                pTag.textContent = attachment.name;
-            }
-        }
-    }
 }

@@ -1,4 +1,4 @@
-<div class="row g-1 pb-2 text-start" *ngFor="let i of [false,false,true,false,false,false]" (click)="routeToEditPage()">
-    <div class="col-4"><div><p>shinjuno123@gmail.com</p></div></div>
-    <div class="col-8"><div><p>Test Subject</p></div></div>
+<div class="row g-1 pb-2 text-start" *ngFor="let contact of contacts" (click)="routeToEditPage(contact.id)">
+    <div class="col-4"><div><p>{{contact.email}}</p></div></div>
+    <div class="col-8"><div><p>{{contact.subject}}</p></div></div>
 </div>

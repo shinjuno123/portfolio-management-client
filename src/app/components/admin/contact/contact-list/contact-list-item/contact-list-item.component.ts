@@ -1,5 +1,7 @@
 import { Component } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
+import { Contact } from "src/app/model/contact.model";
+import { AdminContactService } from "src/app/service/admin-service/admin.contact.service";
 
 
 
@@ -10,16 +12,28 @@ import { ActivatedRoute, Router } from "@angular/router";
 })
 export class AdminContactListItemComponent {
     dummyDate!: Date;
+    contacts: Contact[] = [];
 
-
-    constructor(private router: Router, private route:ActivatedRoute){}
+    constructor(private router: Router, private route:ActivatedRoute,
+        private adminContactService: AdminContactService){}
 
     ngOnInit(): void {
         this.dummyDate = new Date();
+        this.listContact();
     }
 
-    routeToEditPage() {
-        this.router.navigate(["view"], {relativeTo: this.route})
+
+    listContact() {
+        this.adminContactService.listContact()
+            .subscribe({
+                next: (contacts: Contact[]) => {
+                    this.contacts = contacts;
+                }
+            });
+    }
+
+    routeToEditPage(id: string) {
+        this.router.navigate(["view"], {queryParams:{id:id},relativeTo: this.route});
     }
     
 }

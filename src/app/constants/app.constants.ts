@@ -7,6 +7,7 @@ export const  AppConstants = {
     CONTACT_API_URL : "/api/public/contact",
     CERTIFICATIONS_API_URL : "/api/public/certifications",
     SKILL_SET_API_URL : "/api/public/skill-set",
+    NOTIFICATION_API_URL : "/api/v1/public/notifications",
 }
 
 
@@ -16,4 +17,6 @@ export const AdminConstants = {
     CERTIFICATION_API_URL: "/api/admin/certifications",
     EXPERIENCE_API_URL: "/api/admin/experiences",
     PROJECT_API_URL: "/api/admin/projects",
+    CONTACT_API_URL:"/api/admin/contacts",
+    NOTIFICATION_API_URL: "/api/v1/admin/notifications",
 }
