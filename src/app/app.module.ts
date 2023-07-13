@@ -4,7 +4,7 @@ import { AppComponent } from './app.component';
 import { ReplacePipe } from './pipe/replace.pipe';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule, HttpXsrfTokenExtractor } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { PublicComponent } from './components/public/public.component';
 import { IntroComponent } from './components/public/intro/intro.component';
 import { AboutMeComponent } from './components/public/about-me/about-me.component';
@@ -34,7 +34,6 @@ import { AdminIntroEditComponent } from './components/admin/intro/intro-edit/int
 import { AdminIntroListComponent } from './components/admin/intro/intro-list/intro-list.component';
 import { AdminAboutListComponent } from './components/admin/about/about-list/about-list.component';
 import { AdminAboutEditComponent } from './components/admin/about/about-edit/about-edit.component';
-import { AdminAboutListItemComponent } from './components/admin/about/about-list/about-list-item/about-list-item.component';
 import { AdminAboutCertificationListComponent } from './components/admin/about/about-certification-list/about-certification-list.component';
 import { AdminAboutCertificationEditComponent } from './components/admin/about/about-certification-edit/about-certification-edit.component';
 import { AdminExperienceEditComponent } from './components/admin/experience/experience-edit/experience-edit.component';
@@ -43,15 +42,12 @@ import { AdminProjectListComponent } from './components/admin/project/project-li
 import { AdminProjectEditComponent } from './components/admin/project/project-edit/project-edit.component';
 import { AdminContactViewComponent } from './components/admin/contact/contact-view/contact-view.component';
 import { AdminContactListComponent } from './components/admin/contact/contact-list/contact-list.component';
-import { AdminContactListItemComponent } from './components/admin/contact/contact-list/contact-list-item/contact-list-item.component';
 import { AdminNotificationComponent } from './components/admin/notification/notification.component';
 import { AdminNotificationListComponent } from './components/admin/notification/notification-list/notification-list.component';
 import { AdminNotificationEditComponent } from './components/admin/notification/notification-edit/notification-edit.component';
-import { AdminNotificationListItemComponent } from './components/admin/notification/notification-list/notification-list-item/notification-list-item.component';
 import { AdminRelevantSitesComponent } from './components/admin/relevant-sites/relevant-sites.component';
 import { AdminRelevantSitesListComponent } from './components/admin/relevant-sites/relevant-sites-list/relevant-sites-list.component';
 import { AdminRelevantSitesEditComponent } from './components/admin/relevant-sites/relevant-sites-edit/relevant-sites-edit.component';
-import { AdminAboutRelevantSitesListItemComponent } from './components/admin/relevant-sites/relevant-sites-list/relevant-sites-list-item/relevant-sites-list-item.component';
 import { AdminSkillSetEditComponent } from './components/admin/skillset/skillset-edit/skillset-edit.component';
 import { AdminSkillSetHomeComponent } from './components/admin/skillset/skillset-home/skillset-home.component';
 import { AdminSkillSetHomeFirstCategoryComponent } from './components/admin/skillset/skillset-home/skillset-home-first-category/skillset-home-first-category.component';
@@ -79,7 +75,6 @@ import { AdminDataItemComponent } from './components/admin/datalist/dataitem/dat
     AdminIntroEditComponent,
     AdminAboutListComponent,
     AdminAboutEditComponent,
-    AdminAboutListItemComponent,
     AdminAboutCertificationListComponent,
     AdminAboutCertificationEditComponent,
     AdminExperienceEditComponent,
@@ -88,17 +83,14 @@ import { AdminDataItemComponent } from './components/admin/datalist/dataitem/dat
     AdminProjectEditComponent,
     AdminContactViewComponent,
     AdminContactListComponent,
-    AdminContactListItemComponent,
     AdminNotificationComponent,
     AdminNotificationListComponent,
     AdminNotificationEditComponent,
-    AdminNotificationListItemComponent,
     AdminRelevantSitesComponent,
     AdminRelevantSitesListComponent,
     AdminRelevantSitesEditComponent,
     AdminSkillSetEditComponent,
     AdminSkillSetHomeComponent,
-    AdminAboutRelevantSitesListItemComponent,
     AdminSkillSetHomeFirstCategoryComponent,
     AdminSkillSetHomeSecondCategoryComponent,
     AdminSkillSetHomeSkillItemComponent,

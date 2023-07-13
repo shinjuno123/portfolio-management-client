@@ -1,6 +1,7 @@
 import { Component, ElementRef, Renderer2, ViewChild } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Certification } from "src/app/model/certification.model";
+import { Category } from "src/app/model/common/category.model";
 import { RelevantSite } from "src/app/model/relevant-site.model";
 import { AdminRelevantSitesService } from "src/app/service/admin-service/admin.relevant-sites.service";
 
@@ -11,50 +12,37 @@ import { AdminRelevantSitesService } from "src/app/service/admin-service/admin.r
     styleUrls:['./relevant-sites-list.component.css']
 })
 export class AdminRelevantSitesListComponent {
-    propertyNames!: string[];
-    @ViewChild("sortByList") sortByList!:ElementRef;
-    selectedPropertyName: string = "";
-    relevantSites: RelevantSite[] = [];
+    dummyData = new RelevantSite();
+    categories: Category[] = [];
 
-    constructor(private renderer:Renderer2, private route: ActivatedRoute,
-        private router: Router, private adminRelevantSitesService: AdminRelevantSitesService){}
+    constructor(public adminRelevantSitesService: AdminRelevantSitesService){}
 
     ngOnInit(): void {
-       const dummyRelSites = new RelevantSite("","","",0,new Date(), new Date());
-       this.propertyNames = Object.getOwnPropertyNames(dummyRelSites);
-       this.listRelevantSites();
+        this.categories.push(this.createNamePart());
+        this.categories.push(this.createURLPart());
     }
 
-    listRelevantSites() {
-        this.adminRelevantSitesService.listRelevantSites()
-            .subscribe({
-                next:(relevantSites) => {
-                    this.relevantSites = <RelevantSite[]> relevantSites.dataDTOs;
-                }
-            })
-    }
+    createNamePart(): Category {
+        const category = new Category();
+        category.name = "Name";
+        category.numberOfLetters = 20;
+        category.ratio = 6;
+        category.elementType = "TEXT";
+        category.propertyName = "name";
 
-    selectSortBy(selectedIndex: number ,propertyName: string) {
-        const childrenOfSoryByList: HTMLCollection = this.sortByList.nativeElement.children;
-        const selectedItem = childrenOfSoryByList.item(selectedIndex);
-
-        // check seleted item by giving a className "selected"
-        this.renderer.addClass(selectedItem,"selected");
-
-        for(let i=0;i < childrenOfSoryByList.length; i++){
-            if(i === selectedIndex){
-                continue;
-            }
-
-            // remove the className "selected" to all other items
-            this.renderer.removeClass(childrenOfSoryByList.item(i), "selected");
-        }
-
-        this.selectedPropertyName = propertyName;
+        return category;
     }
 
     
-    addItem() {
-        this.router.navigate(['./edit'],{queryParams:{id:''},relativeTo:this.route})
+    createURLPart(): Category {
+        const category = new Category();
+        category.name = "Url";
+        category.numberOfLetters = 20;
+        category.ratio = 6;
+        category.elementType = "TEXT";
+        category.propertyName = "url";
+
+        return category;
     }
+
 }

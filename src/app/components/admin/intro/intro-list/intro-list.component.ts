@@ -1,6 +1,4 @@
-import { AfterViewChecked, AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from "@angular/core";
-import { ActivatedRoute, Route, Router } from "@angular/router";
-import { Subscription } from "rxjs";
+import { Component,  OnInit,} from "@angular/core";
 import { Category } from "src/app/model/common/category.model";
 import { Intro } from "src/app/model/intro.model";
 import { AdminIntroService } from "src/app/service/admin-service/admin.intro.service";

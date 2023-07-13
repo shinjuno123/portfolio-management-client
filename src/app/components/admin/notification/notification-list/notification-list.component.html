@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
     <a class="btn btn-primary mb-5" routerLink="../">Back</a>
     <h3 class="text-start mb-4" >Notifications</h3>
     <div class="row text-end text-start mb-4">
@@ -40,4 +40,14 @@
     <div class="row">
         <hr>
     </div>
-</div>
+</div> -->
+<admin-datalist
+    title="Notification"
+    [dummyData]="dummyData"
+    relativeEditPageRoute="./edit"
+    [categories]="categories"
+    [dataService]="adminNotificationService"
+    [isFirstSection] = "true"
+    [pageSize]="10"
+    returnToPreviousPageRoute="../"
+></admin-datalist>

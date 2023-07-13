@@ -4,14 +4,19 @@ import { AdminConstants, AppConstants } from "src/app/constants/app.constants";
 import { Page } from "src/app/model/custom.page.model";
 import { RelevantSite } from "src/app/model/relevant-site.model";
 import { environment } from "src/environments/environment";
+import { AdminDataService } from "./admin.data.service";
 
 
 @Injectable({
     providedIn: "root"
 })
-export class AdminRelevantSitesService {
+export class AdminRelevantSitesService implements AdminDataService<RelevantSite, Page>{
     
     constructor(private http: HttpClient) {}
+
+    listPaginatedData(pageSize: number, pageNumber: number) {
+        return this.http.get<Page>(`${environment.rootUrl}${AppConstants.RELEVANT_SITES_API_URL}?pageSize=${pageSize}&pageNumber=${pageNumber}`);
+    }
 
     listRelevantSites() {
         return this.http.get<Page>(`${environment.rootUrl}${AppConstants.RELEVANT_SITES_API_URL}`);

@@ -1,5 +1,6 @@
 import { Component, ElementRef, Renderer2, ViewChild } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
+import { Category } from "src/app/model/common/category.model";
 import { Page } from "src/app/model/custom.page.model";
 import { Notification } from "src/app/model/notification";
 import { AdminNotificationService } from "src/app/service/admin-service/admin.notificaiton.service";
@@ -12,74 +13,58 @@ import { AdminNotificationService } from "src/app/service/admin-service/admin.no
     styleUrls: ['./notification-list.component.css']
 })
 export class AdminNotificationListComponent {
-    propertyNames!: string[];
-    @ViewChild("sortByList") sortByList!: ElementRef;
-    selectedPropertyName: string = "";
-    isFirstPage: boolean = true;
-    isLastPage: boolean = true;
-    totalPages: number[] = [];
-    currentPageNumber: number = 1;
-    notifications: Notification[] = [];
+    dummyData = new Notification();
+    categories: Category[] = [];
 
 
-    constructor(private renderer: Renderer2, private router: Router,
-        private route: ActivatedRoute, private adminNotificationService: AdminNotificationService) { }
+    constructor(public adminNotificationService: AdminNotificationService) { }
 
     ngOnInit(): void {
-        const dummyNoti = new Notification("", "", "", "", "", true, true, 1, new Date(), new Date());
-        this.propertyNames = Object.getOwnPropertyNames(dummyNoti);
-        this.fetchNotifications();
-    }
-
-    selectSortBy(selectedIndex: number, propertyName: string) {
-        const childrenOfSoryByList: HTMLCollection = this.sortByList.nativeElement.children;
-        const selectedItem = childrenOfSoryByList.item(selectedIndex);
-
-        // check seleted item by giving a className "selected"
-        this.renderer.addClass(selectedItem, "selected");
-
-        for (let i = 0; i < childrenOfSoryByList.length; i++) {
-            if (i === selectedIndex) {
-                continue;
-            }
-
-            // remove the className "selected" to all other items
-            this.renderer.removeClass(childrenOfSoryByList.item(i), "selected");
-        }
-
-        this.selectedPropertyName = propertyName;
+        this.categories.push(this.createSubjectPart());
+        this.categories.push(this.createActivePart());
+        this.categories.push(this.createDisplayedPart());
+        this.categories.push(this.createUploadedPart());
     }
 
 
-    addItem() {
-        this.router.navigate(['./edit'], { queryParams: { id: "" }, relativeTo: this.route })
+    createSubjectPart(): Category {
+        const category = new Category();
+        category.name = "Subject";
+        category.numberOfLetters = 15;
+        category.ratio = 6;
+        category.elementType = "TEXT";
+        category.propertyName = "subject";
+
+        return category;
     }
 
-    fetchNotifications() {
-        this.adminNotificationService.listNotifications(this.currentPageNumber).subscribe({
-            next: (projectsPage: Page) => {
-                if (projectsPage) {
-                    this.notifications = <Notification[]>projectsPage['dataDTOs'];
-                    this.isFirstPage = projectsPage.isFirstPage;
-                    this.isLastPage = projectsPage.isLastPage;
-                    this.totalPages = Array(projectsPage.totalPage).fill(0).map((_, idx) => idx + 1);
-                    this.currentPageNumber = projectsPage.currentPage;
-                }
-            }
-        });
+    createActivePart(): Category {
+        const category = new Category();
+        category.name = "Active";
+        category.ratio = 2;
+        category.elementType = "CHECKBOX";
+        category.propertyName = "active";
+
+        return category;
     }
 
-    previousPage() {
-        if (this.currentPageNumber > 1) {
-            this.currentPageNumber -= 1;
-            this.fetchNotifications();
-        }
+    createDisplayedPart(): Category {
+        const category = new Category();
+        category.name = "Displayed";
+        category.ratio = 2;
+        category.elementType = "CHECKBOX";
+        category.propertyName = "displayed";
+
+        return category;
     }
 
-    nextPage() {
-        if (this.currentPageNumber < this.totalPages.length) {
-            this.currentPageNumber += 1;
-            this.fetchNotifications();
-        }
+    createUploadedPart(): Category {
+        const category = new Category();
+        category.name = "Uploaded";
+        category.ratio = 2;
+        category.elementType = "DATE";
+        category.propertyName = "uploaded";
+
+        return category;
     }
 }

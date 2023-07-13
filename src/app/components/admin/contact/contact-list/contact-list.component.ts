@@ -1,5 +1,6 @@
 import { Component, ElementRef, Renderer2, ViewChild } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
+import { Category } from "src/app/model/common/category.model";
 import { Contact } from "src/app/model/contact.model";
 import { Experience } from "src/app/model/experience.model";
 import { AdminContactService } from "src/app/service/admin-service/admin.contact.service";
@@ -12,37 +13,37 @@ import { AdminContactService } from "src/app/service/admin-service/admin.contact
     styleUrls: ["./contact-list.component.css"]
 })
 export class AdminContactListComponent {
-    propertyNames!: string[];
-    @ViewChild("sortByList") sortByList!:ElementRef;
-    selectedPropertyName: string = "";
+    dummyData = new Contact();
+    categories: Category[] = [];
 
-    constructor(private renderer:Renderer2, private route: ActivatedRoute, 
-        private router: Router){}
+    constructor(public adminContactService: AdminContactService){}
 
     ngOnInit(): void {
-       const dummyExperience = new Contact("","","");
-       this.propertyNames = Object.getOwnPropertyNames(dummyExperience);
+        this.categories.push(this.createEmailPart());
+        this.categories.push(this.createSubjectPart());
     }
 
 
+    createEmailPart(): Category {
+        const category = new Category();
+        category.name = "Id";
+        category.numberOfLetters = 20;
+        category.ratio = 4;
+        category.elementType = "TEXT";
+        category.propertyName = "id";
 
-    selectSortBy(selectedIndex: number ,propertyName: string) {
-        const childrenOfSoryByList: HTMLCollection = this.sortByList.nativeElement.children;
-        const selectedItem = childrenOfSoryByList.item(selectedIndex);
+        return category;
+    }
 
-        // check seleted item by giving a className "selected"
-        this.renderer.addClass(selectedItem,"selected");
+    createSubjectPart(): Category {
+        const category = new Category();
+        category.name = "Subject";
+        category.numberOfLetters = 35;
+        category.ratio = 8;
+        category.elementType = "TEXT";
+        category.propertyName = "subject";
 
-        for(let i=0;i < childrenOfSoryByList.length; i++){
-            if(i === selectedIndex){
-                continue;
-            }
-
-            // remove the className "selected" to all other items
-            this.renderer.removeClass(childrenOfSoryByList.item(i), "selected");
-        }
-
-        this.selectedPropertyName = propertyName;
+        return category;
     }
 
 

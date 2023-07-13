@@ -4,14 +4,19 @@ import { AdminConstants, AppConstants } from "src/app/constants/app.constants";
 import { Page } from "src/app/model/custom.page.model";
 import { Notification } from "src/app/model/notification";
 import { environment } from "src/environments/environment";
+import { AdminDataService } from "./admin.data.service";
 
 @Injectable({
     providedIn: "root"
 })
-export class AdminNotificationService {
+export class AdminNotificationService implements AdminDataService<Notification, Page>{
     PAGE_SIZE = 10;
 
     constructor(private http: HttpClient) {}
+
+    listPaginatedData(pageSize:number, pageNumber: number) {
+        return this.http.get<Page>(`${environment.rootUrl}${AppConstants.NOTIFICATION_API_URL}?pageNumber=${pageNumber}&pageSize=${pageSize}`, {withCredentials:true});
+    }
 
     listNotifications(pageNumber: number) {
         return this.http.get<Page>(`${environment.rootUrl}${AppConstants.NOTIFICATION_API_URL}?pageNumber=${pageNumber}&pageSize=${this.PAGE_SIZE}`, {withCredentials:true});

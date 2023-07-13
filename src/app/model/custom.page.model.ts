@@ -4,7 +4,7 @@ export class Page {
         public pageSize: number = 0,
         public currentPage: number = 0,
         public totalPage: number = 0,
-        public isLastPage: boolean = false,
-        public isFirstPage: boolean = false,
+        public lastPage: boolean = false,
+        public firstPage: boolean = false,
     ){}
 }

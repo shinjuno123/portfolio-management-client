@@ -2,6 +2,7 @@ import { Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from "@ang
 import { ActivatedRoute, Router } from "@angular/router";
 import { Category } from "src/app/model/common/category.model";
 import { Page as SpringBuiltInPage } from "src/app/model/spring.page.model";
+import { Page as CustomPage } from "src/app/model/custom.page.model";
 import { AdminDataService } from "src/app/service/admin-service/admin.data.service";
 
 
@@ -24,6 +25,7 @@ export class AdminDataListComponent<T extends { [key: string]: any }, Service ex
     @Input("pageSize") pageSize!: number;
     dataList: T[] = [];
     springBuiltInPage!: SpringBuiltInPage;
+    customPage!: CustomPage;
     totalPages: number[] = [];
 
 
@@ -90,17 +92,37 @@ export class AdminDataListComponent<T extends { [key: string]: any }, Service ex
 
     processListDataSuccess(dataList: T[]) {
         this.dataList = dataList;
-
     }
 
     processPaginatedDataSuccess(page: any) {
 
-        this.springBuiltInPage = <SpringBuiltInPage>page;
-        this.springBuiltInPage.number += 1;
-        this.dataList = <T[]>this.springBuiltInPage.content;
-        this.totalPages = Array(this.springBuiltInPage.totalPages).fill(0).map((_, idx) => idx + 1);
+        if(this.areInstancesSame(page, new CustomPage())) {
+            this.customPage = <CustomPage> page;
+            this.dataList = <T[]> this.customPage.dataDTOs;
+            this.totalPages = Array(this.customPage.totalPage).fill(0).map((_, idx) => idx + 1);
 
+        } else if(this.areInstancesSame(page, new SpringBuiltInPage())){
+            this.springBuiltInPage = <SpringBuiltInPage>page;
+            this.springBuiltInPage.number += 1;
+            this.dataList = <T[]>this.springBuiltInPage.content;
+            this.totalPages = Array(this.springBuiltInPage.totalPages).fill(0).map((_, idx) => idx + 1);
+        }
+    }
 
+    areInstancesSame(target: any, comparisonTarget: any):boolean {
+        const keysOfTarget = Object.keys(target);
+        let isSame = false;
+        
+        keysOfTarget.forEach((value, index)=>{
+            if(Object.hasOwn(comparisonTarget, value)) {
+                isSame = true;
+            } else {
+                isSame = false;
+            }
+        });
+
+        return isSame;
+       
     }
 
     changePage(pageNumber: number) {
@@ -118,4 +140,17 @@ export class AdminDataListComponent<T extends { [key: string]: any }, Service ex
             this.listData(this.pageSize, this.springBuiltInPage.number + 1);
         }
     }
+
+    previousCustomPage() {
+        if (this.customPage.currentPage > 1) {
+            this.listData(this.pageSize, this.customPage.currentPage - 1);
+        }
+    }
+
+    nextCustomPage() {
+        if (this.customPage.currentPage < this.customPage.totalPage) {
+            this.listData(this.pageSize, this.customPage.currentPage + 1);
+        }
+    }
+
 }
