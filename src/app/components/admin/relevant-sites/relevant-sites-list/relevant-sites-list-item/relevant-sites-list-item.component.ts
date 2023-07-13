@@ -1,5 +1,6 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
+import { RelevantSite } from "src/app/model/relevant-site.model";
 
 
 @Component({
@@ -9,6 +10,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 })
 export class AdminAboutRelevantSitesListItemComponent implements OnInit{
     dummyDate!: Date;
+    @Input("relevantSites") relevantSites: RelevantSite[] = []
 
 
     constructor(private router: Router, private route:ActivatedRoute){}
@@ -17,8 +19,8 @@ export class AdminAboutRelevantSitesListItemComponent implements OnInit{
         this.dummyDate = new Date();
     }
 
-    routeToEditPage() {
-        this.router.navigate(["edit"], {relativeTo: this.route})
+    routeToEditPage(id: string) {
+        this.router.navigate(["edit"], {queryParams:{id:id},relativeTo: this.route})
     }
     
 }

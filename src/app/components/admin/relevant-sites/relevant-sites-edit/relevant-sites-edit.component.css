@@ -59,6 +59,7 @@ input:focus {
 .date-form p {
     margin-left: auto;
     margin-bottom: 0.3rem;
+    width: 100%;
 }
 
 .btn.btn-primary {

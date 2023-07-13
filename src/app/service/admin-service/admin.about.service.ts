@@ -1,20 +1,23 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { map } from "rxjs";
 import { AdminConstants, AppConstants } from "src/app/constants/app.constants";
 import { About } from "src/app/model/about.model";
 import { Certification } from "src/app/model/certification.model";
 import { environment } from "src/environments/environment";
+import { AdminDataService } from "./admin.data.service";
 
 
 
 @Injectable({
     providedIn: "root"
 })
-export class AdminAboutService {
+export class AdminAboutService implements AdminDataService<About>{
 
     constructor(private http: HttpClient){}
 
+    listData() {
+        return this.http.get<About[]>(`${environment.rootUrl}${AdminConstants.ABOUT_API_URL}`, {withCredentials:true});
+    }
 
     listAbout() {
         return this.http.get<About[]>(`${environment.rootUrl}${AdminConstants.ABOUT_API_URL}`, {withCredentials:true});

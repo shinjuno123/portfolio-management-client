@@ -1,0 +1,14 @@
+<div class="row g-1 pb-2 text-start" *ngFor="let data of dataList" (click)="routeToEditPage(data['id'])">
+    <div [class]="'col-' + category.ratio" *ngFor="let category of categories">
+        <div *ngIf="category.elementType === 'TEXT'">
+            <p *ngIf="category.numberOfLetters > 0 && data[category.propertyName].length > category.numberOfLetters">{{data[category.propertyName] | slice : 0: category.numberOfLetters}}...</p>
+            <p *ngIf="category.numberOfLetters === 0 || data[category.propertyName].length <= category.numberOfLetters">{{data[category.propertyName]}}</p>
+        </div>
+        <div *ngIf="category.elementType === 'CHECKBOX'">
+            <label>
+                <input type="checkbox" [checked]="data[category.propertyName]">
+                <span class="greenmark"></span>
+            </label>
+        </div>
+    </div>
+</div>

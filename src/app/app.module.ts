@@ -31,7 +31,6 @@ import { AdminSkillSetComponent } from './components/admin/skillset/skillset.com
 import { AdminProjectComponent } from './components/admin/project/project.component';
 import { AdminContactComponent } from './components/admin/contact/contact.component';
 import { AdminIntroEditComponent } from './components/admin/intro/intro-edit/intro-edit.compoent';
-import { AdminIntroListItemComponent } from './components/admin/intro/intro-list/intro-list-item/intro-list-item.component';
 import { AdminIntroListComponent } from './components/admin/intro/intro-list/intro-list.component';
 import { AdminAboutListComponent } from './components/admin/about/about-list/about-list.component';
 import { AdminAboutEditComponent } from './components/admin/about/about-edit/about-edit.component';
@@ -65,6 +64,8 @@ import { AdminLoginComponent } from './components/admin/login/login.component';
 import { AdminMenuComponent } from './components/admin/menu/menu.component';
 import { XhrInterceptor } from './interceptors/app.request.interceptor';
 import { AdminSkillSetHomeRelevantProjectsComponent } from './components/admin/skillset/skillset-home/skillset-home-relevant-projects/skillset-home-relevant-projects.component';
+import { AdminDataListComponent } from './components/admin/datalist/datalist.component';
+import { AdminDataItemComponent } from './components/admin/datalist/dataitem/dataitem.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,6 @@ import { AdminSkillSetHomeRelevantProjectsComponent } from './components/admin/s
     AdminProjectComponent,
     AdminContactComponent,
     AdminIntroListComponent,
-    AdminIntroListItemComponent,
     AdminIntroEditComponent,
     AdminAboutListComponent,
     AdminAboutEditComponent,
@@ -109,8 +109,10 @@ import { AdminSkillSetHomeRelevantProjectsComponent } from './components/admin/s
     AdminSkillSetHomeSecondCategoryComponent,
     AdminSkillSetHomeSkillItemComponent,
     AdminSkillSetHomeRelevantProjectsComponent,
+    AdminDataListComponent,
     AdminMenuComponent,
     AdminLoginComponent,
+    AdminDataItemComponent,
     PublicComponent,
     AdminIntroComponent,
     IntroComponent,

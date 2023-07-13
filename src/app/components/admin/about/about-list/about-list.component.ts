@@ -1,6 +1,6 @@
-import { Component, ElementRef, Renderer2, ViewChild } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
+import { Component,  OnInit} from "@angular/core";
 import { About } from "src/app/model/about.model";
+import { Category } from "src/app/model/common/category.model";
 import { AdminAboutService } from "src/app/service/admin-service/admin.about.service";
 
 
@@ -9,42 +9,61 @@ import { AdminAboutService } from "src/app/service/admin-service/admin.about.ser
     templateUrl: './about-list.component.html',
     styleUrls:['./about-list.component.css']
 })
-export class AdminAboutListComponent {
-    propertyNames!: string[];
-    @ViewChild("sortByList") sortByList!:ElementRef;
-    selectedPropertyName: string = "";
+export class AdminAboutListComponent implements OnInit{
+    dummyData = new About();
+    categories: Category[] = [];
 
-    constructor(private renderer:Renderer2, private router:Router,
-        private route: ActivatedRoute){}
+    constructor( public adminAboutService: AdminAboutService){}
 
-    ngOnInit(): void {
-       const dummyAbout = new About();
-       this.propertyNames = Object.getOwnPropertyNames(dummyAbout);
+    ngOnInit(): void { 
+        this.categories.push(this.createIdPart());
+        this.categories.push(this.createUpdatedPart());
+        this.categories.push(this.createUploadedPart());
+        this.categories.push(this.createActivePart());
     }
 
-    selectSortBy(selectedIndex: number ,propertyName: string) {
-        const childrenOfSoryByList: HTMLCollection = this.sortByList.nativeElement.children;
-        const selectedItem = childrenOfSoryByList.item(selectedIndex);
+    createIdPart(): Category {
+        const category = new Category();
+        category.name = "Id";
+        category.numberOfLetters = 5;
+        category.ratio = 3;
+        category.elementType = "TEXT";
+        category.propertyName = "id";
 
-        // check seleted item by giving a className "selected"
-        this.renderer.addClass(selectedItem,"selected");
+        return category;
+    }
 
-        for(let i=0;i < childrenOfSoryByList.length; i++){
-            if(i === selectedIndex){
-                continue;
-            }
+    createUpdatedPart(): Category {
+        const category = new Category();
+        category.name = "Updated";
+        category.ratio = 4;
+        category.elementType = "TEXT";
+        category.propertyName = "updated";
 
-            // remove the className "selected" to all other items
-            this.renderer.removeClass(childrenOfSoryByList.item(i), "selected");
-        }
+        return category;
+    }
 
-        this.selectedPropertyName = propertyName;
+    createUploadedPart(): Category {
+        const category = new Category();
+        category.name = "Uploaded";
+        category.ratio = 4;
+        category.elementType = "TEXT";
+        category.propertyName = "uploaded";
+
+        return category;
+    }
+
+    createActivePart(): Category {
+        const category = new Category();
+        category.name = "Active";
+        category.ratio = 1;
+        category.elementType = "CHECKBOX";
+        category.propertyName = "active";
+
+        return category;
     }
 
 
-    addItem() {
-        this.router.navigate(['./edit'],{queryParams:{id:""},relativeTo:this.route})
-    }
 
 
     

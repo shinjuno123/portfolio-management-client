@@ -1,4 +1,4 @@
-<div class="row g-1 pb-2 text-start" *ngFor="let i of [false,false,true,false,false,false]" (click)="routeToEditPage()">
-    <div class="col-6"><div><p>Hashnode</p></div></div>
-    <div class="col-6"><div><p>www.naver.com</p></div></div>
+<div class="row g-1 pb-2 text-start" *ngFor="let relevantSite of relevantSites" (click)="routeToEditPage(relevantSite.id)">
+    <div class="col-6"><div><p>{{relevantSite.name}}</p></div></div>
+    <div class="col-6"><div><p>{{relevantSite.url}}</p></div></div>
 </div>

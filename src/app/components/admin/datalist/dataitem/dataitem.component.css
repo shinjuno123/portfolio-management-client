@@ -14,9 +14,8 @@
 .row >  div:nth-child(4) > div {
     background-color: rgb(47, 100, 168,.5);
 }
-
 .row >  div:nth-child(5) > div {
-    background-color: rgba(55, 47, 168, 0.5);
+    background-color: rgba(47, 64, 163, 0.5);
 }
 
 p {
@@ -27,8 +26,9 @@ p {
 .row > div > div {
     position: relative;
     height: 100%;
-    padding: 1rem 0;
     vertical-align: middle;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 }
 
 .row > div > div > p,label{
@@ -94,10 +94,10 @@ p {
     position: absolute;
     top:2px;
     width: 100%;
-    height: calc(100% - 8px);
     border:2px dashed rgba(127, 233, 162,.5);
     content: "";
     opacity: 100%;
+    height: calc(100% - 8px);
 }
 
 .row::after {

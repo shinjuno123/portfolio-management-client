@@ -1,7 +1,7 @@
-<!-- <a class="btn btn-primary mb-4" routerLink="../">Back</a>
-<h2 class="text-start mb-5">About Me Management</h2>
+<a class="btn btn-primary mb-4" *ngIf="isFirstSection" [routerLink]="returnToPreviousPageRoute">Back</a>
+<h2 class="text-start mb-5" *ngIf="isFirstSection">{{title}} Management</h2>
 
-<h3 class="text-start">"About Me" List</h3>
+<h3 class="text-start">{{title}}</h3>
 <div class="container">
     <div class="row text-end mb-2">
         <div class="dropdown">
@@ -21,29 +21,20 @@
         </div>
     </div>
     <div class="row mb-4 g-1">
-        <div class="col-3"><div>Id</div></div>
-        <div class="col-4"><div>Updated</div></div>
-        <div class="col-4"><div>Uploaded</div></div>
-        <div class="col-1"><div>Active</div></div>
+        <div [class]="'col-'+category.ratio" *ngFor="let category of categories"><div>{{category.name}}</div></div>
     </div>
     <div class="row">
         <hr>
     </div>
 
-    <admin-about-list-item></admin-about-list-item>
+    <admin-dataitem
+    [adminDataService]="adminDataService"
+    [relativeEditPageRoute]="relativeEditPageRoute"
+    [categories]="categories"
+    [dummyData]="dummyData"
+    ></admin-dataitem>
     
     <div class="row">
         <hr>
     </div>
-</div> -->
-<admin-datalist
-    [dummyData]="dummyData"
-    [relativeEditPageRoute]="'./edit'"
-    title='"About Me" List'
-    returnToPreviousPageRoute="../"
-    [isFirstSection]="true"
-    [categories]="categories"
-    [dataService]="adminAboutService"
-
-></admin-datalist>
-<admin-about-certification-list></admin-about-certification-list>
+</div>

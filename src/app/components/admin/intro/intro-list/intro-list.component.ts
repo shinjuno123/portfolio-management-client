@@ -1,6 +1,7 @@
 import { AfterViewChecked, AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from "@angular/core";
 import { ActivatedRoute, Route, Router } from "@angular/router";
 import { Subscription } from "rxjs";
+import { Category } from "src/app/model/common/category.model";
 import { Intro } from "src/app/model/intro.model";
 import { AdminIntroService } from "src/app/service/admin-service/admin.intro.service";
 
@@ -8,59 +9,84 @@ import { AdminIntroService } from "src/app/service/admin-service/admin.intro.ser
 @Component({
     selector: 'admin-intro-list',
     templateUrl: './intro-list.component.html',
-    styleUrls:['./intro-list.component.css']
+    styleUrls: ['./intro-list.component.css']
 })
-export class AdminIntroListComponent implements OnInit, AfterViewInit{
+export class AdminIntroListComponent implements OnInit{
     propertyNames!: string[];
-    @ViewChild("sortByList") sortByList!:ElementRef;
+    @ViewChild("sortByList") sortByList!: ElementRef;
     selectedPropertyName: string = "";
     listIntrosSubscription!: Subscription;
+    categories: Category[] = [];
     introList: Intro[] = [];
+    dummyIntro = new Intro();
 
-    constructor(private renderer:Renderer2, private router: Router,
-        private adminIntroService:AdminIntroService, private route:ActivatedRoute){}
+    constructor(public adminIntroService: AdminIntroService) { }
 
     ngOnInit(): void {
-       const dummyIntro = new Intro("","","","");
-       this.propertyNames = Object.getOwnPropertyNames(dummyIntro);
+        this.categories.push(this.createIdPart());
+        this.categories.push(this.createSayHiPart());
+        this.categories.push(this.createNamePart());
+        this.categories.push(this.createOpeningPart());
+        this.categories.push(this.createActivePart());
     }
 
-    ngAfterViewInit(): void {
-        this.listIntrosSubscription = 
-            this.adminIntroService.listIntros()
-            .subscribe({
-                next: (response) => this.processIntroSuccess(response),
-            })
+    createIdPart(): Category {
+        const category = new Category();
+        category.name = "Id";
+        category.numberOfLetters = 5;
+        category.ratio = 1;
+        category.elementType = "TEXT";
+        category.propertyName = "id";
+
+        return category;
     }
 
-    processIntroSuccess(response : object | null) {
-        const introList = <Intro[]> response;
-        this.introList = introList;
+
+    createSayHiPart(): Category {
+        const category = new Category();
+        category.name = "Say Hi";
+        category.numberOfLetters = 10;
+        category.ratio = 2;
+        category.elementType = "TEXT";
+        category.propertyName = "sayHi";
+
+        return category;
+    }
+
+    createNamePart(): Category {
+        const category = new Category();
+        category.name = "Name";
+        category.numberOfLetters = 10;
+        category.ratio = 2;
+        category.elementType = "TEXT";
+        category.propertyName = "name";
+
+        return category;
+    }
+
+    createOpeningPart(): Category {
+        const category = new Category();
+        category.name = "Opening";
+        category.numberOfLetters = 20;
+        category.ratio = 6;
+        category.elementType = "TEXT";
+        category.propertyName = "opening";
+
+        return category;
+    }
+
+    createActivePart(): Category {
+        const category = new Category();
+        category.name = "Active";
+        category.ratio = 1;
+        category.elementType = "CHECKBOX";
+        category.propertyName = "active";
+
+        return category;
     }
 
 
-    selectSortBy(selectedIndex: number ,propertyName: string) {
-        const childrenOfSoryByList: HTMLCollection = this.sortByList.nativeElement.children;
-        const selectedItem = childrenOfSoryByList.item(selectedIndex);
 
-        // check seleted item by giving a className "selected"
-        this.renderer.addClass(selectedItem,"selected");
 
-        for(let i=0;i < childrenOfSoryByList.length; i++){
-            if(i === selectedIndex){
-                continue;
-            }
 
-            // remove the className "selected" to all other items
-            this.renderer.removeClass(childrenOfSoryByList.item(i), "selected");
-        }
-
-        this.selectedPropertyName = propertyName;
-    }
-
-    addItem() {
-        this.router.navigate(['./edit'],{queryParams:{id:""},relativeTo:this.route})
-    }
-    
-    
 }

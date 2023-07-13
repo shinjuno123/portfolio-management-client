@@ -10,7 +10,6 @@ import { AdminAboutService } from "src/app/service/admin-service/admin.about.ser
     styleUrls:['./about-list-item.component.css']
 })
 export class AdminAboutListItemComponent implements OnInit{
-    dummyDate = new Date();
     aboutList: About[] = [];
 
     constructor(private router: Router,
