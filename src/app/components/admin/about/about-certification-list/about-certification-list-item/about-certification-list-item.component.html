@@ -1,6 +1,0 @@
-<div class="row g-1 pb-2 text-start" *ngFor="let certification of certifications" (click)="routeToEditPage(certification.id)">
-    <div class="col-3"><div><p>{{certification.id | slice : 0: 5}}...</p></div></div>
-    <div class="col-5"><div><p>{{certification.name | slice : 0: 25 }}...</p></div></div>
-    <div class="col-2"><div><p>{{certification.updated | date : 'M/d/yy'}}</p></div></div>
-    <div class="col-2"><div><p>{{certification.uploaded | date : 'M/d/yy'}}</p></div></div>
-</div>

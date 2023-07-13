@@ -1,6 +1,8 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Certification } from "src/app/model/certification.model";
+import { Category } from "src/app/model/common/category.model";
+import { AdminAboutCertificationService } from "src/app/service/admin-service/admin.about.certification.service";
 
 
 @Component({
@@ -9,37 +11,60 @@ import { Certification } from "src/app/model/certification.model";
     styleUrls:['./about-certification-list.component.css']
 })
 export class AdminAboutCertificationListComponent implements OnInit{
-    propertyNames!: string[];
-    @ViewChild("sortByList") sortByList!:ElementRef;
-    selectedPropertyName: string = "";
+    dummyData = new Certification();
+    categories: Category[] = [];
 
-    constructor(private renderer:Renderer2, private route: ActivatedRoute, private router: Router){}
+    constructor(public adminAboutCertificationService: AdminAboutCertificationService){}
 
     ngOnInit(): void {
-       const dummyCert = new Certification("","");
-       this.propertyNames = Object.getOwnPropertyNames(dummyCert);
+        this.categories.push(this.createIdPart());
+        this.categories.push(this.createNamePart());
+        this.categories.push(this.createUpdatedPart());
+        this.categories.push(this.createUploadedPart());
     }
 
-    selectSortBy(selectedIndex: number ,propertyName: string) {
-        const childrenOfSoryByList: HTMLCollection = this.sortByList.nativeElement.children;
-        const selectedItem = childrenOfSoryByList.item(selectedIndex);
+    createIdPart(): Category {
+        const category = new Category();
+        category.name = "Id";
+        category.numberOfLetters = 5;
+        category.ratio = 3;
+        category.elementType = "TEXT";
+        category.propertyName = "id";
 
-        // check seleted item by giving a className "selected"
-        this.renderer.addClass(selectedItem,"selected");
-
-        for(let i=0;i < childrenOfSoryByList.length; i++){
-            if(i === selectedIndex){
-                continue;
-            }
-
-            // remove the className "selected" to all other items
-            this.renderer.removeClass(childrenOfSoryByList.item(i), "selected");
-        }
-
-        this.selectedPropertyName = propertyName;
+        return category;
     }
 
-    addItem() {
-        this.router.navigate(['./certification/edit'],{queryParams:{id:''},relativeTo:this.route})
+    createNamePart(): Category {
+        const category = new Category();
+        category.name = "Name";
+        category.numberOfLetters = 25;
+        category.ratio = 5;
+        category.elementType = "TEXT";
+        category.propertyName = "name";
+
+        return category;
     }
+    
+    createUpdatedPart(): Category {
+        const category = new Category();
+        category.name = "Updated";
+        category.numberOfLetters = 0;
+        category.ratio = 2;
+        category.elementType = "DATE";
+        category.propertyName = "updated";
+
+        return category;
+    }
+
+    createUploadedPart(): Category {
+        const category = new Category();
+        category.name = "Uploaded";
+        category.numberOfLetters = 0;
+        category.ratio = 2;
+        category.elementType = "DATE";
+        category.propertyName = "uploaded";
+
+        return category;
+    }
+
 }

@@ -4,15 +4,20 @@ import { AdminConstants, AppConstants } from "src/app/constants/app.constants";
 import { Project } from "src/app/model/project.model";
 import { Page } from "src/app/model/spring.page.model";
 import { environment } from "src/environments/environment";
+import { AdminDataService } from "./admin.data.service";
 
 @Injectable({
     providedIn: "root"
 })
-export class AdminProjectService {
+export class AdminProjectService implements AdminDataService<Project, Page>{
 
     PAGE_SIZE = 10;
 
     constructor(private http: HttpClient){}
+
+    listPaginatedData(pageSize: number,pageNumber: number) {
+        return this.http.get<Page>(`${environment.rootUrl}${AppConstants.PROJECT_API_URL}?pageNumber=${pageNumber}&pageSize=${pageSize}`,{withCredentials:true});
+    }
 
     listProject(pageNumber: number,pageSize: number) {
         return this.http.get<Page>(`${environment.rootUrl}${AppConstants.PROJECT_API_URL}?pageNumber=${pageNumber}&pageSize=${pageSize}`,{withCredentials:true});

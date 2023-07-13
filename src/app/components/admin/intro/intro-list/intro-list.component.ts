@@ -12,12 +12,7 @@ import { AdminIntroService } from "src/app/service/admin-service/admin.intro.ser
     styleUrls: ['./intro-list.component.css']
 })
 export class AdminIntroListComponent implements OnInit{
-    propertyNames!: string[];
-    @ViewChild("sortByList") sortByList!: ElementRef;
-    selectedPropertyName: string = "";
-    listIntrosSubscription!: Subscription;
     categories: Category[] = [];
-    introList: Intro[] = [];
     dummyIntro = new Intro();
 
     constructor(public adminIntroService: AdminIntroService) { }

@@ -11,7 +11,7 @@ import { AdminDataService } from "src/app/service/admin-service/admin.data.servi
 })
 export class AdminDataItemComponent<T extends { [key: string]: any }, Service extends AdminDataService<T>> 
     implements OnInit{
-    dataList: T[] = [];
+    @Input("dataList") dataList: T[] = [];
     @Input("relativeEditPageRoute") relativeEditPageRoute!: string;
     @Input("adminDataService") adminDataService!: Service;
     @Input("categories") categories:Category[] = [];
@@ -26,7 +26,6 @@ export class AdminDataItemComponent<T extends { [key: string]: any }, Service ex
         if(this.dummyData) {
             this.keyOfData = Object.keys(this.dummyData) as Array<keyof T>;
         }
-        this.listData();
     }
 
 
@@ -35,15 +34,5 @@ export class AdminDataItemComponent<T extends { [key: string]: any }, Service ex
         this.router.navigate([this.relativeEditPageRoute], {queryParams:{id:id}, relativeTo: this.route});
     }
 
-    listData() {
-        return this.adminDataService.listData()
-            .subscribe({
-                next: (dataList) => this.processListDataSuccess(dataList),
-            })
-    }
-
-    processListDataSuccess(dataList: T[]) {
-        this.dataList = dataList;
-    }
     
 }
