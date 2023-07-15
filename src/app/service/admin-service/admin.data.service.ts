@@ -6,4 +6,6 @@ export interface AdminDataService<DataType, PageType extends SpringBuiltInPage |
     listData?(): Observable<DataType[]>;
 
     listPaginatedData?(pageSize: number, pageNumber: number): Observable<PageType>;
+
+    getDataById?(id: string): Observable<DataType>;
 }

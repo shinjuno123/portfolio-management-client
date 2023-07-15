@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { ReplacePipe } from './pipe/replace.pipe';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { PublicComponent } from './components/public/public.component';
@@ -59,6 +59,7 @@ import { XhrInterceptor } from './interceptors/app.request.interceptor';
 import { AdminSkillSetHomeRelevantProjectsComponent } from './components/admin/skillset/skillset-home/skillset-home-relevant-projects/skillset-home-relevant-projects.component';
 import { AdminDataListComponent } from './components/admin/datalist/datalist.component';
 import { AdminDataItemComponent } from './components/admin/datalist/dataitem/dataitem.component';
+import { AdminDataEditComponent } from './components/admin/dataedit/dataedit.component';
 
 @NgModule({
   declarations: [
@@ -96,6 +97,7 @@ import { AdminDataItemComponent } from './components/admin/datalist/dataitem/dat
     AdminSkillSetHomeSkillItemComponent,
     AdminSkillSetHomeRelevantProjectsComponent,
     AdminDataListComponent,
+    AdminDataEditComponent,
     AdminMenuComponent,
     AdminLoginComponent,
     AdminDataItemComponent,
@@ -123,6 +125,7 @@ import { AdminDataItemComponent } from './components/admin/datalist/dataitem/dat
     FontAwesomeModule,
     HttpClientModule,
     AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

@@ -113,7 +113,7 @@ export class AdminDataListComponent<T extends { [key: string]: any }, Service ex
         const keysOfTarget = Object.keys(target);
         let isSame = false;
         
-        keysOfTarget.forEach((value, index)=>{
+        keysOfTarget.forEach((value)=>{
             if(Object.hasOwn(comparisonTarget, value)) {
                 isSame = true;
             } else {
