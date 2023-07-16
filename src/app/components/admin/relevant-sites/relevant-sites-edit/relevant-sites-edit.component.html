@@ -1,57 +1,13 @@
-<div class="container">
-  <a class="btn btn-primary mb-4" routerLink="../">Back</a>
-  <h2 class="text-start mb-4">Edit Relevant Site</h2>
-  <div class="board-wrapper">
-    <form (ngSubmit)="submitForm()" #form="ngForm">
-      <p class="text-start" *ngIf="relevantSite.id">id: {{relevantSite.id}}</p>
-
-      <div class="input-group mb-3">
-        <span class="input-group-text">Name</span>
-        <input type="text" class="form-control" placeholder="Name" name="name" [(ngModel)]="relevantSite.name" required>
-      </div>
-
-      <div class="input-group">
-        <span class="input-group-text">URL</span>
-        <input type="text" class="form-control" placeholder="URL" name="url" [(ngModel)]="relevantSite.url" 
-          required 
-          pattern="(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$">
-      </div>
-
-
-      <div class="date-form mt-5" *ngIf="relevantSite.updated">
-        <p>Updated</p>
-        <p>{{relevantSite.updated}}</p>
-      </div>
-      <div class="date-form mt-3" *ngIf="relevantSite.uploaded">
-        <p>Uploaded</p>
-        <p>{{relevantSite.uploaded}}</p>
-      </div>
-      <div></div>
-      <button class="btn btn-primary mt-5" [disabled]="!form.valid">{{relevantSite.id? 'Update' :'Save'}}</button>
-      <button class="btn btn-danger mt-4" type="button" (click)="deleteRelevantSite()">Delete</button>
-    </form>
-  </div>
-</div>
-
-
-<button #deleteModalButton type="button" class="modal-button" data-bs-toggle="modal"
-  data-bs-target="#relevantSiteDeleteModel"></button>
-
-<div class="modal fade" id="relevantSiteDeleteModel" tabindex="-1" aria-labelledby="relevantSiteDeleteModelLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="relevantSiteDeleteModelLabel">Warning</h1>
-        <button #closeModalButton type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p class="text-start">Your data will be removed permanently.</p>
-        <p class="text-start">Do you agree with the permanent removal of your data?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No</button>
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="submitDelete()">Yes</button>
-      </div>
-    </div>
-  </div>
-</div>
+<admin-dataedit
+  [dataService]="adminRelevantSitesService"
+  [textAreaProperties]="textAreaProperties"
+  [textProperties]="textProperties"
+  [filesProperties]="filesProperties"
+  [dataProperties]="dateProperties"
+  [activeProperty]="activeProperty"
+  [versionProperties]="versionProperties"
+  [data]="data"
+  routeLinkToListPage="../"
+  editPageName="About"
+  
+></admin-dataedit>

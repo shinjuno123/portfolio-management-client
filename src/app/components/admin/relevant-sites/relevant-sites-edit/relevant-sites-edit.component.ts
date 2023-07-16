@@ -1,6 +1,6 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from "@angular/core";
-import { ActivatedRoute, Params, Route, Router } from "@angular/router";
-import { faPaperclip } from "@fortawesome/free-solid-svg-icons";
+import { Component, OnInit } from "@angular/core";
+import { Validators } from "@angular/forms";
+import { RegularPropertyInformation } from "src/app/model/common/regular.property.information.model";
 import { RelevantSite } from "src/app/model/relevant-site.model";
 import { AdminRelevantSitesService } from "src/app/service/admin-service/admin.relevant-sites.service";
 
@@ -8,82 +8,73 @@ import { AdminRelevantSitesService } from "src/app/service/admin-service/admin.r
 @Component({
     selector: 'admin-relevant-sites-edit',
     templateUrl: './relevant-sites-edit.component.html',
-    styleUrls:['./relevant-sites-edit.component.css']
+    styleUrls: ['./relevant-sites-edit.component.css']
 })
-export class AdminRelevantSitesEditComponent implements OnInit{
-    isActivated!: boolean;
-    isConfirmed: boolean = false;
-    faPaperclip = faPaperclip;
-    @ViewChild('modalButton') modalButton!:ElementRef;
-    @ViewChild('closeModalButton') closeModelButton!: ElementRef;
-    @ViewChild('deleteModalButton') deleteModalButton!: ElementRef;
-    relevantSite = new RelevantSite();
+export class AdminRelevantSitesEditComponent implements OnInit {
+    // dataEdit properties
+    textAreaProperties: RegularPropertyInformation[] = [];
+    textProperties: RegularPropertyInformation[] = [];
+    filesProperties: { name: string, value: string, permittedExtensions: string[] }[] = [];
+    dateProperties: RegularPropertyInformation[] = [];
+    activeProperty!: RegularPropertyInformation;
+    versionProperties: RegularPropertyInformation[] = [];
+    data = new RelevantSite();
 
-    constructor(private renderer: Renderer2,
-        private route: ActivatedRoute, private adminRelevantSitesService: AdminRelevantSitesService,
-        private router: Router){}
+    constructor(public adminRelevantSitesService: AdminRelevantSitesService) { }
+
+
 
     ngOnInit(): void {
-        this.route.queryParams.subscribe({
-            next: (params: Params) => {
-                if(params['id']) {
-                    this.getRelevantSiteById(params['id']);
+        Object.keys(this.data).forEach(
+            (key: string) => {
+                switch (key) {
+                    case "name":
+                        this.textProperties.push(
+                            this.generateProperty("Name", key, "", [
+                                Validators.required
+                            ])
+                        );
+                        break;
+                    case "url":
+                        this.textProperties.push(
+                            this.generateProperty("Url", key, "", [
+                                Validators.required, Validators.pattern(
+                                    /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/
+                                )
+                            ])
+                        );
+                        break;
+                    case "version":
+                        this.versionProperties.push(
+                            this.generateProperty("Version", key, 0, [
+                                Validators.required
+                            ])
+                        );
+                        break;
+                    case "uploaded":
+                        this.dateProperties.push(
+                            this.generateProperty("Uploaded", key, "", [])
+                        );
+                        break;
+                    case "updated":
+                        this.dateProperties.push(
+                            this.generateProperty("Updated", key, "", [])
+                        );
+                        break;
                 }
             }
-        })
+        )
     }
 
-    getRelevantSiteById(id: string) {
-        this.adminRelevantSitesService.getRelevantSiteById(id)
-            .subscribe({
-                next:(relevantSite) => {
-                    this.relevantSite = relevantSite;
-                }
-            })
+    generateProperty(displayedName: string, name: string, value: any, constraints: any[]) {
+        const property = new RegularPropertyInformation();
+        property.name = name;
+        property.displayedName = displayedName;
+        property.value = value
+        property.constraints = constraints;
+
+        return property;
     }
 
-    activateAboutMe() {
-        if(this.isActivated) {
-            this.renderer.selectRootElement(this.modalButton.nativeElement).dispatchEvent(new Event('click'));
-        }
-    }
-
-
-
-    deleteRelevantSite() {
-        this.renderer.selectRootElement(this.deleteModalButton.nativeElement).dispatchEvent(new Event('click'));
-    }
-
-    submitDelete(){
-        console.log("Your data is removed!");
-    }
-
-    submitForm() {
-        const relevantSiteClone = structuredClone(this.relevantSite);
-        relevantSiteClone.updated = null;
-    
-        if(this.relevantSite.id) {
-            this.adminRelevantSitesService.updateRelevantSite(relevantSiteClone.id,relevantSiteClone)
-                .subscribe({
-                    next: () => {
-                        this.router.navigate(['../'],{queryParams:{updateSuccess:true},relativeTo:this.route});
-                    },
-                    error: () => {
-                        this.router.navigate(['../'],{queryParams:{updateSuccess:false},relativeTo:this.route});
-                    }
-                })
-
-        } else {
-            this.adminRelevantSitesService.saveRelevantSite(relevantSiteClone)
-                .subscribe({
-                    next: () => {
-                        this.router.navigate(['../'],{queryParams:{saveSuccess:true},relativeTo:this.route});
-                    },
-                    error: () => {
-                        this.router.navigate(['../'],{queryParams:{saveSuccess:false},relativeTo:this.route});
-                    }
-                })
-        }
-    }
 
 }

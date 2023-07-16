@@ -5,6 +5,7 @@ import { Page } from "src/app/model/custom.page.model";
 import { RelevantSite } from "src/app/model/relevant-site.model";
 import { environment } from "src/environments/environment";
 import { AdminDataService } from "./admin.data.service";
+import { Observable } from "rxjs";
 
 
 @Injectable({
@@ -14,23 +15,23 @@ export class AdminRelevantSitesService implements AdminDataService<RelevantSite,
     
     constructor(private http: HttpClient) {}
 
+    delete(id: string): Observable<{}> {
+        throw new Error("Method not implemented.");
+    }
+
+    getDataById(id: string): Observable<RelevantSite> {
+        return this.http.get<RelevantSite>(`${environment.rootUrl}${AdminConstants.RELEVANT_SITES_API_URL}/${id}`, {withCredentials: true});
+    }
+
+    save(data: RelevantSite): Observable<{}> {
+        return this.http.post(`${environment.rootUrl}${AdminConstants.RELEVANT_SITES_API_URL}`, data, {withCredentials:true});
+    }
+    update(data: RelevantSite): Observable<{}> {
+        return this.http.put(`${environment.rootUrl}${AdminConstants.RELEVANT_SITES_API_URL}/${data.id}`, data, {withCredentials:true});
+    }
+
     listPaginatedData(pageSize: number, pageNumber: number) {
         return this.http.get<Page>(`${environment.rootUrl}${AppConstants.RELEVANT_SITES_API_URL}?pageSize=${pageSize}&pageNumber=${pageNumber}`);
     }
 
-    listRelevantSites() {
-        return this.http.get<Page>(`${environment.rootUrl}${AppConstants.RELEVANT_SITES_API_URL}`);
-    }
-
-    getRelevantSiteById(id: string) {
-        return this.http.get<RelevantSite>(`${environment.rootUrl}${AdminConstants.RELEVANT_SITES_API_URL}/${id}`, {withCredentials: true});
-    }
-
-    saveRelevantSite(relevantSite: RelevantSite) {
-        return this.http.post(`${environment.rootUrl}${AdminConstants.RELEVANT_SITES_API_URL}`, relevantSite, {withCredentials:true});
-    }
-
-    updateRelevantSite(id: string, relevantSite: RelevantSite) {
-        return this.http.put(`${environment.rootUrl}${AdminConstants.RELEVANT_SITES_API_URL}/${id}`, relevantSite, {withCredentials:true});
-    }
 }

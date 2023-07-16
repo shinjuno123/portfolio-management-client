@@ -5,32 +5,33 @@ import { Page } from "src/app/model/custom.page.model";
 import { Notification } from "src/app/model/notification";
 import { environment } from "src/environments/environment";
 import { AdminDataService } from "./admin.data.service";
+import { Observable } from "rxjs";
 
 @Injectable({
     providedIn: "root"
 })
 export class AdminNotificationService implements AdminDataService<Notification, Page>{
-    PAGE_SIZE = 10;
-
     constructor(private http: HttpClient) {}
+
+    delete(id: string): Observable<{}> {
+        return this.http.delete<Notification>(`${environment.rootUrl}${AdminConstants.NOTIFICATION_API_URL}/${id}`, {withCredentials: true});
+    }
+
+    getDataById(id: string): Observable<Notification> {
+        return this.http.get<Notification>(`${environment.rootUrl}${AdminConstants.NOTIFICATION_API_URL}/${id}`, {withCredentials: true});
+    }
+
+    save(data: Notification, files:  (File | null)[]): Observable<{}> {
+        const formData = this.createRequestBodyForNotification(data, files[0]!);
+        return this.http.post(`${environment.rootUrl}${AdminConstants.NOTIFICATION_API_URL}`, formData, {observe:"response", withCredentials: true});
+    }
+    update(data: Notification, files: (File | null)[]): Observable<{}> {
+        const formData = this.createRequestBodyForNotification(data, files[0]!);
+        return this.http.put(`${environment.rootUrl}${AdminConstants.NOTIFICATION_API_URL}/${data.id}`, formData, {observe:"response", withCredentials: true});
+    }
 
     listPaginatedData(pageSize:number, pageNumber: number) {
         return this.http.get<Page>(`${environment.rootUrl}${AppConstants.NOTIFICATION_API_URL}?pageNumber=${pageNumber}&pageSize=${pageSize}`, {withCredentials:true});
-    }
-
-    listNotifications(pageNumber: number) {
-        return this.http.get<Page>(`${environment.rootUrl}${AppConstants.NOTIFICATION_API_URL}?pageNumber=${pageNumber}&pageSize=${this.PAGE_SIZE}`, {withCredentials:true});
-    }
-
-    saveNotifcation(notification: Notification, notificationImage: File) {
-        const formData = this.createRequestBodyForNotification(notification, notificationImage);
-        return this.http.post(`${environment.rootUrl}${AdminConstants.NOTIFICATION_API_URL}`, formData, {observe:"response", withCredentials: true});
-    }
-
-
-    updateNotification(id: string,notification: Notification, notificationImage: File) {
-        const formData = this.createRequestBodyForNotification(notification, notificationImage);
-        return this.http.put(`${environment.rootUrl}${AdminConstants.NOTIFICATION_API_URL}/${id}`, formData, {observe:"response", withCredentials:true});
     }
 
     createRequestBodyForNotification(notificaiton: Notification, notificationImage: File) {
@@ -43,10 +44,8 @@ export class AdminNotificationService implements AdminDataService<Notification, 
             payload.append("image", notificationImage);
         }
 
+
         return payload;
     }
 
-    getNotificationById(id: string) {
-        return this.http.get<Notification>(`${environment.rootUrl}${AdminConstants.NOTIFICATION_API_URL}/${id}`, {withCredentials: true});
-    }
 }

@@ -11,15 +11,15 @@ import { AdminDataService } from "./admin.data.service";
 @Injectable({
     providedIn: "root"
 })
-export class AdminIntroService implements AdminDataService<Intro>{
+export class AdminIntroService implements AdminDataService<Intro,{}, Intro>{
 
     constructor(private http: HttpClient){}
 
-    listData() {
-        return this.http.get<Intro[]>(environment.rootUrl + AdminConstants.INTRO_API_URL, {withCredentials:true});
+    delete(id: string): Observable<Intro> {
+        return this.http.delete<Intro>(environment.rootUrl + `${AdminConstants.INTRO_API_URL}/${id}`,{withCredentials:true} );
     }
 
-    getIntroById(id : string) {
+    getDataById?(id: string): Observable<Intro> {
         return this.http.get<Intro>(environment.rootUrl + `${AdminConstants.INTRO_API_URL}/${id}`,{observe:"response", withCredentials:true})
         .pipe(
             map(
@@ -30,8 +30,20 @@ export class AdminIntroService implements AdminDataService<Intro>{
                 }
             )
         )
-            
     }
+
+    save(data: Intro): Observable<Intro> {
+        return this.http.post<Intro>(environment.rootUrl + AdminConstants.INTRO_API_URL, data,{ withCredentials:true} );
+    }
+    update(data: Intro): Observable<Intro> {
+        return this.http.post<Intro>(environment.rootUrl + AdminConstants.INTRO_API_URL, data,{withCredentials:true} );
+    }
+
+    listData() {
+        return this.http.get<Intro[]>(environment.rootUrl + AdminConstants.INTRO_API_URL, {withCredentials:true});
+    }
+
+
 
 
     saveIntro(intro : Intro) {

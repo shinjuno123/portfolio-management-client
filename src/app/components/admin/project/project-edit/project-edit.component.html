@@ -1,84 +1,12 @@
-<div class="container">
-    <a class="btn btn-primary mb-4" routerLink="../">Back</a>
-    <h2 class="text-start mb-4">Edit Project</h2>
-    <div class="board-wrapper">
-      <form (ngSubmit)="submitForm()" #form="ngForm">
-        <p class="text-start" *ngIf="project.id">id: {{project.id}}</p>
+<admin-dataedit
+  [dataService]="adminProjectService"
+  [textAreaProperties]="textAreaProperties"
+  [textProperties]="textProperties"
+  [filesProperties]="filesProperties"
+  [dataProperties]="dateProperties"
+  [activeProperty]="activeProperty"
+  [data]="data"
+  routeLinkToListPage="../"
+  editPageName="Project"
   
-        <div class="input-group mb-3">
-          <span class="input-group-text">Project Name</span>
-          <input type="text" 
-            class="form-control" 
-            placeholder="Project Name"
-            name="projectName"
-            [(ngModel)]="project.projectName"
-            required>
-        </div>
-        <div class="input-group mb-3">
-          <span class="input-group-text">Url</span>
-          <input type="url"
-            class="form-control"
-            placeholder="Url"
-            name="url"
-            [(ngModel)]="project.url"
-            required
-            pattern="(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$">
-        </div>
-  
-        <div class="d-flex attachment-box">
-
-          <div class="attachment-form" (click)="projectImageUpload.click()">
-            <div class="attachment-background">
-              <p class="attachment-type">Project</p>
-              <input type="file" name="projectImage" id="projectImage" (change)="setAttachment($event)" #projectImageUpload
-                hidden>
-              <p class="icon-description">Click to upload your certification </p>
-              <p *ngIf="isProjectImageNotPermitted" class="warning">(Not permitted type!)</p>
-              <div class="icon-wrapper">
-                <fa-icon class="fa-icon" [icon]="faPaperclip"></fa-icon>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="file-viewer-button" *ngIf="project.id" (click)="reviewFile('imagePath')">
-          <button type="button">Review this file</button>
-        </div>
-  
-  
-        <div class="date-form mt-5" *ngIf="project.updated">
-          <p>Updated</p>
-          <p>{{project.updated}}</p>
-        </div>
-        <div class="date-form mt-3" *ngIf="project.uploaded">
-          <p>Uploaded</p>
-          <p>{{project.uploaded}}</p>
-        </div>
-        <div></div>
-        <button class="btn btn-primary mt-3 mb-4"
-          [disabled]="!projectImage ||!form.valid">{{project.id? 'Update':'Save'}}</button>
-        <button class="btn btn-danger" (click)="deleteProject()">Delete</button>
-      </form>
-    </div>
-  </div>
-  
-  <button #deleteModalButton type="button" class="modal-button" data-bs-toggle="modal"
-    data-bs-target="#exampleModal2"></button>
-  
-  <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel2">Warning</h1>
-          <button #closeModalButton type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p class="text-start">Your data will be removed permanently.</p>
-          <p class="text-start">Do you agree with the permanent removal of your data?</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No</button>
-          <button type="button" class="btn btn-primary" (click)="submitDelete()">Yes</button>
-        </div>
-      </div>
-    </div>
-  </div>
+></admin-dataedit>

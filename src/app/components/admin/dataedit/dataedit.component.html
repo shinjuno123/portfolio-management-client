@@ -1,6 +1,6 @@
 <div class="container">
-  <a class="btn btn-primary mb-4" routerLink="../">Back</a>
-  <h2 class="text-start mb-4">Edit About</h2>
+  <a class="btn btn-primary mb-4" [routerLink]="routeLinkToListPage">Back</a>
+  <h2 class="text-start mb-4">Edit {{editPageName}}</h2>
   <div class="board-wrapper">
     <form (ngSubmit)="submitForm()" [formGroup]="formGroup">
       <p class="text-start" *ngIf="formGroup.get('id')?.value">id: {{formGroup.get('id')?.value}}</p>
@@ -8,62 +8,66 @@
 
       <div class="input-group mb-3" *ngFor="let textProperty of textProperties">
         <span class="input-group-text">{{textProperty.displayedName}}</span>
-        <input type="text" 
-          class="form-control" 
-          [placeholder]="textProperty.displayedName" 
-          [name]="textProperty.name"
-          [formControlName]="textProperty.name"
-          >
+        <input type="text" class="form-control" [placeholder]="textProperty.displayedName" [name]="textProperty.name"
+          [formControlName]="textProperty.name">
       </div>
 
       <div class="form-floating text-black mb-3" *ngFor="let textAreaProperty of textAreaProperties">
-        <textarea 
-          class="form-control" 
-          placeholder="Write details of the subject." 
-          [id]="textAreaProperty.name" 
-          [name]="textAreaProperty.name"
-          [formControlName]="textAreaProperty.name"
-          ></textarea>
+        <textarea class="form-control" placeholder="Write details of the subject." [id]="textAreaProperty.name"
+          [name]="textAreaProperty.name" [formControlName]="textAreaProperty.name"></textarea>
         <label [for]="textAreaProperty.name">{{textAreaProperty.displayedName}}</label>
       </div>
 
       <div class="form-check form-switch mb-5" *ngIf="activeProperty">
-        <input #activated 
-          class="form-check-input" 
-          name="activated"
-          (change)="activateThisData()" 
-          type="checkbox" 
-          role="switch" 
-          id="activated"
-          [formControlName]="activeProperty.name"
-          >
-        <label class="form-check-label" for="activated">Activate this "About Me"</label>
+        <input #activated class="form-check-input" name="activated" (change)="activateThisData(activeProperty)"
+          type="checkbox" role="switch" id="activated" [formControlName]="activeProperty.name">
+        <label class="form-check-label" for="activated">Activate this "{{editPageName}}"</label>
+      </div>
+
+      <div class="row mb-3 gx-1" *ngIf="checkBoxProperties">
+        <div class="col" *ngFor="let checkboxProperty of checkBoxProperties">
+          <div class="font-highlight checkbox-flex">
+            <div class="checkbox-wrapper">
+              <label>
+                <input type="checkbox" name="active" [formControlName]="checkboxProperty.name">
+                <span class="greenmark"></span>
+              </label>
+            </div>
+            <p>{{checkboxProperty.displayedName}}</p>
+          </div>
+        </div>
+
       </div>
 
 
-      <div class="d-flex mb-5 attachment-box" *ngIf="filesProperties.length">
+      <div class="d-flex mb-5 attachment-box" *ngIf="filesProperties && filesProperties.length">
         <div class="attachment-form" *ngFor="let fileProperty of filesProperties let index=index;">
           <div class="attachment-background" (click)="fileUpload.click()">
             <p class="attachment-type">{{fileProperty.name}}</p>
-            <input type="file" [name]="fileProperty.name" [id]="fileProperty.name" (change)="setAttachment($event,index)" #fileUpload hidden>
+            <input type="file" [name]="fileProperty.name" [id]="fileProperty.name"
+              (change)="setAttachment($event,index, fileProperty)" #fileUpload hidden>
             <p class="icon-description">Click to upload your {{fileProperty.name}}</p>
             <p class="warning" *ngIf="areFilesPermitted[index]">(Not permitted type!)</p>
             <div class="icon-wrapper mt-4">
               <fa-icon class="fa-icon" [icon]="faPaperclip"></fa-icon>
             </div>
           </div>
-          <button type="button" class="file-viewer-button mt-2">Review this file</button>
+          <button type="button" *ngIf="id && files[index]" (click)="reviewFile(fileProperty.name)"
+            class="file-viewer-button mt-2">Review this file</button>
         </div>
       </div>
 
 
-      <div class="date-form mb-3" *ngFor="let dateProperty of dateProperties">
-        <p>{{dateProperty.displayedName}}</p>
-        <p>{{formGroup.get(dateProperty.name)}}</p>
+      <div class="date-form" *ngFor="let dateProperty of dateProperties">
+        <div class="mb-3" *ngIf="data[dateProperty.name]">
+          <p>{{dateProperty.displayedName}}</p>
+          <p>{{data[dateProperty.name]}}</p>
+        </div>
       </div>
 
-      <button class="btn btn-primary mb-4" [disabled]="!formGroup.valid" type="submit"> {{id?'Update':'Save'}}</button>
-      <button class="btn btn-danger" type="button">Delete</button>
+      <button class="btn btn-primary mb-4" [disabled]="checkIfEmptyFileExists() || !formGroup.valid" type="submit">
+        {{id?'Update':'Save'}}</button>
+      <button class="btn btn-danger" type="button" *ngIf="id" (click)="openDeleteModal()">Delete</button>
     </form>
   </div>
 </div>
@@ -71,8 +75,7 @@
 <button #activeModalButton type="button" class="modal-button" data-bs-toggle="modal"
   data-bs-target="#activationModal"></button>
 
-<div class="modal fade" id="activationModal" tabindex="-1" aria-labelledby="activationModalLabel"
-  aria-hidden="true">
+<div class="modal fade" id="activationModal" tabindex="-1" aria-labelledby="activationModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -80,13 +83,14 @@
         <button #closeModalButton type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <p class="text-start">Do you really want to activate this "About Me"?</p>
-        <p class="text-start">Warning, Other "About Me" will be deactivated!</p>
+        <p class="text-start">Do you really want to activate this "{{editPageName}}"?</p>
+        <p class="text-start">Warning, Other "{{editPageName}}" will be deactivated!</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" (click)="cancelActivation()" data-bs-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary" (click)="confirmActivation()" data-bs-dismiss="modal">Confirm activating this "About
-          Me"</button>
+        <button type="button" class="btn btn-danger" (click)="cancelActivation()"
+          data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="confirmActivation()" data-bs-dismiss="modal">Confirm
+          activating this "{{editPageName}}"</button>
       </div>
     </div>
   </div>
@@ -109,7 +113,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No</button>
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Yes</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="deleteThis()">Yes</button>
       </div>
     </div>
   </div>

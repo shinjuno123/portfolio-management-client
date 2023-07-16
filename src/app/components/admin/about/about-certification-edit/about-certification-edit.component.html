@@ -1,74 +1,12 @@
-<div class="container">
-  <a class="btn btn-primary mb-4" routerLink="../../">Back</a>
-  <h2 class="text-start mb-4">Edit Certification</h2>
-  <div class="board-wrapper">
-    <form (ngSubmit)="submitForm()" #form="ngForm">
-      <p class="text-start" *ngIf="certification.id">id: {{certification.id}}</p>
-
-      <div class="input-group mb-3">
-        <span class="input-group-text">Name</span>
-        <input type="text" class="form-control" placeholder="Name" name="name" [(ngModel)]="certification.name">
-      </div>
-
-      <div class="d-flex attachment-box">
-
-        <div class="attachment-form" (click)="certificationUpload.click()">
-          <div class="attachment-background">
-            <p class="attachment-type">Certification</p>
-            <input type="file" name="certFile" id="certFile" (change)="setAttachment($event)" #certificationUpload
-              hidden>
-            <p class="icon-description">Click to upload your certification </p>
-            <p *ngIf="isCertNotPermitted" class="warning">(Not permitted type!)</p>
-            <div class="icon-wrapper">
-              <fa-icon class="fa-icon" [icon]="faPaperclip"></fa-icon>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="file-viewer-button" *ngIf="certification.id" (click)="reviewFile('downloadUrl')">
-        <button type="button">Review this file</button>
-      </div>
-
-
-      <div class="date-form mt-5" *ngIf="certification.updated">
-        <p>Updated</p>
-        <p>{{certification.updated}}</p>
-      </div>
-      <div class="date-form mt-3" *ngIf="certification.uploaded">
-        <p>Uploaded</p>
-        <p>{{certification.uploaded}}</p>
-      </div>
-      <div></div>
-      <button class="btn mt-5 btn-primary mb-4" [disabled]="!certFile ||!form.valid">{{certification.id?
-        'Update':'Save'}}</button>
-      <button class="btn btn-danger" type="button" (click)="deleteCeritication()">Delete</button>
-    </form>
-  </div>
-</div>
-
-<button #modalButton type="button" class="modal-button" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
-
-
-
-
-<button #deleteModalButton type="button" class="modal-button" data-bs-toggle="modal"
-  data-bs-target="#deleteCertificationModal"></button>
-
-<div class="modal fade" id="deleteCertificationModal" tabindex="-1" aria-labelledby="deleteCertificationModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="deleteCertificationModalLabel">Warning</h1>
-        <button #closeModalButton type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p class="text-start">Your data will be removed permanently.</p>
-        <p class="text-start">Do you agree with the permanent removal of your data?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No</button>
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="submitDeleteCert()">Yes</button>
-      </div>
-    </div>
-  </div>
-</div>
+<admin-dataedit
+  [dataService]="adminAboutCertificationService"
+  [textAreaProperties]="textAreaProperties"
+  [textProperties]="textProperties"
+  [filesProperties]="filesProperties"
+  [dataProperties]="dateProperties"
+  [activeProperty]="activeProperty"
+  [data]="data"
+  routeLinkToListPage="../../"
+  editPageName="Certification"
+  
+></admin-dataedit>

@@ -1,10 +1,11 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { AdminConstants, AppConstants } from "src/app/constants/app.constants";
 import { About } from "src/app/model/about.model";
 import { Certification } from "src/app/model/certification.model";
 import { environment } from "src/environments/environment";
 import { AdminDataService } from "./admin.data.service";
+import { Observable } from "rxjs";
 
 
 
@@ -15,6 +16,20 @@ export class AdminAboutService implements AdminDataService<About>{
 
     constructor(private http: HttpClient){}
 
+    delete(id: string): Observable<{}> {
+        return this.http.delete(`${environment.rootUrl}${AdminConstants.ABOUT_API_URL}/${id}`,{withCredentials:true, observe:"response"});
+    }
+
+    save(data: About, files: (File | null)[], fileProperties:  { name: string, value:string,permittedExtensions: string[] }[]): Observable<HttpResponse<Object>> {
+        
+        const formData = this.createRequestBodyForAbout(data, files, fileProperties);
+        return this.http.post(`${environment.rootUrl}${AdminConstants.ABOUT_API_URL}`, formData,{withCredentials:true, observe:"response"});
+    }
+    update(data: About, files: (File | null)[], fileProperties:  { name: string, value:string,permittedExtensions: string[] }[]): Observable<HttpResponse<Object>> {
+        const formData = this.createRequestBodyForAbout(data, files, fileProperties);
+        return this.http.post(`${environment.rootUrl}${AdminConstants.ABOUT_API_URL}`, formData,{withCredentials:true, observe:"response"});
+    }
+
     listData() {
         return this.http.get<About[]>(`${environment.rootUrl}${AdminConstants.ABOUT_API_URL}`, {withCredentials:true});
     }
@@ -23,33 +38,43 @@ export class AdminAboutService implements AdminDataService<About>{
         return this.http.get<About[]>(`${environment.rootUrl}${AdminConstants.ABOUT_API_URL}`, {withCredentials:true});
     }
 
+    getDataById(id: string) {
+        return this.http.get<About>(`${environment.rootUrl}${AdminConstants.ABOUT_API_URL}/${id}`, {withCredentials:true});
+    }
+
     getAboutById(id: string) {
         return this.http.get<About>(`${environment.rootUrl}${AdminConstants.ABOUT_API_URL}/${id}`, {withCredentials:true});
     }
 
-    saveOrUpdateAbout(about: About, faceImage: File, transcript: File, diploma: File) {
-        const formData = this.createRequestBodyForAbout(about, faceImage, transcript, diploma);
-        return this.http.post(`${environment.rootUrl}${AdminConstants.ABOUT_API_URL}`, formData,{withCredentials:true, observe:"response"});
-    }
 
 
-    createRequestBodyForAbout(about: About, faceImage: File, transcript: File, diploma: File) : FormData {
+    createRequestBodyForAbout(data: About, files: (File | null)[], fileProperties:  { name: string, value:string,permittedExtensions: string[] }[]) : FormData {
         const payload = new FormData();
-        payload.append("about", new Blob([JSON.stringify({...about})], {
+        payload.append("about", new Blob([JSON.stringify({...data})], {
             type:"application/json"
         }));
 
-        if(faceImage.type) {
-            payload.append("faceImage", faceImage);
-        }
+        fileProperties.forEach((fileProperty,index) => {
+            const lowercasedPropertyName = fileProperty.name.toLowerCase();
+            if(lowercasedPropertyName.includes("faceimage")) {
+                if(files[index]?.type) {
+                    payload.append("faceImage", files[index]!);
+                }
+            }
 
-        if(transcript.type) {
-            payload.append("transcript", transcript);
-        }
+            else if(lowercasedPropertyName.includes("transcript")) {
+                if(files[index]?.type) {
+                    payload.append("transcript", files[index]!);
+                }
+            }
 
-        if(diploma.type) {
-            payload.append("diploma", diploma);
-        }
+            else if(lowercasedPropertyName.includes("diploma")) {
+                if(files[index]?.type) {
+                    payload.append("diploma", files[index]!);
+                }
+            }
+        });
+
 
         return payload;
     }
