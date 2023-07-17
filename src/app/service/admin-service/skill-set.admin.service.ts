@@ -1,11 +1,26 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Subject, map, tap } from "rxjs";
+import { AppConstants } from "src/app/constants/app.constants";
+import { FirstCategory } from "src/app/model/skill-set/first-category.model";
+import { RelevantProject} from "src/app/model/skill-set/relevant-project.model";
+import { SecondCategory } from "src/app/model/skill-set/second-category.model";
+import { SkillSetItem } from "src/app/model/skill-set/skill-set-item.model";
+import { environment } from "src/environments/environment";
 
 
 @Injectable({
     providedIn: "root",
 })
 export class SkillSetAdminService {
+
+    allCategoriesLoadCompleteEvent = new Subject<{}>();
+
+    firstCategories: FirstCategory[] = [];
+    selectedFirstCategoryIdx: number = 0;
+    selectedSecondCategoryIdx: number = 0;
+    selectedSkillSetItemIdx: number = 0;
+
 
     firstCategory: {id:string, name:string}[] = [
         {id:"baebab16-12c2-11ee-be56-0242ac120002", name:"Desktop"},
@@ -29,20 +44,50 @@ export class SkillSetAdminService {
 
     constructor(private http: HttpClient) { }
 
-    public getFirstCategory() {
-        return this.firstCategory.slice();
+    public loadCategories() {
+        return this.http.get<FirstCategory[]>(`${environment.rootUrl}${AppConstants.SKILL_SET_API_URL}`)
+        .subscribe(
+            (firstCategories) => {
+                if(firstCategories && firstCategories.length) {
+                    this.firstCategories = firstCategories;
+                }
+
+                this.allCategoriesLoadCompleteEvent.next({});
+            }
+        );
+    }
+
+    public getFirstCategories() {
+        return structuredClone(this.firstCategories);
     }
 
 
-    public getSecondCategory() {
-        return this.secondCategory.slice();
+    public getSecondCategories(selectedFirstCategoryIdx: number) {
+        const firstCategories = this.getFirstCategories();
+        if(firstCategories && 0 <= selectedFirstCategoryIdx &&  selectedFirstCategoryIdx < firstCategories.length) {
+            return structuredClone(firstCategories[selectedFirstCategoryIdx].secondCategorySet);
+        }
+
+        return null;
     }
 
-    public getSkillSetItems() {
-        return this.skillSetItem.slice();
+    public getSkillSetItems(selectedFirstCategoryIdx: number, selectedSecondCategoryIdx: number) {
+        const secondCategory = this.getSecondCategories(selectedFirstCategoryIdx);
+
+        if(secondCategory && 0 <= selectedSecondCategoryIdx && selectedSecondCategoryIdx < secondCategory.length ) {
+            return structuredClone(secondCategory[selectedSecondCategoryIdx].skillSetItemSet);
+        }
+
+        return null;
     }
 
-    public getRelevantProjects() {
+    public getRelevantProjects(selectedFirstCategoryIdx: number, selectedSecondCategoryIdx: number, selectedSkillSetItemIdx: number) {
+        const skillSetItem = this.getSkillSetItems(selectedFirstCategoryIdx,selectedSecondCategoryIdx);
 
+        if(skillSetItem && 0 <= selectedSkillSetItemIdx && selectedSkillSetItemIdx < skillSetItem.length ) {
+            return structuredClone(skillSetItem[selectedSkillSetItemIdx].relevantProjectSet);
+        }
+
+        return null;
     }
 }

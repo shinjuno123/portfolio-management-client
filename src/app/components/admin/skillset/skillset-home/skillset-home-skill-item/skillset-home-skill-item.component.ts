@@ -1,36 +1,57 @@
-import { Component } from "@angular/core";
+import { Component, ElementRef, Renderer2, ViewChild } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { faCirclePlus, faHandPointer, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import { SkillSetItem } from "src/app/model/skill-set/skill-set-item.model";
 import { SkillSetAdminService } from "src/app/service/admin-service/skill-set.admin.service";
 
 
 @Component({
     selector: 'admin-skillset-home-skill-item',
     templateUrl: './skillset-home-skill-item.component.html',
-    styleUrls:['./skillset-home-skill-item.component.css']
+    styleUrls: ['./skillset-home-skill-item.component.css']
 })
 export class AdminSkillSetHomeSkillItemComponent {
-    skillSetItems!: {
-        id: string;
-        title: string;
-        description: string;
-    }[];
+    skillSetItems!: SkillSetItem[] | null;
     faCirclePlus = faCirclePlus;
-    toggleEditIcon= faHandPointer;
+    toggleEditIcon = faHandPointer;
 
-    constructor(private skillSetAdminService:SkillSetAdminService,
-        private router: Router, private route:ActivatedRoute){}
+    constructor(private skillSetAdminService: SkillSetAdminService,
+        private router: Router, private route: ActivatedRoute) { }
 
     ngOnInit(): void {
-        this.skillSetItems = this.skillSetAdminService.getSkillSetItems(); 
+        this.getSkillSetItems();
     }
 
+    getSkillSetItems() {
+        this.skillSetAdminService.allCategoriesLoadCompleteEvent.subscribe({
+            next: () => {
+                this.skillSetItems = this.skillSetAdminService.getSkillSetItems(
+                    this.skillSetAdminService.selectedFirstCategoryIdx,
+                    this.skillSetAdminService.selectedSecondCategoryIdx
+                );
+            }
+        });
+    }
+
+    selectOrEditCategory(idx: number) {
+        // Edit
+        if(this.toggleEditIcon === faPenToSquare) {
+            this.routeToEditPage();
+            return;
+        }
+
+        // Select
+        this.skillSetAdminService.selectedSkillSetItemIdx = idx;
+        this.skillSetAdminService.allCategoriesLoadCompleteEvent.next({});
+    }
+
+
     addCategory() {
-        
+
     }
 
     toggleEditMode() {
-        if(this.toggleEditIcon === faPenToSquare) {
+        if (this.toggleEditIcon === faPenToSquare) {
             this.toggleEditIcon = faHandPointer;
             return;
         }
@@ -39,6 +60,6 @@ export class AdminSkillSetHomeSkillItemComponent {
     }
 
     routeToEditPage() {
-        this.router.navigate(["edit"], {relativeTo: this.route})
+        this.router.navigate(["edit"], { relativeTo: this.route })
     }
 }

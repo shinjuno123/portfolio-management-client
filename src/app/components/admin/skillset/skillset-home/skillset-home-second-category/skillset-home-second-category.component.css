@@ -24,21 +24,6 @@ h2 {
 }
 
 .add-button {
-    background-color: transparent;
-    color: white;
-    height: fit-content;
-    padding: 0;
-    border: 0;
-}
-
-.add-button fa-icon {
-    display: block;
-    position: relative;
-    font-size: larger;
-}
-
-
-.add-button {
     background-color: #27374D;
     color: white;
     height: fit-content;
@@ -104,6 +89,10 @@ p {
     transition: background .3s;
 }
 
+.save-button:disabled{
+    background-color: #99e9bd;
+}
+
 .save-button:hover{
     background-color: #9ce4bc;
     transition: background .3s;
@@ -128,4 +117,23 @@ p {
     display: flex;
     flex-flow: column;
     justify-content: space-between;
+}
+
+button.btn.btn-primary {
+    position: relative;
+}
+
+.delete-icon-wrapper {
+    position: absolute;
+    right: -10%;
+    top: -25%;
+    width: 1rem;
+    height: 1rem;
+    font-size: .5rem;
+    font-weight: bolder;
+    z-index: 3;
+    background-color: #FF6666;
+    padding: 0 .3rem;
+    border-radius: 2rem;
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, .7);
 }

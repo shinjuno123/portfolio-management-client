@@ -2,7 +2,7 @@
     <h2>Category 1</h2>
     <div>
         <button class="add-button" (click)="addCategory()">
-            <fa-icon [icon]="faCirclePlus"/>
+            <fa-icon [icon]="addIcon"/>
         </button>
         <button class="edit-toggle" (click)="toggleEditMode()">
             <fa-icon [icon]="toggleEditIcon"></fa-icon>
@@ -11,11 +11,13 @@
 </div>
 <div class="d-flex">
     <button class="btn btn-primary"
-     [id]="category.id" 
-     *ngFor="let category of firstCategory"
+     [id]="firstCategory.id" 
+     *ngFor="let firstCategory of firstCategories let idx=index"
      type="button"
-     data-bs-toggle="offcanvas"
-     data-bs-target="#editcategory" aria-controls="editcategory">{{category.name}}</button>
+     (click)="selectOrEditOrDeleteCategory(idx)">{{firstCategory.name}} 
+     <div *ngIf="toggleEditIcon === deleteIcon" class="delete-icon-wrapper"><fa-icon [icon]="minusIcon" [style]="{'color':'white'}"/></div>
+    </button>
+    <button #offCanvas1Button type="button" data-bs-toggle="offcanvas" data-bs-target="#editcategory" aria-controls="editcategory" hidden></button>
 </div>
 
 <div class="offcanvas offcanvas-end" tabindex="-1" id="editcategory" aria-labelledby="offcanvasLabel">
@@ -24,17 +26,19 @@
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-        <div>
-            <p class="text-start">id: 5258b3c4-0e3e-11ee-be56-0242ac120002</p>
-            <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon2">name</span>
-                <input type="text" class="form-control" placeholder="name"
-                  aria-describedby="basic-addon2">
+        <form #form="ngForm">
+            <div>
+                <p class="text-start" *ngIf="selectedFirstCategory.id">id: {{selectedFirstCategory.id}}</p>
+                <div class="input-group">
+                    <span class="input-group-text">name</span>
+                    <input type="text" class="form-control" placeholder="Enter the name of first category" name="name" [(ngModel)]="selectedFirstCategory.name" required>
+                </div>
             </div>
-        </div>
-        <div>
-            <button class="save-button mb-3">Update Or Save</button>
-            <button class="delete-button">Delete</button>
-        </div>
+            <div>
+                <button class="save-button mt-3" data-bs-dismiss="offcanvas" [disabled]="!form.valid">{{selectedFirstCategory.id?'Update':'Save'}}</button>
+                <button class="delete-button mt-3" data-bs-dismiss="offcanvas" type="button" *ngIf="selectedFirstCategory.id">Delete</button>
+            </div>
+        </form>
+
     </div>
 </div>

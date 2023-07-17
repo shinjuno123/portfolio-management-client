@@ -12,7 +12,7 @@
 <div class="d-flex">
     <button class="btn btn-primary"
      [id]="category.id" 
-     *ngFor="let category of firstCategory"
+     *ngFor="let category of relevantProjects"
      type="button"
      data-bs-toggle="offcanvas"
      data-bs-target="#editrelevantprojects" aria-controls="editrelevantprojects">{{category.name}}</button>

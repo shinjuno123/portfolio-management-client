@@ -1,4 +1,4 @@
-import { RelevantProjects } from "./relevant-project.model";
+import { RelevantProject } from "./relevant-project.model";
 
 export interface SkillSetItem {
     id: string,
@@ -7,5 +7,5 @@ export interface SkillSetItem {
     description: string,
     updated: string,
     uploaded: string,
-    relevantProjectSet: RelevantProjects[]
+    relevantProjectSet: RelevantProject[]
 }
