@@ -6,5 +6,5 @@ export interface SecondCategory {
     name: string,
     updated: string,
     uploaded: string,
-    skillSetItemSet: SkillSetItem[]
+    skillSetItemSet: SkillSetItem[] | null
 }

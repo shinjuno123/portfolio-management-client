@@ -6,6 +6,11 @@
     --bs-btn-hover-border-color: #84C69B;
 }
 
+.btn.selected {
+    --bs-btn-bg:#25cdda;
+    --bs-btn-border-color:#25cdda;
+}
+
 .d-flex:nth-child(1) {
     justify-content: space-between;
 }

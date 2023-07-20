@@ -24,8 +24,6 @@ export class AdminIntroService implements AdminDataService<Intro,{}, Intro>{
         .pipe(
             map(
                 value => {
-                    console.log(value);
-
                     return <Intro> value.body;
                 }
             )

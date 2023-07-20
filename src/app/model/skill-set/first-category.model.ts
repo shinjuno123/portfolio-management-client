@@ -5,5 +5,5 @@ export interface FirstCategory {
     name: string;
     updated: string;
     uploaded: string;
-    secondCategorySet: SecondCategory[]
+    secondCategorySet: SecondCategory[] | null;
 }

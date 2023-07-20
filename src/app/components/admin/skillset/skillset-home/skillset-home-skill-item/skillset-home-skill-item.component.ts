@@ -15,7 +15,7 @@ export class AdminSkillSetHomeSkillItemComponent {
     faCirclePlus = faCirclePlus;
     toggleEditIcon = faHandPointer;
 
-    constructor(private skillSetAdminService: SkillSetAdminService,
+    constructor(public skillSetAdminService: SkillSetAdminService,
         private router: Router, private route: ActivatedRoute) { }
 
     ngOnInit(): void {
@@ -26,28 +26,29 @@ export class AdminSkillSetHomeSkillItemComponent {
         this.skillSetAdminService.allCategoriesLoadCompleteEvent.subscribe({
             next: () => {
                 this.skillSetItems = this.skillSetAdminService.getSkillSetItems(
-                    this.skillSetAdminService.selectedFirstCategoryIdx,
-                    this.skillSetAdminService.selectedSecondCategoryIdx
+                    this.skillSetAdminService.selectedFirstCategoryId,
+                    this.skillSetAdminService.selectedSecondCategoryId
                 );
             }
         });
     }
 
-    selectOrEditCategory(idx: number) {
+    selectOrEditCategory(idx: number, id:string) {
         // Edit
         if(this.toggleEditIcon === faPenToSquare) {
-            this.routeToEditPage();
+            this.routeToEditPage(id);
             return;
         }
 
         // Select
-        this.skillSetAdminService.selectedSkillSetItemIdx = idx;
+        this.skillSetAdminService.selectedSkillSetItemId = id;
         this.skillSetAdminService.allCategoriesLoadCompleteEvent.next({});
     }
 
 
     addCategory() {
-
+        this.routeToEditPage('');
+        
     }
 
     toggleEditMode() {
@@ -59,7 +60,7 @@ export class AdminSkillSetHomeSkillItemComponent {
         this.toggleEditIcon = faPenToSquare;
     }
 
-    routeToEditPage() {
-        this.router.navigate(["edit"], { relativeTo: this.route })
+    routeToEditPage(id: string) {
+        this.router.navigate(["edit"], {queryParams:{id:id}, relativeTo: this.route })
     }
 }

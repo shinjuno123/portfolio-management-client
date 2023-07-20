@@ -1,11 +1,15 @@
 import { RelevantProject } from "./relevant-project.model";
 
-export interface SkillSetItem {
-    id: string,
-    title: string,
-    imagePath: string,
-    description: string,
-    updated: string,
-    uploaded: string,
-    relevantProjectSet: RelevantProject[]
+export class SkillSetItem {
+    constructor(   
+        public id: string = "",
+        public title: string = "",
+        public imagePath: string = "",
+        public description: string = "",
+        public updated: string = "",
+        public uploaded: string = "",
+        public relevantProjectSet: RelevantProject[] = []) {
+
+    }
+
 }

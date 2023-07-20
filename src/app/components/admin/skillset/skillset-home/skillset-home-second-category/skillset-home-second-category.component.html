@@ -1,7 +1,7 @@
 <div class="d-flex mb-3">
     <h2>Category 2</h2>
     <div>
-        <button class="add-button" (click)="addCategory()">
+        <button class="add-button" [hidden]="!skillSetAdminService.selectedFirstCategoryId" (click)="addCategory()">
             <fa-icon [icon]="faCirclePlus" />
         </button>
         <button class="edit-toggle" (click)="toggleEditMode()">
@@ -10,9 +10,9 @@
     </div>
 </div>
 <div class="d-flex">
-    <button class="btn btn-primary" [id]="secondCategory.id"
+    <button [class]="{btn:true, 'btn-primary':true, selected:secondCategory.id=== skillSetAdminService.selectedSecondCategoryId}" [id]="secondCategory.id"
         *ngFor="let secondCategory of secondCategories let idx=index" type="button"
-        (click)="selectOrEditOrDeleteCategory(idx)">{{secondCategory.name}}
+        (click)="selectOrEditOrDeleteCategory(idx,secondCategory.id)">{{secondCategory.name}}
         <div *ngIf="toggleEditIcon === deleteIcon" class="delete-icon-wrapper"><fa-icon [icon]="minusIcon"
                 [style]="{'color':'white'}" /></div>
     </button>
@@ -28,7 +28,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-        <form #form="ngForm">
+        <form #form="ngForm" (ngSubmit)="saveOrUpdateSecondCategory()">
             <div>
                 <p class="text-start" *ngIf="selectedSecondCategory.id">id: {{selectedSecondCategory.id}}</p>
                 <div class="input-group mb-3">
@@ -41,7 +41,7 @@
                 <button class="save-button mb-3" data-bs-dismiss="offcanvas"
                     [disabled]="!form.valid">{{selectedSecondCategory.id?'Update':'Save'}}</button>
                 <button class="delete-button" data-bs-dismiss="offcanvas" type="button"
-                    *ngIf="selectedSecondCategory.id">Delete</button>
+                    *ngIf="selectedSecondCategory.id" (click)="deleteSecondCategory(selectedSecondCategory.id)">Delete</button>
             </div>
         </form>
     </div>

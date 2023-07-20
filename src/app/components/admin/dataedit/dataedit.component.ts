@@ -1,7 +1,8 @@
-import { Component, ElementRef, Input, OnInit, QueryList, Renderer2, ViewChild, ViewChildren } from "@angular/core";
+import { AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, OnDestroy, OnInit, QueryList, Renderer2, ViewChild, ViewChildren } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
 import { ActivatedRoute, Params, Router } from "@angular/router";
 import { faPaperclip } from "@fortawesome/free-solid-svg-icons";
+import { Subscription } from "rxjs";
 import { RegularPropertyInformation } from "src/app/model/common/regular.property.information.model";
 import { AdminDataService } from "src/app/service/admin-service/admin.data.service";
 import { environment } from "src/environments/environment";
@@ -11,7 +12,7 @@ import { environment } from "src/environments/environment";
     templateUrl: './dataedit.component.html',
     styleUrls: ['./dataedit.component.css']
 })
-export class AdminDataEditComponent<K extends keyof T,T extends { [key: string]: any }, Service extends AdminDataService<T>> implements OnInit {
+export class AdminDataEditComponent<K extends keyof T,T extends { [key: string]: any }, Service extends AdminDataService<T>> implements OnInit, AfterViewChecked, OnDestroy {
     faPaperclip = faPaperclip;
     @Input("routeLinkToListPage") routeLinkToListPage!: string;
     @Input("editPageName") editPageName!: string;
@@ -19,7 +20,7 @@ export class AdminDataEditComponent<K extends keyof T,T extends { [key: string]:
     @Input("textAreaProperties") textAreaProperties!:RegularPropertyInformation[];
     @Input("textProperties") textProperties!:RegularPropertyInformation[];
     @Input("filesProperties") filesProperties!: { name: string, value:string,permittedExtensions: string[] }[];
-    @Input("dataProperties") dateProperties!: RegularPropertyInformation[];
+    @Input("dateProperties") dateProperties!: RegularPropertyInformation[];
     @Input("checkBoxProperties") checkBoxProperties!: RegularPropertyInformation[];
     @Input("versionProperties") versionProperties!: RegularPropertyInformation[];
     areFilesPermitted: boolean[] = [];
@@ -32,12 +33,14 @@ export class AdminDataEditComponent<K extends keyof T,T extends { [key: string]:
     files: (File | null)[] = [];
     isConfirmed = false;
     id!:string;
+    queryParamSubScription!: Subscription;
 
     // Input dummy data which has empty values of properties, not fully filled with data
     @Input("data") data!: T;
 
     constructor(private renderer: Renderer2,
-        private route: ActivatedRoute, private router: Router) {
+        private route: ActivatedRoute, private router: Router,
+        private changeDetectorRef: ChangeDetectorRef) {
     }
 
     ngOnInit(): void {
@@ -49,8 +52,7 @@ export class AdminDataEditComponent<K extends keyof T,T extends { [key: string]:
         }
 
         this.createReactiveForm();
-
-        this.route.queryParams.subscribe({
+        this.queryParamSubScription = this.route.queryParams.subscribe({
             // Get id from request parameter
             next: (params: Params) => {
                 if (params && params['id']) {
@@ -61,8 +63,19 @@ export class AdminDataEditComponent<K extends keyof T,T extends { [key: string]:
                 }
             }
         });
+
     }
 
+    ngAfterViewChecked(): void {
+        this.checkIfAllFilesAreAlreadyExist();
+        this.changeDetectorRef.detectChanges();
+    }
+
+    ngOnDestroy(): void {
+        if(this.queryParamSubScription) {
+            this.queryParamSubScription.unsubscribe();
+        }
+    }
 
     createReactiveForm() {
         // Initialize formGroup
@@ -148,7 +161,6 @@ export class AdminDataEditComponent<K extends keyof T,T extends { [key: string]:
                 next: (data) => {
                     // Fill the data from database
                     this.data = data;
-                    this.checkIfAllFilesAreAlreadyExist();
                     this.setReactiveForm();
                 }
             });
@@ -173,6 +185,7 @@ export class AdminDataEditComponent<K extends keyof T,T extends { [key: string]:
                 (fileProperty: { name: string,  permittedExtensions: string[] }, index) => {
                     // Check if data object exists.
                     const filePath: string = this.data[fileProperty.name];
+            
                     if (filePath) {
                         // Create dummy file.
                         const file: File = this.createDummyFile(filePath.split("/").at(-1));
@@ -182,6 +195,7 @@ export class AdminDataEditComponent<K extends keyof T,T extends { [key: string]:
     
                         // Set file name of variable 'file' to ptag of the attachment view.
                         this.setFileNameToTag(file, this.fileUploads.get(index)?.nativeElement, true);
+
                     }
                 }
             )

@@ -10,11 +10,12 @@
     </div>
 </div>
 <div class="d-flex">
-    <button class="btn btn-primary"
+    <button
      [id]="firstCategory.id" 
      *ngFor="let firstCategory of firstCategories let idx=index"
      type="button"
-     (click)="selectOrEditOrDeleteCategory(idx)">{{firstCategory.name}} 
+     (click)="selectOrEditOrDeleteCategory(idx,firstCategory.id)"
+     [class]="{btn:true, 'btn-primary':true, selected:firstCategory.id ===  this.skillSetAdminService.selectedFirstCategoryId}">{{firstCategory.name}} 
      <div *ngIf="toggleEditIcon === deleteIcon" class="delete-icon-wrapper"><fa-icon [icon]="minusIcon" [style]="{'color':'white'}"/></div>
     </button>
     <button #offCanvas1Button type="button" data-bs-toggle="offcanvas" data-bs-target="#editcategory" aria-controls="editcategory" hidden></button>
@@ -26,7 +27,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-        <form #form="ngForm">
+        <form #form="ngForm" (ngSubmit)="saveOrUpdateFirstCategory()">
             <div>
                 <p class="text-start" *ngIf="selectedFirstCategory.id">id: {{selectedFirstCategory.id}}</p>
                 <div class="input-group">
@@ -36,7 +37,7 @@
             </div>
             <div>
                 <button class="save-button mt-3" data-bs-dismiss="offcanvas" [disabled]="!form.valid">{{selectedFirstCategory.id?'Update':'Save'}}</button>
-                <button class="delete-button mt-3" data-bs-dismiss="offcanvas" type="button" *ngIf="selectedFirstCategory.id">Delete</button>
+                <button class="delete-button mt-3" data-bs-dismiss="offcanvas" type="button" *ngIf="selectedFirstCategory.id" (click)="deleteFirstCategory(selectedFirstCategory.id)">Delete</button>
             </div>
         </form>
 

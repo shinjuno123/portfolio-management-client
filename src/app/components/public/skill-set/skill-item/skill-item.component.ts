@@ -26,7 +26,7 @@ export class SkillItemComponent implements OnInit, OnDestroy,AfterViewInit {
   ngOnInit(): void {
     this.secondCategoryChange = this.skillSetService.selectedSecondCategoryNameChange.subscribe(
       selectedSecondCategory => {
-        this.selectedSkillSetItems = selectedSecondCategory.skillSetItemSet;
+        this.selectedSkillSetItems = selectedSecondCategory.skillSetItemSet!;
       }
     )
   }

@@ -11,7 +11,6 @@ import { SkillSetAdminService } from "src/app/service/admin-service/skill-set.ad
 })
 export class AdminSkillSetHomeFirstCategoryComponent implements OnInit{
     firstCategories!:FirstCategory[];
-    selectedSecondIndex = 0;
     addIcon = faCirclePlus;
     deleteIcon = faCircleMinus;
     minusIcon = faMinus;
@@ -19,10 +18,14 @@ export class AdminSkillSetHomeFirstCategoryComponent implements OnInit{
     @ViewChild("offCanvas1Button") offCanvas1Button!: ElementRef;
     selectedFirstCategory = <FirstCategory> new Object();
 
-    constructor(private skillSetAdminService:SkillSetAdminService,
+    constructor(public skillSetAdminService:SkillSetAdminService,
         private renderer:Renderer2){}
 
     ngOnInit(): void {
+        this.initializeFirstCategories();
+    }
+
+    initializeFirstCategories() {
         this.skillSetAdminService.loadCategories();
         this.getFirstCategories();
     }
@@ -35,12 +38,7 @@ export class AdminSkillSetHomeFirstCategoryComponent implements OnInit{
         });
     }
 
-    selectOrEditOrDeleteCategory(idx: number) {
-        // Delete
-        if(this.toggleEditIcon === faCircleMinus) {
-            return;
-        }
-
+    selectOrEditOrDeleteCategory(idx: number,id:string) {
         // Open edit offcanvas
         if(this.toggleEditIcon === faPenToSquare) {
             this.selectedFirstCategory = structuredClone(this.firstCategories[idx]);
@@ -49,7 +47,9 @@ export class AdminSkillSetHomeFirstCategoryComponent implements OnInit{
         }
 
         // Select
-        this.skillSetAdminService.selectedFirstCategoryIdx = idx;
+        this.skillSetAdminService.selectedFirstCategoryId = id;
+        this.skillSetAdminService.selectedSecondCategoryId = '';
+        this.skillSetAdminService.selectedSkillSetItemId = '';
         this.skillSetAdminService.allCategoriesLoadCompleteEvent.next({});
     }
 
@@ -68,15 +68,37 @@ export class AdminSkillSetHomeFirstCategoryComponent implements OnInit{
         this.updateSelectedFirstCategory("","","","");
     }
 
+    saveOrUpdateFirstCategory() {
+        const firstCategoryClone = structuredClone(this.selectedFirstCategory);
+        firstCategoryClone.secondCategorySet = null;
+
+        this.skillSetAdminService.saveOrUpdateFirstCategory(firstCategoryClone)
+            .subscribe({
+                next:() => {
+                    this.initializeFirstCategories();
+                },
+                error:() => {
+
+                }
+            })
+    }
+
+    deleteFirstCategory(id: string){
+        this.skillSetAdminService.deleteFirstCategory(id)
+            .subscribe({
+                next: () => {
+                    this.initializeFirstCategories();
+                },
+                error: () => {
+
+                }
+            })
+    }
+
 
     toggleEditMode() {
         if(this.toggleEditIcon === faPenToSquare) {
             this.toggleEditIcon = faHandPointer;
-            return;
-        }
-
-        if(this.toggleEditIcon === faHandPointer) {
-            this.toggleEditIcon = faCircleMinus;
             return;
         }
 

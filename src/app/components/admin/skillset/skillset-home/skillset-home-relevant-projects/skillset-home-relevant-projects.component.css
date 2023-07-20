@@ -94,6 +94,10 @@ p {
     transition: background .3s;
 }
 
+.save-button:disabled{
+    background-color: #99e9bd;
+}
+
 .delete-button{
     width: 100%;
     background-color: #e64f70;

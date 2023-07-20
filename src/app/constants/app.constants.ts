@@ -19,6 +19,7 @@ export const AdminConstants = {
     EXPERIENCE_API_URL: "/api/admin/experiences",
     PROJECT_API_URL: "/api/admin/projects",
     CONTACT_API_URL:"/api/admin/contacts",
+    SKILL_SET_API_URL : "/api/admin/skill-set",
     NOTIFICATION_API_URL: "/api/v1/admin/notifications",
     RELEVANT_SITES_API_URL: "/api/v1/admin/relevant-sites",
 }

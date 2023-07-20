@@ -24,7 +24,7 @@ export class CategoryComponent implements OnInit, OnDestroy, AfterViewInit{
   ngOnInit(): void {
     this.firstCategoryNameChangeEvent = this.skillSetService.selectedFirstCategoryNameChange.subscribe(
       selectedFirstCategory => {
-        this.secondCategories = selectedFirstCategory.secondCategorySet;
+        this.secondCategories = selectedFirstCategory.secondCategorySet!;
 
         if(this.secondCategories.length === 0){
           this.selectedSecondCategoryIndex = -1;

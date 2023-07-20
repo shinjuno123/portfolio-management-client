@@ -19,27 +19,28 @@ export class AdminSkillSetHomeSecondCategoryComponent implements OnInit {
     @ViewChild("offCanvas2Button") offCanvas2Button!: ElementRef;
     selectedSecondCategory = <SecondCategory> new Object();
 
-    constructor(private skillSetAdminService:SkillSetAdminService,
+    constructor(public skillSetAdminService:SkillSetAdminService,
         private renderer:Renderer2){}
 
     ngOnInit(): void {
         this.getSecondCategories();
     }
 
+    reloadSecondCategories() {
+        this.skillSetAdminService.loadCategories();
+        this.getSecondCategories();
+    }
+
+
     getSecondCategories() {
         this.skillSetAdminService.allCategoriesLoadCompleteEvent.subscribe({
             next: () => {
-                this.secondCategories = this.skillSetAdminService.getSecondCategories(this.skillSetAdminService.selectedFirstCategoryIdx)!;
+                this.secondCategories = this.skillSetAdminService.getSecondCategories(this.skillSetAdminService.selectedFirstCategoryId)!;
             }
         });
     }
 
-    selectOrEditOrDeleteCategory(idx: number) {
-        // Delete
-        if(this.toggleEditIcon === faCircleMinus) {
-            return;
-        }
-
+    selectOrEditOrDeleteCategory(idx: number, id:string) {
         // Edit
         if(this.toggleEditIcon === faPenToSquare) {
             this.selectedSecondCategory = structuredClone(this.secondCategories[idx]);
@@ -49,7 +50,8 @@ export class AdminSkillSetHomeSecondCategoryComponent implements OnInit {
 
 
         // Select
-        this.skillSetAdminService.selectedSecondCategoryIdx = idx;
+        this.skillSetAdminService.selectedSecondCategoryId = id;
+        this.skillSetAdminService.selectedSkillSetItemId = '';
         this.skillSetAdminService.allCategoriesLoadCompleteEvent.next({});
     }
     
@@ -66,14 +68,35 @@ export class AdminSkillSetHomeSecondCategoryComponent implements OnInit {
         this.updateSelectedSecondCategory("","","","");
     }
 
+    saveOrUpdateSecondCategory() {
+        const secondCategoryClone = structuredClone(this.selectedSecondCategory);
+        secondCategoryClone.skillSetItemSet = null;
+
+        this.skillSetAdminService.saveOrUpdateSecondCategory(secondCategoryClone)
+            .subscribe({
+                next:() => {
+                    this.reloadSecondCategories();
+                }, 
+                error:(e) => {
+                }
+            });
+
+    }
+
+    deleteSecondCategory(id: string) {
+        this.skillSetAdminService.deleteSecondCategory(id)
+            .subscribe({
+                next:(res) => {
+                    this.reloadSecondCategories();
+                }, 
+                error:(e) => {
+                }
+            })
+    }
+
     toggleEditMode() {
         if(this.toggleEditIcon === faPenToSquare) {
             this.toggleEditIcon = faHandPointer;
-            return;
-        }
-
-        if(this.toggleEditIcon === faHandPointer) {
-            this.toggleEditIcon = faCircleMinus;
             return;
         }
 

@@ -8,7 +8,7 @@
             <button class="btn btn-secondary dropdown-toggle me-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
               Sort by {{selectedPropertyName !== ""? '(' + selectedPropertyName + ')': ''}}
             </button>
-            <button class="btn btn-primary" (click)="addItem()">
+            <button *ngIf="relativeEditPageRoute !== './view'" class="btn btn-primary" (click)="addItem()">
                 <p>Add</p>
             </button>
             <ul class="dropdown-menu" #sortByList>

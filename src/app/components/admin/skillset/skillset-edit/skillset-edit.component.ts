@@ -1,66 +1,86 @@
-import { Component, ElementRef, Renderer2, ViewChild } from "@angular/core";
-import { faPaperclip } from "@fortawesome/free-solid-svg-icons";
-
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  Renderer2,
+  ViewChild,
+} from '@angular/core';
+import { Validators } from '@angular/forms';
+import { faPaperclip } from '@fortawesome/free-solid-svg-icons';
+import { RegularPropertyInformation } from 'src/app/model/common/regular.property.information.model';
+import { SkillSetItem } from 'src/app/model/skill-set/skill-set-item.model';
+import { SkillSetAdminService } from 'src/app/service/admin-service/skill-set.admin.service';
 
 @Component({
-    selector: 'admin-skillset-edit',
-    templateUrl: './skillset-edit.component.html',
-    styleUrls:['./skillset-edit.component.css']
+  selector: 'admin-skillset-edit',
+  templateUrl: './skillset-edit.component.html',
+  styleUrls: ['./skillset-edit.component.css'],
 })
-export class AdminSkillSetEditComponent {
-    isActivated!: boolean;
-    isConfirmed: boolean = false;
-    faPaperclip = faPaperclip;
-    @ViewChild('modalButton') modalButton!:ElementRef;
-    @ViewChild('closeModalButton') closeModelButton!: ElementRef;
-    @ViewChild('deleteModalButton') deleteModalButton!: ElementRef;
+export class AdminSkillSetEditComponent implements OnInit {
+  // dataEdit properties
+  textAreaProperties: RegularPropertyInformation[] = [];
+  textProperties: RegularPropertyInformation[] = [];
+  filesProperties: {
+    name: string;
+    value: string;
+    permittedExtensions: string[];
+  }[] = [];
+  dateProperties: RegularPropertyInformation[] = [];
+  activeProperty!: RegularPropertyInformation;
+  data = new SkillSetItem();
 
-    constructor(private renderer: Renderer2){}
+  constructor(
+    public skillSetAdminService: SkillSetAdminService
+  ) {}
+  ngOnInit(): void {
+    Object.keys(this.data).forEach((key: string) => {
+      switch (key) {
+        case 'title':   
+          this.textProperties.push(
+            this.generateProperty('Title', key, '', [Validators.required])
+          );
+          break;
 
-    activateAboutMe() {
-        if(this.isActivated) {
-            this.renderer.selectRootElement(this.modalButton.nativeElement).dispatchEvent(new Event('click'));
-        }
-    }
+        case 'imagePath':
+          this.filesProperties.push({
+            name: key,
+            value: '',
+            permittedExtensions: ['image/jpeg', 'image/png', 'image/jpg'],
+          });
+          break;
+        case 'description':
+          this.textAreaProperties.push(
+            this.generateProperty('Description', key, '', [Validators.required])
+          );
+          break;
 
-    confirmActivation() {
-        this.renderer.selectRootElement(this.closeModelButton.nativeElement).dispatchEvent(new Event('click'));
-        this.isConfirmed = true;
-    }
+        case 'uploaded':
+          this.dateProperties.push(
+            this.generateProperty('Uploaded', key, '', [])
+          );
+          break;
+        case 'updated':
+          this.dateProperties.push(
+            this.generateProperty('Updated', key, '', [])
+          );
+          break;
+      }
+    });
+  }
 
-    cancelActivation() {
-        this.isActivated = false;
-    }
+  generateProperty(
+    displayedName: string,
+    name: string,
+    value: any,
+    constraints: any[]
+  ) {
+    const property = new RegularPropertyInformation();
+    property.name = name;
+    property.displayedName = displayedName;
+    property.value = value;
+    property.constraints = constraints;
 
-    closeModal() {
-        if(this.isConfirmed) {
-            this.isActivated = true;
-            this.isConfirmed = false;
-            return;
-        }
+    return property;
+  }
 
-        this.isActivated = false;
-        this.renderer.selectRootElement(this.closeModelButton.nativeElement).dispatchEvent(new Event('click'));
-    }
-
-    deleteAboutMe() {
-        this.renderer.selectRootElement(this.deleteModalButton.nativeElement).dispatchEvent(new Event('click'));
-    }
-
-    submitDelete(){
-        console.log("Your data is removed!");
-    }
-
-    setAttachment(event: Event) {
-        const target = event.target as HTMLInputElement;
-        const files = target.files;
-
-        if(files !== undefined && files !== null && files.length > 0){
-            const attachment: File = files[0];
-            const pTag: ChildNode | null = target.nextSibling;
-            if(pTag) {
-                pTag.textContent = attachment.name;
-            }
-        }
-    }
 }
