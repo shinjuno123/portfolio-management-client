@@ -11,7 +11,7 @@ import { AdminDataService } from "src/app/service/admin-service/admin.data.servi
     templateUrl: './datalist.component.html',
     styleUrls: ['./datalist.component.css']
 })
-export class AdminDataListComponent<T extends { [key: string]: any }, Service extends AdminDataService<T>> implements OnInit {
+export class AdminDataListComponent<K extends keyof T,T extends { [key: string]: any }, Service extends AdminDataService<T>> implements OnInit {
     propertyNames!: string[];
     @ViewChild("sortByList") sortByList!: ElementRef;
     selectedPropertyName: string = "";
@@ -151,6 +151,39 @@ export class AdminDataListComponent<T extends { [key: string]: any }, Service ex
         if (this.customPage.currentPage < this.customPage.totalPage) {
             this.listData(this.pageSize, this.customPage.currentPage + 1);
         }
+    }
+
+    sortItems(selectedPropertyName: string) {
+        const key = <K> selectedPropertyName;
+
+        this.dataList.sort(
+            (a:T, b:T) => {
+                let propertyValueA = a[key];
+                let propertyValueB = b[key];
+
+                if(typeof propertyValueA === 'string') {
+                    const toLowerCasedA = (<string> propertyValueA).toLowerCase();
+                    const toLowerCasedB = (<string> propertyValueB).toLowerCase();
+
+                    if(toLowerCasedA < toLowerCasedB) {
+                        return -1;
+                    } else if(toLowerCasedA > toLowerCasedB) {
+                        return 1;
+                    }
+    
+                    return 0;
+                }
+
+
+                if(propertyValueA < propertyValueB) {
+                    return -1;
+                } else if(propertyValueA > propertyValueB) {
+                    return 1;
+                }
+
+                return 0;
+            }
+        )        
     }
 
 }

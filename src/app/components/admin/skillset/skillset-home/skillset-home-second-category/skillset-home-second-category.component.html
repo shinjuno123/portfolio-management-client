@@ -9,6 +9,7 @@
         </button>
     </div>
 </div>
+<hr>
 <div class="d-flex">
     <button [class]="{btn:true, 'btn-primary':true, selected:secondCategory.id=== skillSetAdminService.selectedSecondCategoryId}" [id]="secondCategory.id"
         *ngFor="let secondCategory of secondCategories let idx=index" type="button"

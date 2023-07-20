@@ -15,7 +15,7 @@
     justify-content: space-between;
 }
 
-.d-flex:nth-child(2) {
+.d-flex:nth-child(3) {
     flex-wrap: wrap;
     gap: .7rem;
     padding-bottom: 2rem;

@@ -157,7 +157,6 @@ form {
 
 .attachment-form {
     position: relative;
-    width: 30%;
     padding: .5rem;
     display: flex;
     flex-flow: column;
@@ -344,6 +343,6 @@ p.block-highlight {
 
 @media screen and (max-width:768px)  {
     .attachment-form {
-        width: 100%;
+        width: 100%!important;
     }
 }

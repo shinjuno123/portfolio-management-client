@@ -2,23 +2,25 @@
     <h2>Category 1</h2>
     <div>
         <button class="add-button" (click)="addCategory()">
-            <fa-icon [icon]="addIcon"/>
+            <fa-icon [icon]="addIcon" />
         </button>
         <button class="edit-toggle" (click)="toggleEditMode()">
             <fa-icon [icon]="toggleEditIcon"></fa-icon>
         </button>
     </div>
 </div>
+
+<hr>
+
 <div class="d-flex">
-    <button
-     [id]="firstCategory.id" 
-     *ngFor="let firstCategory of firstCategories let idx=index"
-     type="button"
-     (click)="selectOrEditOrDeleteCategory(idx,firstCategory.id)"
-     [class]="{btn:true, 'btn-primary':true, selected:firstCategory.id ===  this.skillSetAdminService.selectedFirstCategoryId}">{{firstCategory.name}} 
-     <div *ngIf="toggleEditIcon === deleteIcon" class="delete-icon-wrapper"><fa-icon [icon]="minusIcon" [style]="{'color':'white'}"/></div>
+    <button [id]="firstCategory.id" *ngFor="let firstCategory of firstCategories let idx=index" type="button"
+        (click)="selectOrEditOrDeleteCategory(idx,firstCategory.id)"
+        [class]="{btn:true, 'btn-primary':true, selected:firstCategory.id ===  this.skillSetAdminService.selectedFirstCategoryId}">{{firstCategory.name}}
+        <div *ngIf="toggleEditIcon === deleteIcon" class="delete-icon-wrapper"><fa-icon [icon]="minusIcon"
+                [style]="{'color':'white'}" /></div>
     </button>
-    <button #offCanvas1Button type="button" data-bs-toggle="offcanvas" data-bs-target="#editcategory" aria-controls="editcategory" hidden></button>
+    <button #offCanvas1Button type="button" data-bs-toggle="offcanvas" data-bs-target="#editcategory"
+        aria-controls="editcategory" hidden></button>
 </div>
 
 <div class="offcanvas offcanvas-end" tabindex="-1" id="editcategory" aria-labelledby="offcanvasLabel">
@@ -32,12 +34,16 @@
                 <p class="text-start" *ngIf="selectedFirstCategory.id">id: {{selectedFirstCategory.id}}</p>
                 <div class="input-group">
                     <span class="input-group-text">name</span>
-                    <input type="text" class="form-control" placeholder="Enter the name of first category" name="name" [(ngModel)]="selectedFirstCategory.name" required>
+                    <input type="text" class="form-control" placeholder="Enter the name of first category" name="name"
+                        [(ngModel)]="selectedFirstCategory.name" required>
                 </div>
             </div>
             <div>
-                <button class="save-button mt-3" data-bs-dismiss="offcanvas" [disabled]="!form.valid">{{selectedFirstCategory.id?'Update':'Save'}}</button>
-                <button class="delete-button mt-3" data-bs-dismiss="offcanvas" type="button" *ngIf="selectedFirstCategory.id" (click)="deleteFirstCategory(selectedFirstCategory.id)">Delete</button>
+                <button class="save-button mt-3" data-bs-dismiss="offcanvas"
+                    [disabled]="!form.valid">{{selectedFirstCategory.id?'Update':'Save'}}</button>
+                <button class="delete-button mt-3" data-bs-dismiss="offcanvas" type="button"
+                    *ngIf="selectedFirstCategory.id"
+                    (click)="deleteFirstCategory(selectedFirstCategory.id)">Delete</button>
             </div>
         </form>
 

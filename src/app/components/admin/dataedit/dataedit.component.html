@@ -41,7 +41,7 @@
 
 
       <div class="d-flex mb-5 attachment-box" *ngIf="filesProperties && filesProperties.length">
-        <div class="attachment-form" *ngFor="let fileProperty of filesProperties let index=index;">
+        <div class="attachment-form" *ngFor="let fileProperty of filesProperties let index=index;" [style]="{'width': '30%'}">
           <div class="attachment-background" (click)="fileUpload.click()">
             <p class="attachment-type">{{fileProperty.name}}</p>
             <input type="file" [name]="fileProperty.name" [id]="fileProperty.name"

@@ -1,6 +1,4 @@
-<a class="btn btn-primary mb-4" *ngIf="isFirstSection" [routerLink]="returnToPreviousPageRoute">Back</a>
-<h2 class="text-start mb-5" *ngIf="isFirstSection">{{title}} Management</h2>
-
+<a class="btn btn-primary mb-5 ms-2" *ngIf="isFirstSection" [routerLink]="returnToPreviousPageRoute">Back</a>
 <h3 class="text-start">{{title}}</h3>
 <div class="container">
     <div class="row text-end mb-2">
@@ -12,7 +10,7 @@
                 <p>Add</p>
             </button>
             <ul class="dropdown-menu" #sortByList>
-                <li *ngFor="let propertyName of propertyNames let idx=index" (click)="selectSortBy(idx, propertyName)">
+                <li *ngFor="let propertyName of propertyNames let idx=index" (click)="sortItems(propertyName)" (click)="selectSortBy(idx, propertyName)">
                     <a class="dropdown-item">
                         {{propertyName}}
                     </a>

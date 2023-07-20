@@ -12,7 +12,7 @@ import { environment } from "src/environments/environment";
     templateUrl: './dataedit.component.html',
     styleUrls: ['./dataedit.component.css']
 })
-export class AdminDataEditComponent<K extends keyof T,T extends { [key: string]: any }, Service extends AdminDataService<T>> implements OnInit, AfterViewChecked, OnDestroy {
+export class AdminDataEditComponent<K extends keyof T,T extends { [key: string]: any }, Service extends AdminDataService<T>> implements OnInit, AfterViewChecked, AfterViewInit, OnDestroy {
     faPaperclip = faPaperclip;
     @Input("routeLinkToListPage") routeLinkToListPage!: string;
     @Input("editPageName") editPageName!: string;
@@ -64,6 +64,10 @@ export class AdminDataEditComponent<K extends keyof T,T extends { [key: string]:
             }
         });
 
+    }
+
+    ngAfterViewInit(): void {
+        this.setWidthOfAttachmentForm();
     }
 
     ngAfterViewChecked(): void {
@@ -372,4 +376,15 @@ export class AdminDataEditComponent<K extends keyof T,T extends { [key: string]:
             
             })
     }
+
+    setWidthOfAttachmentForm() {
+        const width = Math.floor(90 / this.filesProperties.length) + "%";
+        this.fileUploads.forEach(
+            (fileUpload) => {
+                const parent = this.renderer.parentNode(this.renderer.parentNode(fileUpload.nativeElement));
+                this.renderer.setStyle(parent,"width",width);
+            }
+        )
+    }
+    
 }
