@@ -9,6 +9,7 @@ export const  AppConstants = {
     SKILL_SET_API_URL : "/api/public/skill-set",
     NOTIFICATION_API_URL : "/api/v1/public/notifications",
     RELEVANT_SITES_API_URL: "/api/v1/public/relevant-sites",
+    ADMIN_INFORMATION: "/api/v1/public/information",
 }
 
 

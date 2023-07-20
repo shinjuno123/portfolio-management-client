@@ -1,4 +1,4 @@
 <div class="container-fluid" #footer>
-    <p>Email: <a href="mailto:shinjuno123@gmail.com">shinjuno123@gmail.com</a></p>
-    <p>Mobile: +01&#41;702-XXXX-XXXX</p>
+    <p>Email: <a [href]="'mailto:'+admin.email">{{admin.email}}</a></p>
+    <p>Mobile: {{admin.mobileNumber}}</p>
 </div>
