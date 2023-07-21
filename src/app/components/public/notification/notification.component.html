@@ -8,6 +8,7 @@
 
 <div class="offcanvas offcanvas-start" tabindex="-1" id="notificationOffCanvas" aria-labelledby="notificationOffCanvasLabel">
     <div class="offcanvas-header">
+        <h2>Notification</h2>
         <a type="button" class="text-white" data-bs-dismiss="offcanvas" aria-label="Close">
             <fa-icon [icon]="exitIcon" class="fab fa-angular fa-fw fa"/>
         </a>
@@ -26,7 +27,7 @@
             </div>  
         </li>
     </ul>
-    <nav class="d-block">
+    <nav class="d-block mb-5">
         <ul class="m-auto pagination" style="width: fit-content;">
             <li class="page-item"><a class="page-link" [ngClass]="{disabled: page.firstPage}" (click)="previousPage()">Previous</a></li>
             <li class="page-item" 
@@ -38,6 +39,7 @@
             <li class="page-item"><a class="page-link" [ngClass]="{disabled: page.lastPage}" (click)="nextPage()" >Next</a></li>
         </ul>
     </nav>
+    <app-notification-relevant-site></app-notification-relevant-site>
 </div>
 
 <app-notification-view [selectedNotification]="selectedNotification" (closeNotificationViewEvent)="updateIsNotificationViewDisplayed($event)" [isDisplayed]="isNotificationViewDisplayed"></app-notification-view>
