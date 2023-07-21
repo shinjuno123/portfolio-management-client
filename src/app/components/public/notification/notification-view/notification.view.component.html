@@ -5,6 +5,8 @@
         <button type="button" (click)="emitCloseNotificationViewEvent()"><fa-icon [icon]="exitIcon" class="fab fa-angular fa-fw fa"/></button>
     </div>
     <div class="image mb-5" *ngIf="!selectedNotification.videoUrl"  [style]="{'background-image': generateUrlBackgroundString(selectedNotification.imageUrl)}"></div>
-    <iframe class="mb-5" allow="fullscreen;" *ngIf="selectedNotification.videoUrl" [src]="selectedNotification.videoUrl | safe"></iframe>
+    <iframe class="mb-5" allowfullscreen allow="fullscreen; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" frameborder="0" *ngIf="selectedNotification.videoUrl" [src]="selectedNotification.videoUrl+'?playsinline=1' | safe"></iframe>
+
+
     <p>{{selectedNotification.body}}</p>
 </div>

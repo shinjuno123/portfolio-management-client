@@ -1,0 +1,34 @@
+<div *ngIf="isDisplayed" class="popup-view-background" (click)="closePopup()"></div>
+<button *ngIf="isDisplayed" class="exit" type="button" (click)="closePopup()"><fa-icon [icon]="exitIcon" class="fab fa-angular fa-fw fa"/></button>
+<div *ngIf="isDisplayed" id="popupCarousel" class="popup-view carousel slide">
+    <div class="carousel-indicators">
+        <button *ngFor="let displayNotification of displayedNotifications let idx=index"
+             type="button" 
+             data-bs-target="#popupCarousel" 
+             [attr.data-bs-slide-to]="idx" 
+             [class]="{active:idx===0}" [attr.aria-current]="idx === 0" 
+             attr.aria-label="Slide {{idx}}"></button>
+      </div>
+    <div class="carousel-inner">
+        <div [class]="{'carousel-item':true, 'active':idx===0}" *ngFor="let displayNotification of displayedNotifications let idx=index">
+            <div class="popup-header mb-5">
+                <h2>{{displayNotification.subject}}</h2>
+            </div>
+            <div *ngIf="!displayNotification.videoUrl" class="popup-image mb-5" [style]="{'background-image': generateUrlBackgroundString('/api/public/files/file-categories/notification/file-names/5df595d1-18c4-4dda-b4d8-e08183058083_photo-1575936123452-b67c3203c357.jpg')}"></div>
+            <iframe *ngIf="displayNotification.videoUrl" class="popup-video mb-5" allowfullscreen allow="fullscreen; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" frameborder="0" [src]="'https://www.youtube-nocookie.com/embed/g_WclIRvXLo'+'?playsinline=1' | safe"></iframe>
+            <p>{{displayNotification.body}}</p>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#popupCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#popupCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+      <div class="one-day-later">
+        <button type="button" class="btn btn-primary" (click)="closePopup()"><p>Close</p></button>
+        <button type="button" class="btn btn-primary" (click)="doNotOpenForADay()"><p>Do not open for a day</p></button>
+    </div>
+</div>

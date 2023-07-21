@@ -63,6 +63,7 @@ import { AdminDataEditComponent } from './components/admin/dataedit/dataedit.com
 import { NotificationComponent } from './components/public/notification/notification.component';
 import { NotificationViewComponent } from './components/public/notification/notification-view/notification.view.component';
 import { SafePipe } from './pipe/safe.pip';
+import { PopupComponent } from './components/public/popup/popup.component';
 
 @NgModule({
   declarations: [
@@ -124,6 +125,7 @@ import { SafePipe } from './pipe/safe.pip';
     CertificationItemComponent,
     NotificationComponent,
     NotificationViewComponent,
+    PopupComponent,
   ],
   imports: [
     BrowserModule,
