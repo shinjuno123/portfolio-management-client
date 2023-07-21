@@ -43,6 +43,9 @@ export class PopupComponent implements OnInit{
             if(notifications.length < 1) {
               this.isDisplayed = false;
             }
+          },
+          error: () => {
+            this.isDisplayed = false;
           }
         });
     }
