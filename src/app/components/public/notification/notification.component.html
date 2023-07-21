@@ -1,0 +1,43 @@
+<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#notificationOffCanvas"
+    aria-controls="notificationOffCanvas">
+    <fa-icon [icon]="circleExclamation" class="fab fa-angular fa-fw fa-2x fa"/>
+    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+        {{page.totalPage === 1? activeNotifications.length:(page.totalPage - 1) * page.pageSize + '+'}}
+    </span>
+</button>
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="notificationOffCanvas" aria-labelledby="notificationOffCanvasLabel">
+    <div class="offcanvas-header">
+        <a type="button" class="text-white" data-bs-dismiss="offcanvas" aria-label="Close">
+            <fa-icon [icon]="exitIcon" class="fab fa-angular fa-fw fa"/>
+        </a>
+    </div>
+    <ul class="notification-box">
+        <li class="notification-item" *ngFor="let activeNotification of activeNotifications" (click)="viewNotification(activeNotification)">
+            <div class="notification-picture" [style]="{'background-image': generateUrlBackgroundString(activeNotification.imageUrl)}">
+                <div >
+
+                </div>
+            </div>
+            <div class="notification-details">
+                <h3>{{activeNotification.subject}}</h3>
+                <p *ngIf="activeNotification.body.length> 25">{{activeNotification.body | slice : 0: 25}}...</p>
+                <p *ngIf="activeNotification.body.length<= 25">{{activeNotification.body}}...</p>
+            </div>  
+        </li>
+    </ul>
+    <nav class="d-block">
+        <ul class="m-auto pagination" style="width: fit-content;">
+            <li class="page-item"><a class="page-link" [ngClass]="{disabled: page.firstPage}" (click)="previousPage()">Previous</a></li>
+            <li class="page-item" 
+                *ngFor="let pageNumber of totalPages"
+                (click)="changePage(pageNumber)"
+            >
+                    <a class="page-link" [ngClass]="{active: pageNumber === page.currentPage}">{{pageNumber}}</a>
+            </li>
+            <li class="page-item"><a class="page-link" [ngClass]="{disabled: page.lastPage}" (click)="nextPage()" >Next</a></li>
+        </ul>
+    </nav>
+</div>
+
+<app-notification-view [selectedNotification]="selectedNotification" (closeNotificationViewEvent)="updateIsNotificationViewDisplayed($event)" [isDisplayed]="isNotificationViewDisplayed"></app-notification-view>

@@ -1,0 +1,10 @@
+<div class="notification-view-background" *ngIf="isDisplayed" (click)="emitCloseNotificationViewEvent()"></div>
+<div class="notification-view" *ngIf="isDisplayed">
+    <div class="notification-header mb-5">
+        <h2>This is Subject</h2>
+        <button type="button" (click)="emitCloseNotificationViewEvent()"><fa-icon [icon]="exitIcon" class="fab fa-angular fa-fw fa"/></button>
+    </div>
+    <div class="image mb-5" *ngIf="!selectedNotification.videoUrl"  [style]="{'background-image': generateUrlBackgroundString(selectedNotification.imageUrl)}"></div>
+    <iframe class="mb-5" allow="fullscreen;" *ngIf="selectedNotification.videoUrl" [src]="selectedNotification.videoUrl | safe"></iframe>
+    <p>{{selectedNotification.body}}</p>
+</div>

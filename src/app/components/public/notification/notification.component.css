@@ -1,0 +1,100 @@
+li {
+    list-style: none;
+}
+
+p {
+    margin: 0;
+    word-wrap: break-word;
+}
+
+.offcanvas-header a {
+    margin-left: auto;
+}
+
+.offcanvas {
+    background-color: #171717;
+    padding: 1rem;
+}
+
+.btn.btn-primary {
+    position: fixed;
+    right: 5%;
+    bottom: 8%;
+    border-radius: .5rem;
+    width: 62px;
+    height: 62px;
+    background-color: #28475C;
+    border: unset;
+    box-shadow: 5px 5px 3px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+}
+
+.notification-box {
+    padding: .5rem;
+    color: white;
+}
+
+.notification-box .notification-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+    border-radius: .375rem;
+    position: relative;
+    cursor: pointer;
+    padding: .5rem;
+    background-color: #0e5585;
+    margin-bottom: .6rem;
+}
+
+.notification-box .notification-item:hover {
+    outline: 3px solid #FFD95A;
+    outline-offset: .1rem;
+}
+
+
+
+.notification-box .notification-item .notification-picture {
+    width: 30%;     
+    height: 7.5rem;
+    display: block;
+    background-color: #FFD95A;
+    position: relative;
+    background-position: center;
+    background-size:cover;
+    background-repeat: no-repeat;
+    border-radius: .375rem;
+}
+
+
+
+
+
+
+.notification-box .notification-item .notification-details {    
+    padding: 1rem;
+    width: 70%;
+    border-radius: .375rem;
+    background-color: #28475C;
+}
+
+
+#notificationOffCanvas {
+    height: 100%;
+    overflow-y: auto;
+}
+
+.page-link {
+    cursor: pointer;
+}
+
+
+.page-link.active{
+    background-color:#84C69B;
+}
+
+.page-link{
+    background-color:#2F8886;
+    color: white;
+    border: none;
+}

@@ -54,7 +54,7 @@ export class AdminNotificationEditComponent implements OnInit{
                     case "videoUrl":
                         this.textProperties.push(
                             this.generateProperty("Video Url",key,"",[
-                                Validators.required, Validators.pattern(
+                                Validators.pattern(
                                     /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/
                                 )
                             ])

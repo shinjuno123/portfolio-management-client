@@ -60,6 +60,9 @@ import { AdminSkillSetHomeRelevantProjectsComponent } from './components/admin/s
 import { AdminDataListComponent } from './components/admin/datalist/datalist.component';
 import { AdminDataItemComponent } from './components/admin/datalist/dataitem/dataitem.component';
 import { AdminDataEditComponent } from './components/admin/dataedit/dataedit.component';
+import { NotificationComponent } from './components/public/notification/notification.component';
+import { NotificationViewComponent } from './components/public/notification/notification-view/notification.view.component';
+import { SafePipe } from './pipe/safe.pip';
 
 @NgModule({
   declarations: [
@@ -117,7 +120,10 @@ import { AdminDataEditComponent } from './components/admin/dataedit/dataedit.com
     ContactComponent,
     FooterComponent,
     ReplacePipe,
-    CertificationItemComponent
+    SafePipe,
+    CertificationItemComponent,
+    NotificationComponent,
+    NotificationViewComponent,
   ],
   imports: [
     BrowserModule,
