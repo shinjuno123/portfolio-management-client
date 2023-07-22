@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChildren } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { faX } from '@fortawesome/free-solid-svg-icons';
 import { Notification } from 'src/app/model/notification';
 import { NotificationService } from 'src/app/service/notification.service';

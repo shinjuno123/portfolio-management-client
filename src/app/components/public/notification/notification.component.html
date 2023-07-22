@@ -2,7 +2,7 @@
     aria-controls="notificationOffCanvas">
     <fa-icon [icon]="circleExclamation" class="fab fa-angular fa-fw fa-2x fa"/>
     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-        {{page.totalPage === 1? activeNotifications.length:(page.totalPage - 1) * page.pageSize + '+'}}
+        {{page.totalPage <= 1? activeNotifications.length:(page.totalPage - 1) * page.pageSize + '+'}}
     </span>
 </button>
 
