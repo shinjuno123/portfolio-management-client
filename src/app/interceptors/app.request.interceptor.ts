@@ -17,12 +17,12 @@ export class XhrInterceptor implements HttpInterceptor {
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         let httpHeaders = new HttpHeaders();
-    
+        
         if(sessionStorage.getItem('userDetails')) {
             this.user = JSON.parse(sessionStorage.getItem('userDetails')!);
         }
 
-        if(this.user && this.user.email && this.user.password && this.user.id) {
+        if(this.user && this.user.email && this.user.password) {
             httpHeaders = httpHeaders.append('Authorization', 'Basic ' + window.btoa(this.user.email + ':' + this.user.password));
         } else {
             let authorization = sessionStorage.getItem('Authorization');
@@ -38,7 +38,15 @@ export class XhrInterceptor implements HttpInterceptor {
             headers: httpHeaders
         });
 
-        return next.handle(xhr);
+        return next.handle(xhr)
+            .pipe(tap({
+                error:(error) =>{
+                    const url = <string> error.url;
+                    if(url.includes("/user")){
+                        sessionStorage.removeItem('userDetails');
+                    }
+                }
+            }));
     }
 
 }
