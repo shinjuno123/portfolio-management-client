@@ -26,11 +26,10 @@ export class AdminContactListComponent {
 
     createEmailPart(): Category {
         const category = new Category();
-        category.name = "Id";
-        category.numberOfLetters = 20;
+        category.name = "Email";
         category.ratio = 4;
         category.elementType = "TEXT";
-        category.propertyName = "id";
+        category.propertyName = "email";
 
         return category;
     }
@@ -45,6 +44,7 @@ export class AdminContactListComponent {
 
         return category;
     }
+
 
 
 }
