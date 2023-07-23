@@ -14,9 +14,9 @@ import { Observable } from "rxjs";
 export class AdminRelevantSitesService implements AdminDataService<RelevantSite, Page>{
     
     constructor(private http: HttpClient) {}
-
+    // /api/v1/admin/relevant-sites/{id}
     delete(id: string): Observable<{}> {
-        throw new Error("Method not implemented.");
+        return this.http.delete(`${environment.rootUrl}${AdminConstants.RELEVANT_SITES_API_URL}/${id}`, {withCredentials: true});
     }
 
     getDataById(id: string): Observable<RelevantSite> {
@@ -29,6 +29,7 @@ export class AdminRelevantSitesService implements AdminDataService<RelevantSite,
     update(data: RelevantSite): Observable<{}> {
         return this.http.put(`${environment.rootUrl}${AdminConstants.RELEVANT_SITES_API_URL}/${data.id}`, data, {withCredentials:true});
     }
+
 
     listPaginatedData(pageSize: number, pageNumber: number) {
         return this.http.get<Page>(`${environment.rootUrl}${AppConstants.RELEVANT_SITES_API_URL}?pageSize=${pageSize}&pageNumber=${pageNumber}`);
