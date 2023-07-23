@@ -1,0 +1,40 @@
+.not-found-wrapper {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-image: url("/assets/img/404-notfound-landscape.jpg");
+    background-position: center;
+    background-size:contain;
+    background-repeat: no-repeat;
+    background-color:rgb(41,35,109);
+}
+
+a, a:active, a:hover, a:focus {
+    text-decoration: none;
+    color: white;
+    padding: .5rem 2rem;
+    border-radius: .375rem;
+}
+
+a {
+    position: fixed;
+    right: 10%;
+    bottom: 10%;
+    background-color: #3a3939;
+    font-weight: 400;
+}
+
+a:hover {
+    background-color: #777373;
+}
+
+
+
+@media screen and (max-width: 760px) {
+    .not-found-wrapper {
+        background-image: url("/assets/img/404-notfound-portrait.jpg");
+        background-color: rgb(236,237,240);
+    }
+}

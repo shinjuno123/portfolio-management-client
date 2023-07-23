@@ -65,6 +65,7 @@ import { NotificationViewComponent } from './components/public/notification/noti
 import { SafePipe } from './pipe/safe.pip';
 import { PopupComponent } from './components/public/popup/popup.component';
 import { RelevantSiteComponent } from './components/public/notification/relevant-site/relevant.site.component';
+import { NotFoundComponent } from './components/not-found/not.found.component';
 
 @NgModule({
   declarations: [
@@ -128,6 +129,7 @@ import { RelevantSiteComponent } from './components/public/notification/relevant
     NotificationViewComponent,
     PopupComponent,
     RelevantSiteComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

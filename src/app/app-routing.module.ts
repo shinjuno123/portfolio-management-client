@@ -30,6 +30,7 @@ import { AdminSkillSetHomeComponent } from "./components/admin/skillset/skillset
 import { AdminSkillSetEditComponent } from "./components/admin/skillset/skillset-edit/skillset-edit.component";
 import { AdminLoginComponent } from "./components/admin/login/login.component";
 import { canActivate } from "./routeguards/auth.routeguard";
+import { NotFoundComponent } from "./components/not-found/not.found.component";
 
 
 
@@ -72,7 +73,8 @@ const appRoutes: Routes = [
             {path:"", component:AdminSkillSetHomeComponent},
             {path:"edit", component:AdminSkillSetEditComponent}
         ]}
-    ]}
+    ]},
+    {path: "**", component:NotFoundComponent}
 ]
 
 @NgModule({

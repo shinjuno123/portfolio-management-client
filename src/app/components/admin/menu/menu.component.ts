@@ -33,6 +33,15 @@ export class AdminMenuComponent{
         this.isOpened = true;
     }
 
+    isLogined() {
+        const authorization = sessionStorage.getItem("Authorization");
+        if(!authorization) {
+            return false;
+        }
+
+        return true;
+    }
+
     logout() {
         this.adminLoginService.logout(this.route);
         this.toggleMenu();
