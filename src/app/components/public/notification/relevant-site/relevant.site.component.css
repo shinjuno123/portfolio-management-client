@@ -1,5 +1,11 @@
 h2 {
     color: white;
+    
+}
+
+
+.title-box {
+    padding: 1rem;
 }
 
 li, ul {
@@ -15,6 +21,7 @@ a,a:hover, a:visited, a:link, a:active{
 
 .relevant-site-list {
     text-align: center;
+    padding: .5rem;
 }
 
 .relevant-site-list .relevant-site-item {

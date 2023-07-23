@@ -1,4 +1,6 @@
-<h2 class="mb-4">My Other Sites</h2>
+<div class="title-box">
+    <h2 class="mb-4">My Other Sites</h2>
+</div>
 <ul class="relevant-site-list" *ngIf="relevantSites.length">
     <li *ngFor="let relevantSite of relevantSites" class="relevant-site-item mb-2">
         <a [href]="relevantSite.url" target="_blank">{{relevantSite.name}}</a>

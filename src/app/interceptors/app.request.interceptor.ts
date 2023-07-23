@@ -1,10 +1,8 @@
-import { HttpErrorResponse, HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest, HttpResponse, HttpXsrfTokenExtractor } from "@angular/common/http";
+import { HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest,HttpXsrfTokenExtractor } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { User } from "../model/user.model";
-import {filter, map, tap} from 'rxjs/operators';
-import { Router } from "@angular/router";
-import { Cookies, getCookie, setCookie } from "typescript-cookie";
+import {tap} from 'rxjs/operators';
 
 @Injectable({
     providedIn:"root"
@@ -12,8 +10,6 @@ import { Cookies, getCookie, setCookie } from "typescript-cookie";
 export class XhrInterceptor implements HttpInterceptor {
 
     user = new User();
-
-    constructor(private tokenExtractor: HttpXsrfTokenExtractor){}
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         let httpHeaders = new HttpHeaders();
@@ -43,7 +39,10 @@ export class XhrInterceptor implements HttpInterceptor {
                 error:(error) =>{
                     const url = <string> error.url;
                     if(url.includes("/user")){
-                        sessionStorage.removeItem('userDetails');
+                        this.user = JSON.parse(sessionStorage.getItem('userDetails')!);
+                        this.user.email = "";
+                        this.user.password = "";
+                        sessionStorage.setItem('userDetails',JSON.stringify(this.user));
                     }
                 }
             }));
