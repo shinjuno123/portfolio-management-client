@@ -52,7 +52,7 @@
               <fa-icon class="fa-icon" [icon]="faPaperclip"></fa-icon>
             </div>
           </div>
-          <button type="button" *ngIf="id && files[index]" (click)="reviewFile(fileProperty.name)"
+          <button type="button" *ngIf="id && files[index]" (click)="reviewFile(fileProperty.name, files[index])"
             class="file-viewer-button mt-2">Review this file</button>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, OnDestroy, OnInit, QueryList, Renderer2, ViewChild, ViewChildren } from "@angular/core";
+import { AfterContentInit, AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, OnDestroy, OnInit, QueryList, Renderer2, ViewChild, ViewChildren } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
 import { ActivatedRoute, Params, Router } from "@angular/router";
 import { faPaperclip } from "@fortawesome/free-solid-svg-icons";
@@ -12,7 +12,7 @@ import { environment } from "src/environments/environment";
     templateUrl: './dataedit.component.html',
     styleUrls: ['./dataedit.component.css']
 })
-export class AdminDataEditComponent<K extends keyof T,T extends { [key: string]: any }, Service extends AdminDataService<T>> implements OnInit, AfterViewChecked, AfterViewInit, OnDestroy {
+export class AdminDataEditComponent<K extends keyof T,T extends { [key: string]: any }, Service extends AdminDataService<T>> implements OnInit,  AfterViewInit,  OnDestroy {
     faPaperclip = faPaperclip;
     @Input("routeLinkToListPage") routeLinkToListPage!: string;
     @Input("editPageName") editPageName!: string;
@@ -34,7 +34,6 @@ export class AdminDataEditComponent<K extends keyof T,T extends { [key: string]:
     isConfirmed = false;
     id!:string;
     queryParamSubScription!: Subscription;
-
     // Input dummy data which has empty values of properties, not fully filled with data
     @Input("data") data!: T;
 
@@ -43,7 +42,12 @@ export class AdminDataEditComponent<K extends keyof T,T extends { [key: string]:
         private changeDetectorRef: ChangeDetectorRef) {
     }
 
+
     ngOnInit(): void {
+        this.createReactiveForm();
+    }
+
+    ngAfterViewInit(): void {
         if(this.filesProperties) {
             this.filesProperties.forEach(() => {
                 this.areFilesPermitted.push(false);
@@ -51,7 +55,8 @@ export class AdminDataEditComponent<K extends keyof T,T extends { [key: string]:
             })
         }
 
-        this.createReactiveForm();
+
+        this.setWidthOfAttachmentForm();
         this.queryParamSubScription = this.route.queryParams.subscribe({
             // Get id from request parameter
             next: (params: Params) => {
@@ -60,20 +65,26 @@ export class AdminDataEditComponent<K extends keyof T,T extends { [key: string]:
                     this.id = id;
                     this.getDataById(id);
                     this.formGroup.setControl("id", new FormControl(id));
+                    this.changeDetectorRef.detectChanges();
                 }
             }
         });
-
     }
 
-    ngAfterViewInit(): void {
-        this.setWidthOfAttachmentForm();
+
+    getDataById(id: string) {
+        if (this.dataService.getDataById !== undefined) {
+            this.dataService.getDataById(id).subscribe({
+                next: (data) => {
+                    // Fill the data from database
+                    this.data = data;
+                    this.setReactiveForm();
+                    this.checkIfAllFilesAreAlreadyExist();
+                }
+            });
+        }
     }
 
-    ngAfterViewChecked(): void {
-        this.checkIfAllFilesAreAlreadyExist();
-        this.changeDetectorRef.detectChanges();
-    }
 
     ngOnDestroy(): void {
         if(this.queryParamSubScription) {
@@ -159,18 +170,6 @@ export class AdminDataEditComponent<K extends keyof T,T extends { [key: string]:
         
     }
 
-    getDataById(id: string) {
-        if (this.dataService.getDataById !== undefined) {
-            this.dataService.getDataById(id).subscribe({
-                next: (data) => {
-                    // Fill the data from database
-                    this.data = data;
-                    this.setReactiveForm();
-                }
-            });
-        }
-    }
-
     setReactiveForm() {
         Object.keys(this.data).forEach(
             (key) => {
@@ -196,6 +195,7 @@ export class AdminDataEditComponent<K extends keyof T,T extends { [key: string]:
     
                         // Push file to files array
                         this.files[index] = file;
+
     
                         // Set file name of variable 'file' to ptag of the attachment view.
                         this.setFileNameToTag(file, this.fileUploads.get(index)?.nativeElement, true);
@@ -258,6 +258,7 @@ export class AdminDataEditComponent<K extends keyof T,T extends { [key: string]:
             const attachment: File = files[0];
             let hasToContinue = false;
 
+
             const permittedExtensions = this.filesProperties.at(index)?.permittedExtensions;
 
             if (permittedExtensions !== undefined && permittedExtensions.length > 0) {
@@ -270,6 +271,10 @@ export class AdminDataEditComponent<K extends keyof T,T extends { [key: string]:
                 this.setFileNameToTag(attachment, target, false, target.name);
                 return;
             }
+
+
+            this.updateObjectProperty(<K> fileProperty.name ,<T[K]> "");
+
 
             this.setFileNameToTag(attachment, target, true);
         }
@@ -350,14 +355,15 @@ export class AdminDataEditComponent<K extends keyof T,T extends { [key: string]:
         })
     }
 
-    reviewFile(fileName: string) {
-        let filePath: string = '';
-
-        if(fileName) {
-            filePath = <string> this.data[fileName as keyof T];
+    reviewFile(fileName: string, file: File | null) {
+        if(fileName && this.data[fileName as keyof T]) {
+            let filePath = <string> this.data[fileName as keyof T];
+            window.open(environment.rootUrl + filePath);
+        } else {
+            const dataUrl = URL.createObjectURL(file!);
+            window.open(dataUrl);
         }
 
-        window.open(environment.rootUrl + filePath);
     }
 
     openDeleteModal() {
