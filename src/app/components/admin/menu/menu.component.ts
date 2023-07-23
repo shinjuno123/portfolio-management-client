@@ -1,5 +1,7 @@
 import { Component, ElementRef, Renderer2, ViewChild } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { AdminLoginService } from "src/app/service/admin-service/login.admin.service";
 
 
 @Component({
@@ -14,7 +16,8 @@ export class AdminMenuComponent{
     @ViewChild("menu") menuWrapper!:ElementRef;
 
 
-    constructor(private renderer:Renderer2){}
+    constructor(private renderer:Renderer2, private adminLoginService:AdminLoginService,
+        private route:ActivatedRoute){}
 
 
     toggleMenu() {
@@ -28,6 +31,11 @@ export class AdminMenuComponent{
         this.renderer.removeClass(this.menuWrapper.nativeElement,"close");
         this.renderer.addClass(this.menuWrapper.nativeElement,"open");
         this.isOpened = true;
+    }
+
+    logout() {
+        this.adminLoginService.logout(this.route);
+        this.toggleMenu();
     }
 
 }

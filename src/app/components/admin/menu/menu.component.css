@@ -8,6 +8,19 @@ menu {
     position: relative;
 }
 
+.logout-button {
+    background-color: #2F8886;
+    color: white;
+    border: unset;
+    width: 100%;
+    padding: .5rem 0;
+    border-radius: .375rem;
+}
+
+.logout-button:hover {
+    background-color: #84C69B;
+}
+
 menu::after {
     z-index: -1;
     position: absolute;
