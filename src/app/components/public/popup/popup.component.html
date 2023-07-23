@@ -15,7 +15,7 @@
                 <h2>{{displayNotification.subject}}</h2>
             </div>
             <div *ngIf="!displayNotification.videoUrl" class="popup-image mb-5" [style]="{'background-image': generateUrlBackgroundString('/api/public/files/file-categories/notification/file-names/5df595d1-18c4-4dda-b4d8-e08183058083_photo-1575936123452-b67c3203c357.jpg')}"></div>
-            <iframe *ngIf="displayNotification.videoUrl" class="popup-video mb-5" allowfullscreen allow="fullscreen; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" frameborder="0" [src]="'https://www.youtube-nocookie.com/embed/g_WclIRvXLo'+'?playsinline=1' | safe"></iframe>
+            <iframe *ngIf="displayNotification.videoUrl" class="popup-video mb-5" allowfullscreen allow="fullscreen; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" frameborder="0" [src]="displayNotification.videoUrl | safe"></iframe>
             <p>{{displayNotification.body}}</p>
         </div>
     </div>

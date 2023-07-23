@@ -18,6 +18,7 @@ export class AdminIntroEditComponent implements OnInit {
     textProperties: RegularPropertyInformation[] = [];
     dateProperties: RegularPropertyInformation[] = [];
     activeProperty!: RegularPropertyInformation;
+    filesProperties: { name: string, value: string, permittedExtensions: string[] }[] = [];
     data = new Intro();
 
 
