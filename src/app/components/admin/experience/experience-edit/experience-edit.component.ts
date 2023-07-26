@@ -48,21 +48,21 @@ export class AdminExperienceEditComponent implements OnInit {
                         break;
                     case "company":
                         this.textProperties.push(
-                            this.generateProperty("Name",key,"",[
+                            this.generateProperty("Company",key,"",[
                                 Validators.required
                             ])
                         );
                         break;
                     case "positionName":
                         this.textProperties.push(
-                            this.generateProperty("School",key,"",[
+                            this.generateProperty("Position Name",key,"",[
                                 Validators.required
                             ])
                         );
                         break;
                     case "status":
                         this.textProperties.push(
-                            this.generateProperty("Diploma",key,"",[
+                            this.generateProperty("status",key,"",[
                                 Validators.required
                             ])
                         );

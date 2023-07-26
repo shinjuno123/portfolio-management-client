@@ -84,7 +84,7 @@ p {
     text-align: center;
     overflow-y: auto;
     max-height: 100%;
-    padding: 2rem 3rem;
+    padding: 2rem 1rem;
 }
 
 .popup-view .popup-image {

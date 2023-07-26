@@ -32,7 +32,7 @@ p {
     max-height: 80%;
     background-color: rgba(25, 97, 57, 0.5);
     z-index: 1051;
-    padding: 3rem;
+    padding: 3rem 1rem;
     overflow-y: auto;
 }
 
